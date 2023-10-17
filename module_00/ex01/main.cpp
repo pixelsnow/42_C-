@@ -1,20 +1,29 @@
 #include "PhoneBook.hpp"
 
+/* std::string toLower(std::string str)
+{
+	return str;
+} */
+
 int main(void)
 {
 	PhoneBook	phonebook;
 	bool		exit;
-	char		command[10];
+	std::string	command;
 
 	exit = false;
 	phonebook.printInstructions();
 	while (!exit)
 	{
 		std::cin >> command;
-		std::cout << "Your command: " << command << std::endl;
-		if (!strcmp(command, "exit"))
+		std::transform(command.begin(), command.end(), command.begin(),
+				::tolower);
+		if (command == "exit")
 			exit = true;
-		phonebook.run();
+		else if (command == "add")
+			phonebook.run();
+		else
+			phonebook.printInstructions();
 	}
 	return 0;
 }
