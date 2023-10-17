@@ -1,0 +1,4 @@
+*.o
+.DS_Store
+module_00/ex00/megaphone
+module_00/ex01/phonebook
