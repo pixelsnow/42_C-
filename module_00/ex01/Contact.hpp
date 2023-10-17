@@ -9,6 +9,8 @@ public:
 
 	Contact(void);
 	~Contact(void);
+	void displayDetails(void);
+	void displayAsRow(void);
 
 private:
 
@@ -18,6 +20,8 @@ private:
 	std::string nickname;
 	std::string phoneNumber;
 	std::string secret;
+
+	void displayAsCell(std::string); // try to use template maybe?
 
 };
 
