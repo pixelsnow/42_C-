@@ -9,7 +9,8 @@ public:
 
 	PhoneBook(void);
 	~PhoneBook(void);
-	void run(void);
+	void add(void);
+	void search(void);
 	void printInstructions(void);
 
 private:

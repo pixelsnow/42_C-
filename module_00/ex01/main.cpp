@@ -16,7 +16,9 @@ int main(void)
 		if (command == "exit")
 			exit = true;
 		else if (command == "add")
-			phonebook.run();
+			phonebook.add();
+		else if (command == "search")
+			phonebook.search();
 		else
 			phonebook.printInstructions();
 	}
