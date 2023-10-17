@@ -45,4 +45,5 @@ int main(int ac, char** av)
 	Megaphone megaphone;
 
 	megaphone.activate(ac, av);
+	return 0;
 }

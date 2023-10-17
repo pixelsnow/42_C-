@@ -14,6 +14,7 @@ public:
 private:
 
 	Contact contacts[8];
+	void printInstructions(void);
 
 };
 
