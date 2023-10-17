@@ -1,10 +1,5 @@
 #include "PhoneBook.hpp"
 
-/* std::string toLower(std::string str)
-{
-	return str;
-} */
-
 int main(void)
 {
 	PhoneBook	phonebook;
