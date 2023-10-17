@@ -1,1 +1,2 @@
-# 42_C++
+# School 42 C++ modules
+
