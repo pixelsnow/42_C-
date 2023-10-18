@@ -2,10 +2,12 @@
 
 PhoneBook::PhoneBook(void)
 {
+	return;
 }
 
 PhoneBook::~PhoneBook(void)
 {
+	return;
 }
 
 void PhoneBook::printInstructions(void)
