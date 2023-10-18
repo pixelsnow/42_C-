@@ -10,8 +10,8 @@ public:
 	PhoneBook(void);
 	~PhoneBook(void);
 	void add(void);
-	void search(void);
-	void printInstructions(void);
+	void search(void) const;
+	void printInstructions(void) const;
 
 private:
 

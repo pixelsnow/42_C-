@@ -7,10 +7,15 @@ class Contact {
 
 public:
 
-	Contact(void);
+	Contact(int index,
+		std::string firstName,
+		std::string lastName,
+		std::string nickname,
+		std::string phoneNumber,
+		std::string secret);
 	~Contact(void);
-	void displayDetails(void);
-	void displayAsRow(void);
+	void displayDetails(void) const;
+	void displayAsRow(void) const;
 
 private:
 
@@ -21,7 +26,7 @@ private:
 	std::string phoneNumber;
 	std::string secret;
 
-	void displayAsCell(std::string); // try to use template maybe?
+	void displayAsCell(std::string) const; // try to use template maybe?
 
 };
 
