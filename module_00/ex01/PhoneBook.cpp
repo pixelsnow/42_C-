@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/19 16:32:33 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:48:34 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,13 @@ void PhoneBook::add(void)
 
 void PhoneBook::search(void)
 {
+	std::string	indexToShow;
+
+	// handle empty case
 	for (int i=0; i<nextIndex; i++)
 		contacts[i].displayAsRow();
-	std::cout << "searching" << std::endl;
-
+	std::cout << "enter index" << std::endl;
+	while (!indexToShow.length()) // also check if number and if in range
+		std::cin >> indexToShow;
+	contacts[std::stoi(indexToShow)].displayDetails();
 }
