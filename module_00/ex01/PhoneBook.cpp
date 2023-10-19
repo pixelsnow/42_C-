@@ -6,11 +6,12 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/19 21:12:47 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/19 21:33:45 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <unistd.h>
 
 PhoneBook::PhoneBook(void) : nextIndex(0)
 {
@@ -19,6 +20,21 @@ PhoneBook::PhoneBook(void) : nextIndex(0)
 
 PhoneBook::~PhoneBook(void)
 {
+	std::string message = "Deleting your loved ones' contacts FOREVER";
+	std::string progress = " . . . . .";
+
+	for (int i = 0; i < message.length(); i++)
+	{
+		std::cout << message[i] << std::flush;
+		usleep(30000);
+	}
+	for (int i = 0; i < progress.length(); i++)
+	{
+		std::cout << progress[i] << std::flush;
+		if (i % 2)
+			usleep(200000);
+	}
+	std::cout << std::endl;
 	return;
 }
 
@@ -30,7 +46,7 @@ void PhoneBook::printInstructions(void)
 //	std::cout << "|   |                                         |" << std::endl;
 //	std::cout << " \\_ |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
 	std::cout << " \\_ |                                         |" << std::endl;
-	std::cout << "    |                                         |" << std::endl;
+//	std::cout << "    |                                         |" << std::endl;
 	std::cout << "    |  Here's the little that it can do:      |" << std::endl;
 	std::cout << "    |                                         |" << std::endl;
 	std::cout << "    |    ‣ ADD - Adds a new contact           |" << std::endl;
