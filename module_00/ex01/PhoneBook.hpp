@@ -10,12 +10,13 @@ public:
 	PhoneBook(void);
 	~PhoneBook(void);
 	void add(void);
-	void search(void) const;
-	void printInstructions(void) const;
+	void search(void);
+	void printInstructions(void);
 
 private:
 
 	Contact contacts[8];
+	int nextIndex;
 
 };
 
