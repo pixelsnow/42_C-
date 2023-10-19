@@ -10,7 +10,7 @@ int main(void)
 	phonebook.printInstructions();
 	while (!exit)
 	{
-		std::cin >> command;
+		std::getline(std::cin, command);
 		std::transform(command.begin(), command.end(), command.begin(),
 				::tolower);
 		if (command == "exit")
