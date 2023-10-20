@@ -6,12 +6,13 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/19 21:33:45 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:56:14 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <unistd.h>
+#include <stdlib.h>
 
 PhoneBook::PhoneBook(void) : nextIndex(0)
 {
@@ -20,13 +21,19 @@ PhoneBook::PhoneBook(void) : nextIndex(0)
 
 PhoneBook::~PhoneBook(void)
 {
-	std::string message = "Deleting your loved ones' contacts FOREVER";
+	std::string message = "Deleting your loved ones' contacts ";
+	std::string accent = "FOREVER";
 	std::string progress = " . . . . .";
 
 	for (int i = 0; i < message.length(); i++)
 	{
 		std::cout << message[i] << std::flush;
-		usleep(30000);
+		usleep(20000);
+	}
+	for (int i = 0; i < accent.length(); i++)
+	{
+		std::cout << accent[i] << std::flush;
+		usleep(100000);
 	}
 	for (int i = 0; i < progress.length(); i++)
 	{
