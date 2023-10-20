@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/20 15:49:35 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:54:49 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void PhoneBook::add(void)
 	contacts[nextIndex].setContactInfo(nextIndex, newFirstName, "lastname", "nick", "phone", "secret");
 	nextIndex++;
 	nextIndex %= 8;
-	std::cout << "✴ " << newFirstName << " has been added to your awesome phonebook ✴" << std::endl;
+	std::cout << "✴ " << newFirstName << " has been added to your awesomest phonebook ✴" << std::endl;
 }
 
 bool PhoneBook::isValidIndex(std::string searchIndex) const
 {
 	return (searchIndex.length() == 1
 		&& searchIndex[0] >= '0'
-		&& searchIndex[0] <= '0' + nextIndex);
+		&& searchIndex[0] < '0' + nextIndex);
 }
 
 void PhoneBook::displayTableHeaders(void) const
@@ -103,6 +103,7 @@ void PhoneBook::printPhoneBook(void)
 	std::cout << "|   |   WELCOME TO YOUR CRAPPY 80S PHONEBOOK!   |" << std::endl;
 		std::cout << " \\_ |                                           |" << std::endl;
 	displayTableHeaders();
+	std::cout << "    |-------------------------------------------|" << std::endl;
 	for (int i=0; i<nextIndex; i++)
 		contacts[i].displayAsRow();
 	std::cout << "    |   ________________________________________|___" << std::endl;
@@ -121,8 +122,6 @@ void PhoneBook::search(void)
 	}
 	// handle empty case
 	printPhoneBook();
-	/* for (int i=0; i<nextIndex; i++)
-		contacts[i].displayAsRow(); */
 	std::cout << "‣ index" << std::endl;
 	while (1) // also check if number and if in range
 	{
