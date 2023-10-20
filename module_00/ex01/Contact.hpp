@@ -28,7 +28,7 @@ private:
 	std::string secret;
 
 	void displayIndexCell() const;
-	void displayTextCell(std::string str) const; // try to use template maybe?
+	void displayTextCell(std::string str) const;
 
 };
 

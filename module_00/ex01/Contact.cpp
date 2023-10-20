@@ -58,7 +58,7 @@ void Contact::displayDetails(void) const
 
 void Contact::displayAsRow(void) const
 {
-	std::cout << "|";
+	std::cout << "    |";
 	displayIndexCell();
 	displayTextCell(firstName);
 	displayTextCell(lastName);

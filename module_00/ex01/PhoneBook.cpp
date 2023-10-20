@@ -6,13 +6,13 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/20 14:56:14 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:49:35 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <unistd.h>
-#include <stdlib.h>
+#include <iomanip>
 
 PhoneBook::PhoneBook(void) : nextIndex(0)
 {
@@ -22,7 +22,7 @@ PhoneBook::PhoneBook(void) : nextIndex(0)
 PhoneBook::~PhoneBook(void)
 {
 	std::string message = "Deleting your loved ones' contacts ";
-	std::string accent = "FOREVER";
+	std::string accentWord = "FOREVER";
 	std::string progress = " . . . . .";
 
 	for (int i = 0; i < message.length(); i++)
@@ -30,9 +30,9 @@ PhoneBook::~PhoneBook(void)
 		std::cout << message[i] << std::flush;
 		usleep(20000);
 	}
-	for (int i = 0; i < accent.length(); i++)
+	for (int i = 0; i < accentWord.length(); i++)
 	{
-		std::cout << accent[i] << std::flush;
+		std::cout << accentWord[i] << std::flush;
 		usleep(100000);
 	}
 	for (int i = 0; i < progress.length(); i++)
@@ -70,24 +70,71 @@ void PhoneBook::add(void)
 {
 	std::string	newFirstName;
 
-	std::cout << "first name:" << std::endl;
+	std::cout << "‣ first name:" << std::endl;
 	while (newFirstName.length() == 0)
 		std::getline(std::cin, newFirstName);
 	contacts[nextIndex].setContactInfo(nextIndex, newFirstName, "lastname", "nick", "phone", "secret");
 	nextIndex++;
 	nextIndex %= 8;
-	std::cout << "adding" << std::endl;
+	std::cout << "✴ " << newFirstName << " has been added to your awesome phonebook ✴" << std::endl;
+}
+
+bool PhoneBook::isValidIndex(std::string searchIndex) const
+{
+	return (searchIndex.length() == 1
+		&& searchIndex[0] >= '0'
+		&& searchIndex[0] <= '0' + nextIndex);
+}
+
+void PhoneBook::displayTableHeaders(void) const
+{
+	std::cout << "    |";
+	std::cout << std::setw (10) << "index" << "|";
+	std::cout << std::setw (10) << "first name" << "|";
+	std::cout << std::setw (10) << "last name" << "|";
+	std::cout << std::setw (10) << "nickname" << "|";
+	std::cout << std::endl;
+}
+
+void PhoneBook::printPhoneBook(void)
+{
+	std::cout << "   _____________________________________________" << std::endl;
+	std::cout << " / \\                                            \\" << std::endl;
+	std::cout << "|   |   WELCOME TO YOUR CRAPPY 80S PHONEBOOK!   |" << std::endl;
+		std::cout << " \\_ |                                           |" << std::endl;
+	displayTableHeaders();
+	for (int i=0; i<nextIndex; i++)
+		contacts[i].displayAsRow();
+	std::cout << "    |   ________________________________________|___" << std::endl;
+	std::cout << "    |  /                                           /" << std::endl;
+	std::cout << "    \\_/___________________________________________/" << std::endl;
 }
 
 void PhoneBook::search(void)
 {
 	std::string	indexToShow;
 
+	if (nextIndex == 0)
+	{
+		std::cout << "Your awesomest phonebook is empty... Type ADD to fix it" << std::endl;
+		return;
+	}
 	// handle empty case
-	for (int i=0; i<nextIndex; i++)
-		contacts[i].displayAsRow();
-	std::cout << "enter index" << std::endl;
-	while (!indexToShow.length()) // also check if number and if in range
+	printPhoneBook();
+	/* for (int i=0; i<nextIndex; i++)
+		contacts[i].displayAsRow(); */
+	std::cout << "‣ index" << std::endl;
+	while (1) // also check if number and if in range
+	{
 		std::getline(std::cin, indexToShow);
-	contacts[std::stoi(indexToShow)].displayDetails();
+		if (isValidIndex(indexToShow))
+		{
+			contacts[std::stoi(indexToShow)].displayDetails();
+			break;
+		}
+		else
+		{
+			std::cout << "Not a valid index, try again" << std::endl;
+		}
+	}
 }

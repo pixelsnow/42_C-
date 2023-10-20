@@ -17,7 +17,10 @@ private:
 
 	Contact contacts[8];
 	int nextIndex;
+	bool isValidIndex(std::string searchIndex) const;
+	void printPhoneBook(void);
+	void displayTableHeaders(void) const;
 
 };
 
-#endif
+#endifgit add 
