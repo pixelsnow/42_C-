@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/22 20:44:44 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:56:05 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,6 @@ std::string getValueInput(std::string prompt)
 			std::cout << "✖ " << prompt << " can't be empty, try again" << std::endl;
 		else
 			break;
-		//std::getline(std::cin, inputValue);
-	}
-	if (std::cin.bad())
-	{
-		
-	} else if (!std::cin.eof())
-	{
-
 	}
 	return (inputValue);
 }
@@ -131,8 +123,6 @@ void PhoneBook::add(void)
 {
 	Contact newContact;
 	std::string inputValue;
-
-	//inputValue = getValueInput("first name");
 
 	newContact.setFirstName(getValueInput("first name"));
 	if (std::cin.eof())
@@ -202,9 +192,8 @@ void PhoneBook::search(void)
 	// handle empty case
 	printPhoneBook();
 	std::cout << "‣ index" << std::endl;
-	while (1) // also check if number and if in range
+	while (std::getline(std::cin, indexToShow)) // also check if number and if in range
 	{
-		std::getline(std::cin, indexToShow);
 		if (isValidIndex(indexToShow))
 		{
 			displayContactDetails(std::stoi(indexToShow));
