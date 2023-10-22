@@ -3,17 +3,14 @@
 int main(void)
 {
 	PhoneBook	phonebook;
-	bool		exit;
 	std::string	command;
 
-	exit = false;
-	while (!exit)
+	while (std::getline(std::cin, command))
 	{
-		std::getline(std::cin, command);
 		std::transform(command.begin(), command.end(), command.begin(),
 				::tolower);
 		if (command == "exit")
-			exit = true;
+			break;
 		else if (command == "add")
 			phonebook.add();
 		else if (command == "search")

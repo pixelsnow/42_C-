@@ -20,6 +20,8 @@ private:
 
 	Contact contacts[8];
 	int nextIndex;
+	int size;
+
 	bool isValidIndex(std::string searchIndex) const;
 	void printPhoneBook(void);
 	void displayTableHeaders(void) const;

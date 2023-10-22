@@ -6,13 +6,13 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/22 18:15:50 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:44:44 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void) : nextIndex(0)
+PhoneBook::PhoneBook(void) : nextIndex(0), size(0)
 {
 	std::cout << "   ___________________________________________" << std::endl;
 	std::cout << " / \\                                          \\" << std::endl;
@@ -108,9 +108,22 @@ std::string getValueInput(std::string prompt)
 {
 	std::string inputValue;
 
-	std::cout << prompt << std::endl;
-	while (inputValue.length() == 0)
-		std::getline(std::cin, inputValue);
+	std::cout << "‣ " << prompt << ":" << std::endl;
+	while (std::getline(std::cin, inputValue))
+	{
+		if (!inputValue.length())
+			std::cout << "✖ " << prompt << " can't be empty, try again" << std::endl;
+		else
+			break;
+		//std::getline(std::cin, inputValue);
+	}
+	if (std::cin.bad())
+	{
+		
+	} else if (!std::cin.eof())
+	{
+
+	}
 	return (inputValue);
 }
 
@@ -119,16 +132,30 @@ void PhoneBook::add(void)
 	Contact newContact;
 	std::string inputValue;
 
-	newContact.setFirstName(getValueInput("‣ first name:"));
-	newContact.setLastName(getValueInput("‣ last name:"));
-	newContact.setNickname(getValueInput("‣ nickname:"));
-	newContact.setPhoneNumber(getValueInput("‣ phone number:"));
-	newContact.setSecret(getValueInput("‣ darkest secret:"));
+	//inputValue = getValueInput("first name");
+
+	newContact.setFirstName(getValueInput("first name"));
+	if (std::cin.eof())
+		return;
+	newContact.setLastName(getValueInput("last name"));
+	if (std::cin.eof())
+		return;
+	newContact.setNickname(getValueInput("nickname"));
+	if (std::cin.eof())
+		return;
+	newContact.setPhoneNumber(getValueInput("phone number"));
+	if (std::cin.eof())
+		return;
+	newContact.setSecret(getValueInput("darkest secret"));
+	if (std::cin.eof())
+		return;
 
 	contacts[nextIndex].copyContactInfo(newContact);
 	std::cout << "✴ " << newContact.getFirstName() << " has been added to your awesomest phonebook ✴" << std::endl;
 	nextIndex++;
 	nextIndex %= 8;
+	if (size < 8)
+		size++;
 }
 
 bool PhoneBook::isValidIndex(std::string searchIndex) const
