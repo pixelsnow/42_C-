@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/22 20:56:05 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/22 21:02:56 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ PhoneBook::PhoneBook(void) : nextIndex(0), size(0)
 	std::cout << "   ___________________________________________" << std::endl;
 	std::cout << " / \\                                          \\" << std::endl;
 	std::cout << "|   |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
-//	std::cout << "|   |                                         |" << std::endl;
-//	std::cout << " \\_ |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
 	std::cout << " \\_ |                                         |" << std::endl;
-//	std::cout << "    |                                         |" << std::endl;
 	std::cout << "    |  Here's the little that it can do:      |" << std::endl;
 	std::cout << "    |                                         |" << std::endl;
 	std::cout << "    |    ‣ ADD - Adds a new contact           |" << std::endl;
@@ -66,7 +63,10 @@ void PhoneBook::displayContactIndexCell(int index) const
 
 void PhoneBook::displayContactTextCell(std::string str) const
 {
-	std::cout << std::setw (10) << str << "|";
+	if (str.length() > 10)
+		std::cout << str.substr(0, 9) << ".|";
+	else
+		std::cout << std::setw (10) << str << "|";
 }
 
 void PhoneBook::displayContactDetails(int index) const
