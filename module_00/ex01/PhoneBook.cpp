@@ -6,17 +6,31 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/20 17:54:49 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:15:50 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <unistd.h>
-#include <iomanip>
 
 PhoneBook::PhoneBook(void) : nextIndex(0)
 {
-	return;
+	std::cout << "   ___________________________________________" << std::endl;
+	std::cout << " / \\                                          \\" << std::endl;
+	std::cout << "|   |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
+//	std::cout << "|   |                                         |" << std::endl;
+//	std::cout << " \\_ |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
+	std::cout << " \\_ |                                         |" << std::endl;
+//	std::cout << "    |                                         |" << std::endl;
+	std::cout << "    |  Here's the little that it can do:      |" << std::endl;
+	std::cout << "    |                                         |" << std::endl;
+	std::cout << "    |    ‣ ADD - Adds a new contact           |" << std::endl;
+	std::cout << "    |    ‣ SEARCH - Displays saved contacts   |" << std::endl;
+	std::cout << "    |    ‣ EXIT - The program quits and       |" << std::endl;
+	std::cout << "    |        your contacts are lost FOREVER!  |" << std::endl;
+	std::cout << "    |   ______________________________________|___" << std::endl;
+	std::cout << "    |  /                                         /" << std::endl;
+	std::cout << "    \\_/_________________________________________/" << std::endl;
+	std::cout << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
@@ -45,17 +59,41 @@ PhoneBook::~PhoneBook(void)
 	return;
 }
 
+void PhoneBook::displayContactIndexCell(int index) const
+{
+	std::cout << std::setw (10) << index << "|";
+}
+
+void PhoneBook::displayContactTextCell(std::string str) const
+{
+	std::cout << std::setw (10) << str << "|";
+}
+
+void PhoneBook::displayContactDetails(int index) const
+{
+	std::cout << "first name: " << contacts[index].getFirstName() << std::endl;
+	std::cout << "last name: " << contacts[index].getLastName() << std::endl;
+	std::cout << "nickname: " << contacts[index].getNickname() << std::endl;
+	std::cout << "phone number: " << contacts[index].getPhoneNumber() << std::endl;
+	std::cout << "darkest secret: " << contacts[index].getSecret() << std::endl;
+}
+
+void PhoneBook::displayContactAsRow(int index) const
+{
+	std::cout << "    |";
+	displayContactIndexCell(index);
+	displayContactTextCell(contacts[index].getFirstName());
+	displayContactTextCell(contacts[index].getLastName());
+	displayContactTextCell(contacts[index].getNickname());
+	std::cout << std::endl;
+}
+
 void PhoneBook::printInstructions(void)
 {
 	std::cout << "   ___________________________________________" << std::endl;
 	std::cout << " / \\                                          \\" << std::endl;
-	std::cout << "|   |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
-//	std::cout << "|   |                                         |" << std::endl;
-//	std::cout << " \\_ |  WELCOME TO YOUR CRAPPY 80S PHONEBOOK!  |" << std::endl;
+	std::cout << "|   |  Here are the only available commands:  |" << std::endl;
 	std::cout << " \\_ |                                         |" << std::endl;
-//	std::cout << "    |                                         |" << std::endl;
-	std::cout << "    |  Here's the little that it can do:      |" << std::endl;
-	std::cout << "    |                                         |" << std::endl;
 	std::cout << "    |    ‣ ADD - Adds a new contact           |" << std::endl;
 	std::cout << "    |    ‣ SEARCH - Displays saved contacts   |" << std::endl;
 	std::cout << "    |    ‣ EXIT - The program quits and       |" << std::endl;
@@ -66,17 +104,31 @@ void PhoneBook::printInstructions(void)
 	std::cout << std::endl;
 }
 
+std::string getValueInput(std::string prompt)
+{
+	std::string inputValue;
+
+	std::cout << prompt << std::endl;
+	while (inputValue.length() == 0)
+		std::getline(std::cin, inputValue);
+	return (inputValue);
+}
+
 void PhoneBook::add(void)
 {
-	std::string	newFirstName;
+	Contact newContact;
+	std::string inputValue;
 
-	std::cout << "‣ first name:" << std::endl;
-	while (newFirstName.length() == 0)
-		std::getline(std::cin, newFirstName);
-	contacts[nextIndex].setContactInfo(nextIndex, newFirstName, "lastname", "nick", "phone", "secret");
+	newContact.setFirstName(getValueInput("‣ first name:"));
+	newContact.setLastName(getValueInput("‣ last name:"));
+	newContact.setNickname(getValueInput("‣ nickname:"));
+	newContact.setPhoneNumber(getValueInput("‣ phone number:"));
+	newContact.setSecret(getValueInput("‣ darkest secret:"));
+
+	contacts[nextIndex].copyContactInfo(newContact);
+	std::cout << "✴ " << newContact.getFirstName() << " has been added to your awesomest phonebook ✴" << std::endl;
 	nextIndex++;
 	nextIndex %= 8;
-	std::cout << "✴ " << newFirstName << " has been added to your awesomest phonebook ✴" << std::endl;
 }
 
 bool PhoneBook::isValidIndex(std::string searchIndex) const
@@ -105,7 +157,7 @@ void PhoneBook::printPhoneBook(void)
 	displayTableHeaders();
 	std::cout << "    |-------------------------------------------|" << std::endl;
 	for (int i=0; i<nextIndex; i++)
-		contacts[i].displayAsRow();
+		displayContactAsRow(i);
 	std::cout << "    |   ________________________________________|___" << std::endl;
 	std::cout << "    |  /                                           /" << std::endl;
 	std::cout << "    \\_/___________________________________________/" << std::endl;
@@ -128,7 +180,7 @@ void PhoneBook::search(void)
 		std::getline(std::cin, indexToShow);
 		if (isValidIndex(indexToShow))
 		{
-			contacts[std::stoi(indexToShow)].displayDetails();
+			displayContactDetails(std::stoi(indexToShow));
 			break;
 		}
 		else

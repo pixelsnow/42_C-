@@ -7,7 +7,6 @@ int main(void)
 	std::string	command;
 
 	exit = false;
-	phonebook.printInstructions();
 	while (!exit)
 	{
 		std::getline(std::cin, command);

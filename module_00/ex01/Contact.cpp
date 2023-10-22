@@ -1,67 +1,64 @@
 #include "Contact.hpp"
-#include <iomanip>
 
-/* Contact::Contact(void)
-			: index(0),
-				firstName(firstName),
-				lastName(lastNameInit),
-				nickname(nicknameInit),
-				phoneNumber(phoneNumberInit),
-				secret(secretInit)
-{
-	return;
-} */
+Contact::Contact(void) {}
 
-Contact::Contact(void)
+Contact::~Contact(void) {}
+
+void Contact::copyContactInfo(Contact source)
 {
-	return;
+	firstName = source.getFirstName();
+	lastName = source.getLastName();
+	nickname = source.getNickname();
+	phoneNumber = source.getPhoneNumber();
+	secret = source.getSecret();
 }
 
-Contact::~Contact(void)
+void Contact::setFirstName(std::string newFirstName)
 {
-	return;
-}
-
-void Contact::setContactInfo(int newIndex,
-		std::string newFirstName,
-		std::string newLastName,
-		std::string newNickname,
-		std::string newPhoneNumber,
-		std::string newSecret)
-{
-	index = newIndex;
 	firstName = newFirstName;
+}
+
+void Contact::setLastName(std::string newLastName)
+{
 	lastName = newLastName;
+}
+
+void Contact::setNickname(std::string newNickname)
+{
 	nickname = newNickname;
+}
+
+void Contact::setPhoneNumber(std::string newPhoneNumber)
+{
 	phoneNumber = newPhoneNumber;
+}
+
+void Contact::setSecret(std::string newSecret)
+{
 	secret = newSecret;
 }
 
-void Contact::displayIndexCell(void) const
+std::string Contact::getFirstName(void) const
 {
-	std::cout << std::setw (10) << index << "|";
+	return firstName;
 }
 
-void Contact::displayTextCell(std::string str) const
+std::string Contact::getLastName(void) const
 {
-	std::cout << std::setw (10) << str << "|";
+	return lastName;
 }
 
-void Contact::displayDetails(void) const
+std::string Contact::getNickname(void) const
 {
-	std::cout << "first name: " << firstName << std::endl;
-	std::cout << "last name: " << lastName << std::endl;
-	std::cout << "nickname: " << nickname << std::endl;
-	std::cout << "phone number: " << phoneNumber << std::endl;
-	std::cout << "darkest secret: " << secret << std::endl;
+	return nickname;
 }
 
-void Contact::displayAsRow(void) const
+std::string Contact::getPhoneNumber(void) const
 {
-	std::cout << "    |";
-	displayIndexCell();
-	displayTextCell(firstName);
-	displayTextCell(lastName);
-	displayTextCell(nickname);
-	std::cout << std::endl;
+	return phoneNumber;
+}
+
+std::string Contact::getSecret(void) const
+{
+	return secret;
 }
