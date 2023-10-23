@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:13:01 by vvagapov          #+#    #+#             */
+/*   Updated: 2023/10/23 15:13:03 by vvagapov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
@@ -8,15 +20,16 @@ class Contact {
 public:
 
 	Contact(void);
-	/* Contact(Contact template); */
 	~Contact(void);
 	
 	void copyContactInfo(Contact source);
+
 	void setFirstName(std::string newFirstName);
 	void setLastName(std::string newLastName);
 	void setNickname(std::string newNickname);
 	void setPhoneNumber(std::string newPhoneNumber);
 	void setSecret(std::string newSecret);
+
 	std::string getFirstName(void) const;
 	std::string getLastName(void) const;
 	std::string getNickname(void) const;
