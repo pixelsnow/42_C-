@@ -5,15 +5,9 @@ class Megaphone
 
 public:
 
-	Megaphone(void)
-	{
-		return;
-	}
+	Megaphone(void){}
 
-	~Megaphone(void)
-	{
-		return;
-	}
+	~Megaphone(void){}
 
 	void activate(int ac, char** av)
 	{
