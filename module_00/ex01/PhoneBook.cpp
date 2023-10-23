@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:32:00 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/22 21:02:56 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:52:51 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,8 @@ void PhoneBook::add(void)
 	contacts[nextIndex].copyContactInfo(newContact);
 	std::cout << "✴ " << newContact.getFirstName() << " has been added to your awesomest phonebook ✴" << std::endl;
 	nextIndex++;
-	nextIndex %= 8;
-	if (size < 8)
+	nextIndex %= SIZE;
+	if (size < SIZE)
 		size++;
 }
 
@@ -152,7 +152,7 @@ bool PhoneBook::isValidIndex(std::string searchIndex) const
 {
 	return (searchIndex.length() == 1
 		&& searchIndex[0] >= '0'
-		&& searchIndex[0] < '0' + nextIndex);
+		&& searchIndex[0] < '0' + size);
 }
 
 void PhoneBook::displayTableHeaders(void) const
@@ -173,7 +173,7 @@ void PhoneBook::printPhoneBook(void)
 		std::cout << " \\_ |                                           |" << std::endl;
 	displayTableHeaders();
 	std::cout << "    |-------------------------------------------|" << std::endl;
-	for (int i=0; i<nextIndex; i++)
+	for (int i=0; i<size; i++)
 		displayContactAsRow(i);
 	std::cout << "    |   ________________________________________|___" << std::endl;
 	std::cout << "    |  /                                           /" << std::endl;
@@ -184,7 +184,7 @@ void PhoneBook::search(void)
 {
 	std::string	indexToShow;
 
-	if (nextIndex == 0)
+	if (size == 0)
 	{
 		std::cout << "Your awesomest phonebook is empty... Type ADD to fix it" << std::endl;
 		return;
@@ -196,7 +196,7 @@ void PhoneBook::search(void)
 	{
 		if (isValidIndex(indexToShow))
 		{
-			displayContactDetails(std::stoi(indexToShow));
+			displayContactDetails(std::atoi(indexToShow.c_str()));
 			break;
 		}
 		else

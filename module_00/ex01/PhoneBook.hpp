@@ -1,9 +1,10 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# define SIZE 8
+# define SIZE 3
 # include "Contact.hpp"
 # include <iomanip>
+# include <iostream>
 # include <unistd.h>
 
 class PhoneBook {
@@ -18,7 +19,7 @@ public:
 
 private:
 
-	Contact contacts[8];
+	Contact contacts[SIZE];
 	int nextIndex;
 	int size;
 
