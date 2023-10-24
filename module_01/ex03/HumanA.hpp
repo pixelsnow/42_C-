@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 16:53:27 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/24 20:38:11 by vvagapov         ###   ########.fr       */
+/*   Created: 2023/10/24 20:39:37 by vvagapov          #+#    #+#             */
+/*   Updated: 2023/10/24 20:43:45 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-#define ZOMBIE_HPP
+#ifndef HUMANA_HPP
+#define HUMANA_HPP
 
 #include <iostream>
 
-class Zombie
+class HumanA
 {
 private:
-	std::string name;
-
 public:
-	Zombie(std::string zombieName);
-	~Zombie(void);
-	void announce(void) const;
 };
 
 #endif
