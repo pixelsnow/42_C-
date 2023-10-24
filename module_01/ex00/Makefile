@@ -6,17 +6,17 @@
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:52:16 by vvagapov          #+#    #+#              #
-#    Updated: 2023/10/24 16:53:42 by vvagapov         ###   ########.fr        #
+#    Updated: 2023/10/24 17:15:29 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = phonebook
+NAME = zombie
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = PhoneBook.cpp Contact.cpp main.cpp
+SRC = Zombie.cpp randomChump.cpp newZombie.cpp main.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
