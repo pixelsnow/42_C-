@@ -5,18 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/24 16:52:16 by vvagapov          #+#    #+#              #
-#    Updated: 2023/10/24 19:55:26 by vvagapov         ###   ########.fr        #
+#    Created: 2023/10/24 19:33:58 by vvagapov          #+#    #+#              #
+#    Updated: 2023/10/24 20:31:17 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = zombie_horde
+NAME = brain
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = Zombie.cpp zombieHorde.cpp main.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
