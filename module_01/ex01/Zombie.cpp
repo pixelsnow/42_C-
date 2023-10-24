@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 16:53:38 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/24 17:32:17 by vvagapov         ###   ########.fr       */
+/*   Created: 2023/10/24 16:53:29 by vvagapov          #+#    #+#             */
+/*   Updated: 2023/10/24 17:50:14 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie *newZombie(std::string name);
-void randomChump(std::string name);
+Zombie::Zombie(void){};
 
-int main(void)
+Zombie::Zombie(std::string newName) : name(newName){};
+
+Zombie::~Zombie(void)
 {
-	Zombie *zombieHeap = newZombie("Heap");
-	zombieHeap->announce();
-	randomChump("Stack");
-	delete (zombieHeap);
-	return 0;
+	std::cout << "Zombie " << name << " is being destroyed... :(" << std::endl;
+};
+
+void Zombie::setName(std::string newName)
+{
+	name = newName;
+}
+
+void Zombie::announce(void) const
+{
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
