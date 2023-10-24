@@ -6,14 +6,14 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:11:51 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/23 15:18:27 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:21:40 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# define SIZE 3
+# define SIZE 8
 
 # include "Contact.hpp"
 # include <iomanip>
