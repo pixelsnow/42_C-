@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:34 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 19:26:01 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:58:18 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ bool Replacer::s1Valid(std::string s1) const
 }
 
 // Modifies string str by replacing every occurence of s1 with s2
-void Replacer::replaceInString(std::string &str, std::string s1, std::string s2)
+void Replacer::replaceInString(std::string &str, std::string s1,
+							   std::string s2) const
 {
 	std::string::size_type position = 0;
 
@@ -42,7 +43,7 @@ void Replacer::replaceInString(std::string &str, std::string s1, std::string s2)
 	}
 }
 
-int Replacer::run(std::string filename, std::string s1, std::string s2)
+int Replacer::run(std::string filename, std::string s1, std::string s2) const
 {
 	std::ifstream inStream;
 	std::ofstream outStream;

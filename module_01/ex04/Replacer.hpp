@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:36 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 19:38:30 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:26:28 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ class Replacer
 private:
 	bool filenameValid(std::string filename) const;
 	bool s1Valid(std::string s1) const;
-	void replaceInString(std::string &str, std::string s1, std::string s2);
+	void replaceInString(std::string &str, std::string s1, std::string s2) const;
 
 public:
 	Replacer(void);
 	~Replacer(void);
 
-	int run(std::string filename, std::string s1, std::string s2);
+	int run(std::string filename, std::string s1, std::string s2) const;
 };
 
 #endif
