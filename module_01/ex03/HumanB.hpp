@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 20:39:40 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/24 20:43:57 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:34:20 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 #define HUMANB_HPP
 
 #include <iostream>
+#include "Weapon.hpp"
 
 class HumanB
 {
 private:
+	Weapon *weapon;
+	std::string name;
+
 public:
+	HumanB(std::string newName);
+	~HumanB(void);
+	void attack(void) const;
+	void setWeapon(Weapon &newWeapon);
 };
 
 #endif

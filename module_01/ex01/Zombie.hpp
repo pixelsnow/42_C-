@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:53:27 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/24 17:47:19 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:15:14 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ private:
 	std::string name;
 
 public:
-	Zombie();
+	Zombie(void);
 	Zombie(std::string newName);
 	~Zombie(void);
 	void setName(std::string newName);

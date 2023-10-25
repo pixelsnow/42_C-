@@ -6,13 +6,16 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 20:39:47 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/24 21:24:04 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:23:14 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Weapon.hpp"
 
-Weapon::Weapon() {}
+Weapon::Weapon(std::string newType)
+{
+	type = newType;
+}
 
 Weapon::~Weapon() {}
 
