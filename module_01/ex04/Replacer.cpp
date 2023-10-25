@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:34 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 19:01:08 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:16:02 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ bool Replacer::s1Valid(std::string s1) const
 // Modifies string str by replacing every occurence of s1 with s2
 void Replacer::replaceInString(std::string &str, std::string s1, std::string s2)
 {
-	std::string::size_type found = 0;
+	std::string::size_type position = 0;
 
 	while (42)
 	{
-		found = str.find(s1, found);
-		if (found == std::string::npos)
+		position = str.find(s1, position);
+		if (position == std::string::npos)
 			break;
-		str.erase(found, s1.length());
-		str.insert(found, s2, 0, s2.length());
-		found += s2.length();
+		str.erase(position, s1.length());
+		str.insert(position, s2, 0, s2.length());
+		position += s2.length();
 	}
 }
