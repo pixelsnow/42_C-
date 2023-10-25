@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:34 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 16:36:17 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:47:28 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Replacer::~Replacer(void) {}
 
 int Replacer::go(std::string filename, std::string s1, std::string s2)
 {
-	std::fstream inStream;
+	// std::fstream inStream;
 	std::fstream outStream;
 	std::string content;
 
@@ -28,16 +28,22 @@ int Replacer::go(std::string filename, std::string s1, std::string s2)
 		return (IN_FILE_OPEN_ERROR);
 	if (!s1Valid(s1))
 		return (EMPTY_S1_ERROR);
-	inStream.open(filename, std::fstream::in);
+
+	std::ifstream inStream(filename);
 	if (!inStream.is_open())
 		return (IN_FILE_OPEN_ERROR);
-	outStream.open(filename.append(".replace"), std::fstream::out);
+	content << t.rdbuf();
+
+	/* inStream.open(filename, std::fstream::in);
 	if (!inStream.is_open())
+		return (IN_FILE_OPEN_ERROR); */
+	outStream.open(filename.append(".replace"), std::fstream::out);
+	if (!outStream.is_open())
 	{
 		inStream.close();
 		return (OUT_FILE_OPEN_ERROR);
 	}
-	inStream >> content;
+	// std::getline(inStream, content);
 	outStream << content;
 	return (SUCCESS);
 }

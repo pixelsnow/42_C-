@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:36 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 16:36:03 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:47:35 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define OUT_FILE_OPEN_ERROR 2
 #define EMPTY_S1_ERROR 3
 
-#include <fstream>
+#include <ifstream>
 
 class Replacer
 {
