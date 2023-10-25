@@ -6,7 +6,7 @@
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 13:57:40 by vvagapov          #+#    #+#              #
-#    Updated: 2023/10/25 16:35:32 by vvagapov         ###   ########.fr        #
+#    Updated: 2023/10/25 19:45:14 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f *.replace
 
 re: fclean all
 
