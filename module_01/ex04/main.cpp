@@ -6,26 +6,46 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:57:35 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 14:01:15 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:37:14 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#define ERROR 1
-#define SUCCESS 0
+#include "Replacer.hpp"
 
-void printArgNumError(void)
+void printErrorMessage(std::string message)
+{
+	std::cout << "ERROR: " << message << std::endl;
+}
+
+void printUsageError()
 {
 	std::cout << "Usage: <filename> <s1> <s2>" << std::endl;
 }
 
+void printError(int code, Replacer replacer)
+{
+	switch (code)
+	{
+	case (IN_FILE_OPEN_ERROR):
+		printErrorMessage("File not found");
+	case (EMPTY_S1_ERROR):
+		printErrorMessage("String to replace can't be empty");
+	}
+}
+
 int main(int ac, char **av)
 {
-	if (ac != 3)
+	Replacer replacer;
+	int returnRes;
+
+	if (ac != 4)
 	{
-		printArgNumError();
-		return (1);
+		printUsageError();
+		return (ARG_NUM_ERROR);
 	}
-	(void)av;
-	return 0;
+
+	returnRes = replacer.go(av[1], av[2], av[3]);
+	printError(returnRes, replacer);
+	return returnRes;
 }

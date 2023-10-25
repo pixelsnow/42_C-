@@ -6,7 +6,7 @@
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 13:57:40 by vvagapov          #+#    #+#              #
-#    Updated: 2023/10/25 13:57:56 by vvagapov         ###   ########.fr        #
+#    Updated: 2023/10/25 16:35:32 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp
+SRC = main.cpp Replacer.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
