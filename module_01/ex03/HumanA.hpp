@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 20:39:37 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 13:31:06 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:46:35 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ private:
 public:
 	HumanA(std::string newName, Weapon &newWeapon);
 	~HumanA(void);
+
 	void attack(void) const;
 };
 

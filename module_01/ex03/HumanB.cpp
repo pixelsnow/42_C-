@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 20:39:29 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 13:41:25 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:54:59 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 HumanB::HumanB(std::string newName)
 	: name(newName), weapon(NULL) {}
 
-HumanB::~HumanB(void)
-{
-	if (weapon != NULL)
-		delete (weapon);
-}
+HumanB::~HumanB(void) {}
 
 void HumanB::attack(void) const
 {
