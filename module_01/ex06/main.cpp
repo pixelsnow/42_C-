@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:58:59 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 22:50:52 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 22:54:46 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void complainWithLevel(Harl &harl, std::string level)
 {
 	std::cout << "[" << level << "]" << std::endl;
 	harl.complain(level);
-	std::cout << std::endl;
 }
 
 void complainGeneric(void)

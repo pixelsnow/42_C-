@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:18:24 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 22:20:39 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 22:53:48 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ Harl::~Harl(void) {}
 
 void Harl::printStr(std::string str) const
 {
-	std::cout << "> HARL: " << str << std::endl;
+	std::cout << str << std::endl
+			  << std::endl;
 }
 
 void Harl::debug(void)
