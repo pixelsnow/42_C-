@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:36 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 17:47:35 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:45:03 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@
 #define OUT_FILE_OPEN_ERROR 2
 #define EMPTY_S1_ERROR 3
 
-#include <ifstream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <iostream> // TODO: remove
 
 class Replacer
 {
 private:
 	bool filenameValid(std::string filename) const;
 	bool s1Valid(std::string s1) const;
+	void replaceInString(std::string &str, std::string s1, std::string s2);
 
 public:
 	Replacer(void);
