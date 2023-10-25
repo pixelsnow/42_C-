@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:05:36 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/25 18:45:03 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:38:30 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 #define SUCCESS 0
 #define ARG_NUM_ERROR 1
-#define IN_FILE_OPEN_ERROR 2
-#define OUT_FILE_OPEN_ERROR 2
-#define EMPTY_S1_ERROR 3
+#define FAULTY_FILENAME_ERROR 2
+#define IN_FILE_OPEN_ERROR 3
+#define OUT_FILE_OPEN_ERROR 4
+#define FAULTY_S1_ERROR 5
 
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <iostream> // TODO: remove
 
 class Replacer
 {
@@ -35,7 +35,7 @@ public:
 	Replacer(void);
 	~Replacer(void);
 
-	int go(std::string filename, std::string s1, std::string s2);
+	int run(std::string filename, std::string s1, std::string s2);
 };
 
 #endif
