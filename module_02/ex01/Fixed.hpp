@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:12 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 20:41:03 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 21:11:07 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,19 @@ private:
 public:
 	Fixed(void);
 	Fixed(const Fixed &source);
+	Fixed(const int value);
+	Fixed(const float value);
+
 	~Fixed(void);
 	Fixed &operator=(Fixed &source);
+	// std::ostream &operator<<(std::ostream &out);
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
+	/* float toFloat(void) const;
+	int toInt(void) const; */
 };
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 
 #endif
