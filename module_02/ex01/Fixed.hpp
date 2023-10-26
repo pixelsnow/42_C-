@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:12 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 21:11:07 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 21:38:38 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class Fixed
 {
 private:
 	int num;
-	static const int bits = 8; // should it be in constructors instead?
+	static const int fractionalPart = 8; // should it be in constructors instead?
 
 public:
 	Fixed(void);
@@ -33,8 +33,8 @@ public:
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
-	/* float toFloat(void) const;
-	int toInt(void) const; */
+	float toFloat(void) const;
+	int toInt(void) const;
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
