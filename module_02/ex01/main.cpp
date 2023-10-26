@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:08 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 22:04:57 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:23:37 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int main(void)
 {
 	Fixed a;
-	Fixed const b(-10);
+	Fixed const b(-10); // Here should be also "Copy assignment operator called"
 	Fixed const c(42.42f);
 	Fixed const d(b);
-	// a = Fixed(1234.4321f);
+	a = Fixed(1234.4321f);
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
 	std::cout << "c is " << c << std::endl;

@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 22:15:46 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:22:39 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,19 @@ Fixed::Fixed(const float value)
 	// this->num =
 }
 
-Fixed &Fixed::operator=(Fixed &source)
+Fixed &Fixed::operator=(Fixed const &source)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->num = source.getRawBits();
 	return *this;
 }
 
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
+std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
 {
-	std::bitset<32> a(fixed.getRawBits());
+	/* std::bitset<32> a(fixed.getRawBits());
 	out << "[" << a << "]";
-	out << " = " << fixed.toInt();
+	out << " = " << fixed.toInt(); */
 	out << " = " << fixed.toFloat();
-	/* float test = 10.5;
-	std::bitset<32> b(test);
-	out << "[" << b << "]"; */
 	return out;
 }
 
