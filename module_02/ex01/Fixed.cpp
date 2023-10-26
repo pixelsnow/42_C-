@@ -6,13 +6,13 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 21:41:41 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 21:57:38 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) : num(0)
+Fixed::Fixed(void) : num(192) // TODO: change
 {
 	std::cout << "Default constructor called" << std::endl;
 }
@@ -31,6 +31,8 @@ Fixed::Fixed(const int value) : num(value << fractionalPart)
 Fixed::Fixed(const float value)
 {
 	std::cout << "Int constructor called" << std::endl;
+	int intPart = static_cast<int>(value);
+
 	// this->num =
 }
 
@@ -46,6 +48,7 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 	std::bitset<32> a(fixed.getRawBits());
 	out << "[" << a << "]";
 	out << " = " << fixed.toInt();
+	out << " = " << fixed.toFloat();
 	/* float test = 10.5;
 	std::bitset<32> b(test);
 	out << "[" << b << "]"; */
@@ -69,9 +72,7 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat(void) const
 {
-	float res;
-	res = 0;
-	return res;
+	return ((double)this->getRawBits() / (double)(1 << this->fractionalPart));
 }
 
 int Fixed::toInt(void) const
