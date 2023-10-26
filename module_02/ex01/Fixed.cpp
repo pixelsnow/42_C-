@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 21:57:38 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:04:30 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Fixed::Fixed(const int value) : num(value << fractionalPart)
 Fixed::Fixed(const float value)
 {
 	std::cout << "Int constructor called" << std::endl;
-	int intPart = static_cast<int>(value);
+	int intPart = static_cast<int>(std::round(value * (1 << this->fractionalPart)));
 
 	// this->num =
 }

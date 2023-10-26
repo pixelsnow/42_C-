@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:12 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/26 21:38:38 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:02:12 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define FIXED_HPP
 
 #include <iostream>
+#include <tgmath.h>
 
 class Fixed
 {
