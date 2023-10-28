@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 17:57:12 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 20:59:48 by vvagapov         ###   ########.fr       */
+/*   Created: 2023/10/28 20:49:57 by vvagapov          #+#    #+#             */
+/*   Updated: 2023/10/28 21:27:33 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ public:
 	~Fixed(void);
 
 	Fixed &operator=(const Fixed &source);
+	bool operator==(const Fixed &other) const;
+	bool operator!=(const Fixed &other) const;
+	bool operator>(const Fixed &other) const;
+	/* bool operator<(const Fixed &other);
+	bool operator>=(const Fixed &other);
+	bool operator<=(const Fixed &other); */
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);

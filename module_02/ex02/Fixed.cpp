@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 20:48:36 by vvagapov         ###   ########.fr       */
+/*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
+/*   Updated: 2023/10/28 22:42:26 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+
+/* CONSTRUCTORS */
 
 Fixed::Fixed(void) : rawBits(0)
 {
@@ -56,6 +58,8 @@ Fixed::Fixed(const float value)
 	}
 }
 
+/* OPERATORS */
+
 Fixed &Fixed::operator=(const Fixed &source)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
@@ -63,22 +67,62 @@ Fixed &Fixed::operator=(const Fixed &source)
 	return *this;
 }
 
+bool Fixed::operator==(const Fixed &other) const
+{
+	return other.rawBits == this->rawBits;
+}
+
+bool Fixed::operator!=(const Fixed &other) const
+{
+	return other.rawBits != this->rawBits;
+}
+
+bool Fixed::operator>(const Fixed &other) const
+{
+	int diff;
+	int sign;
+
+	diff = other.rawBits & (1 << 31) - this->rawBits & (1 << 31);
+	if (diff)
+		return (diff > 0);
+
+	sign = this->rawBits & (1 << 31);
+	std::cout << "sign: " << sign << std::endl;
+
+	for (int i = 30; i >= 0; i--)
+	{
+		diff = this->rawBits & (1 << i) - other.rawBits & (1 << i);
+		if (diff != 0)
+		{
+			if (sign)
+				return (diff < 0);
+			else
+				return (diff > 0);
+		}
+	}
+	return (false);
+}
+
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
 	/* UNCOMMENT TO SEE BINARY REPRESENTATION */
 
-	/* std::bitset<32> a(fixed.getRawBits());
+	std::bitset<32> a(fixed.getRawBits());
 	out << "= [" << a << "]";
-	out << " = "; */
+	out << " = ";
 
 	out << fixed.toFloat();
 	return out;
 }
 
+/* DESTRUCTOR */
+
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
 }
+
+/* MEMBER FUNCTIONS */
 
 int Fixed::getRawBits(void) const
 {
