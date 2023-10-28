@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 16:35:29 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:54:35 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ Fixed::Fixed(void) : rawBits(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-// Should I remove getRawBits() to match the example output better?
 Fixed::Fixed(const Fixed &source) : rawBits(source.rawBits)
 {
 	std::cout << "Copy constructor called" << std::endl;

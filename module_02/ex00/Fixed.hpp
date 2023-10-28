@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:12 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 16:33:42 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:54:31 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ class Fixed
 {
 private:
 	int rawBits;
-	static const int fractionalPart = 8; // should it be in constructors instead?
+	static const int fractionalPart = 8;
 
 public:
 	Fixed(void);
 	Fixed(const Fixed &source);
+
 	~Fixed(void);
 
 	Fixed &operator=(const Fixed &source);
