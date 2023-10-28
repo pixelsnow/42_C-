@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 16:53:47 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:48:03 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,38 @@ Fixed::Fixed(const Fixed &source) : rawBits(source.rawBits)
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int value) : rawBits(value << fractionalPart)
+Fixed::Fixed(const int value)
 {
 	std::cout << "Int constructor called" << std::endl;
+
+	try
+	{
+		if (value < -8388608 || value > 8388607)
+			throw(1);
+		else
+			rawBits = value << fractionalPart;
+	}
+	catch (int e)
+	{
+		std::cout << "ERROR: Value " << value << " out of range [-8388608; 8388607]" << std::endl;
+	}
 }
 
-Fixed::Fixed(const float value) : rawBits(static_cast<int>(std::roundf(value * (1 << this->fractionalPart))))
+Fixed::Fixed(const float value)
 {
-	std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float constructor called on " << value << std::endl;
+
+	try
+	{
+		if (value < -8388608 || value > 8388607)
+			throw(1);
+		else
+			rawBits = static_cast<int>(std::roundf(value * (1 << this->fractionalPart)));
+	}
+	catch (int e)
+	{
+		std::cout << "ERROR: Value " << value << " out of range [-8388608; 8388607]" << std::endl;
+	}
 }
 
 Fixed &Fixed::operator=(const Fixed &source)
@@ -41,6 +65,12 @@ Fixed &Fixed::operator=(const Fixed &source)
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
+	/* UNCOMMENT TO SEE BINARY REPRESENTATION */
+
+	/* std::bitset<32> a(fixed.getRawBits());
+	out << "= [" << a << "]";
+	out << " = "; */
+
 	out << fixed.toFloat();
 	return out;
 }
@@ -52,13 +82,11 @@ Fixed::~Fixed(void)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return rawBits;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
 	rawBits = raw;
 }
 
