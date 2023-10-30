@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:57 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 21:27:33 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:48:05 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ public:
 	bool operator==(const Fixed &other) const;
 	bool operator!=(const Fixed &other) const;
 	bool operator>(const Fixed &other) const;
-	/* bool operator<(const Fixed &other);
-	bool operator>=(const Fixed &other);
-	bool operator<=(const Fixed &other); */
+	bool operator<(const Fixed &other) const;
+	bool operator>=(const Fixed &other) const;
+	bool operator<=(const Fixed &other) const;
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);

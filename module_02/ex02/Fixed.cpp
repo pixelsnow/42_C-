@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 22:42:26 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:48:37 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,22 @@ bool Fixed::operator!=(const Fixed &other) const
 
 bool Fixed::operator>(const Fixed &other) const
 {
-	int diff;
-	int sign;
+	return (this->rawBits > other.rawBits);
+}
 
-	diff = other.rawBits & (1 << 31) - this->rawBits & (1 << 31);
-	if (diff)
-		return (diff > 0);
+bool Fixed::operator<(const Fixed &other) const
+{
+	return (this->rawBits < other.rawBits);
+}
 
-	sign = this->rawBits & (1 << 31);
-	std::cout << "sign: " << sign << std::endl;
+bool Fixed::operator>=(const Fixed &other) const
+{
+	return (this->rawBits >= other.rawBits);
+}
 
-	for (int i = 30; i >= 0; i--)
-	{
-		diff = this->rawBits & (1 << i) - other.rawBits & (1 << i);
-		if (diff != 0)
-		{
-			if (sign)
-				return (diff < 0);
-			else
-				return (diff > 0);
-		}
-	}
-	return (false);
+bool Fixed::operator<=(const Fixed &other) const
+{
+	return (this->rawBits <= other.rawBits);
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)

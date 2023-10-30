@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:50:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 21:36:52 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:49:43 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void test(const Fixed &a, const Fixed &b)
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
 	std::cout << "a == b: " << (a == b) << std::endl;
-	std::cout << "a > b: " << (a > b) << std::endl
-			  << std::endl;
+	std::cout << "a != b: " << (a != b) << std::endl;
+	std::cout << "a > b: " << (a > b) << std::endl;
+	std::cout << "a < b: " << (a < b) << std::endl;
+	std::cout << "a >= b: " << (a >= b) << std::endl;
+	std::cout << "a <= b: " << (a <= b) << std::endl;
+	std::cout << std::endl;
 }
 
 int main(void)
