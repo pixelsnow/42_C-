@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/30 21:38:18 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/30 22:01:48 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ Fixed::Fixed(const float value)
 	}
 }
 
-/* OPERATORS */
+/* COMPARISON OPERATORS */
 
 Fixed &Fixed::operator=(const Fixed &source)
 {
@@ -97,6 +97,41 @@ bool Fixed::operator<=(const Fixed &other) const
 	return (this->rawBits <= other.rawBits);
 }
 
+/* ARITHMETIC OPERATORS */
+
+Fixed Fixed::operator+(const Fixed &other) const
+{
+	Fixed res;
+	res.rawBits = this->rawBits + other.rawBits;
+	return res;
+}
+
+Fixed Fixed::operator-(const Fixed &other) const
+{
+	Fixed res;
+	res.rawBits = this->rawBits - other.rawBits;
+	return res;
+}
+
+// TODO: check
+Fixed Fixed::operator*(const Fixed &other) const
+{
+	Fixed res;
+	int multiplied = static_cast<int64_t>(this->rawBits * other.rawBits);
+	res.rawBits = (multiplied >> this->fractionalPart) + ((multiplied >> (this->fractionalPart - 1)) & 1);
+	return res;
+}
+
+Fixed Fixed::operator/(const Fixed &other) const
+{
+	Fixed res;
+	int divided = static_cast<int64_t>(this->rawBits / other.rawBits);
+	res.rawBits = (divided >> this->fractionalPart) + ((divided >> (this->fractionalPart - 1)) & 1);
+	return res;
+}
+
+/* INCREMENT/DECREMENT OPERATORS */
+
 Fixed &Fixed::operator++(void)
 {
 	++rawBits;
@@ -122,6 +157,8 @@ Fixed Fixed::operator--(int)
 	rawBits--;
 	return original;
 }
+
+/* OUTPUT OPERATOR */
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
