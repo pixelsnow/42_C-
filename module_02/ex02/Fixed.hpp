@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:57 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/30 21:28:53 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:36:39 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ public:
 	Fixed operator*(const Fixed &other) const;
 	Fixed operator/(const Fixed &other) const;
 
-	Fixed operator++(void);
+	Fixed &operator++(void);
+	Fixed &operator--(void);
 	Fixed operator++(int);
-	Fixed operator--(void);
 	Fixed operator--(int); // postfix
 
 	int getRawBits(void) const;

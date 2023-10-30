@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/30 20:48:37 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:38:18 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,32 @@ bool Fixed::operator>=(const Fixed &other) const
 bool Fixed::operator<=(const Fixed &other) const
 {
 	return (this->rawBits <= other.rawBits);
+}
+
+Fixed &Fixed::operator++(void)
+{
+	++rawBits;
+	return *this;
+}
+
+Fixed &Fixed::operator--(void)
+{
+	--rawBits;
+	return *this;
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed original(*this);
+	rawBits++;
+	return original;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed original(*this);
+	rawBits--;
+	return original;
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
