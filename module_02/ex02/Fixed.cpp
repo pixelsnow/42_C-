@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/31 16:19:23 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:00:56 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,12 @@
 
 /* CONSTRUCTORS */
 
-Fixed::Fixed(void) : rawBits(0)
-{
-	std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed(void) : rawBits(0) {}
 
-Fixed::Fixed(const Fixed &source) : rawBits(source.rawBits)
-{
-	std::cout << "Copy constructor called" << std::endl;
-}
+Fixed::Fixed(const Fixed &source) : rawBits(source.rawBits) {}
 
 Fixed::Fixed(const int value)
 {
-	std::cout << "Int constructor called" << std::endl;
-
 	try
 	{
 		if (value < -8388608 || value > 8388607)
@@ -43,8 +35,6 @@ Fixed::Fixed(const int value)
 
 Fixed::Fixed(const float value)
 {
-	std::cout << "Float constructor called on " << value << std::endl;
-
 	try
 	{
 		if (value < -8388608 || value > 8388607)
@@ -62,7 +52,6 @@ Fixed::Fixed(const float value)
 
 Fixed &Fixed::operator=(const Fixed &source)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	this->rawBits = source.rawBits;
 	return *this;
 }
@@ -113,7 +102,6 @@ Fixed Fixed::operator-(const Fixed &other) const
 	return res;
 }
 
-// TODO: check
 Fixed Fixed::operator*(const Fixed &other) const
 {
 	Fixed res;
@@ -163,9 +151,9 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
 	/* UNCOMMENT TO SEE BINARY REPRESENTATION */
 
-	std::bitset<32> a(fixed.getRawBits());
+	/* std::bitset<32> a(fixed.getRawBits());
 	out << "= [" << a << "]";
-	out << " = ";
+	out << " = "; */
 
 	out << fixed.toFloat();
 	return out;
@@ -173,10 +161,7 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 
 /* DESTRUCTOR */
 
-Fixed::~Fixed(void)
-{
-	std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed(void) {}
 
 /* MEMBER FUNCTIONS */
 
@@ -198,4 +183,26 @@ float Fixed::toFloat(void) const
 int Fixed::toInt(void) const
 {
 	return this->rawBits >> this->fractionalPart;
+}
+
+/* MIN, MAX */
+
+Fixed &Fixed::min(Fixed &first, Fixed &second)
+{
+	return (first > second) ? second : first;
+}
+
+const Fixed &Fixed::min(const Fixed &first, const Fixed &second)
+{
+	return (first > second) ? second : first;
+}
+
+Fixed &Fixed::max(Fixed &first, Fixed &second)
+{
+	return (first < second) ? second : first;
+}
+
+const Fixed &Fixed::max(const Fixed &first, const Fixed &second)
+{
+	return (first < second) ? second : first;
 }

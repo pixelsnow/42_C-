@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:57 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/30 21:38:36 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:01:03 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ public:
 	Fixed &operator++(void);
 	Fixed &operator--(void);
 	Fixed operator++(int);
-	Fixed operator--(int); // postfix
+	Fixed operator--(int);
 
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
@@ -54,9 +54,9 @@ public:
 	int toInt(void) const;
 
 	static Fixed &min(Fixed &first, Fixed &second);
-	static Fixed &min(const Fixed &first, const Fixed &second);
+	static const Fixed &min(const Fixed &first, const Fixed &second);
 	static Fixed &max(Fixed &first, Fixed &second);
-	static Fixed &max(const Fixed &first, const Fixed &second);
+	static const Fixed &max(const Fixed &first, const Fixed &second);
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);

@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:50:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/31 16:17:58 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:00:31 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,40 @@
 
 void test(const Fixed &a, const Fixed &b)
 {
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	/* std::cout << "a == b: " << (a == b) << std::endl;
+	std::cout << "[" << a;
+	std::cout << "; " << b << "] " << std::endl;
+	std::cout << "a == b: " << (a == b) << std::endl;
 	std::cout << "a != b: " << (a != b) << std::endl;
 	std::cout << "a > b: " << (a > b) << std::endl;
 	std::cout << "a < b: " << (a < b) << std::endl;
 	std::cout << "a >= b: " << (a >= b) << std::endl;
-	std::cout << "a <= b: " << (a <= b) << std::endl; */
+	std::cout << "a <= b: " << (a <= b) << std::endl;
 	std::cout << "a * b: " << (a * b) << std::endl;
 	std::cout << "a / b: " << (a / b) << std::endl;
 	std::cout << "a - b: " << (a - b) << std::endl;
 	std::cout << "a + b: " << (a + b) << std::endl;
+	std::cout << "max(a, b): " << Fixed::max(a, b) << std::endl;
+	std::cout << "min(a, b): " << Fixed::min(a, b) << std::endl;
 	std::cout << std::endl;
 }
 
 int main(void)
 {
+
+	/* SUBJECT EXAMPLE */
+
+	/* Fixed a;
+	Fixed const b(Fixed(5.05f) * Fixed(2));
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max(a, b) << std::endl; */
+
+	/* MY TESTS */
+
 	Fixed const a(100);
 	Fixed const b(-10);
 	test(a, b);
@@ -45,20 +62,10 @@ int main(void)
 	Fixed const h(-10.5f);
 	test(g, h);
 	Fixed const i(-10.0f);
-	Fixed const j(-10.0f);
+	Fixed const j(-10);
 	test(i, j);
 	Fixed const k(-10);
 	Fixed const l(10);
 	test(k, l);
-	/* std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "a == b: " << (a == b) << std::endl;
-	std::cout << "a > b: " << (a > b) << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
-	std::cout << "e is " << e << std::endl;
-	std::cout << "f is " << f << std::endl;
-	std::cout << "g is " << g << std::endl;
-	std::cout << "h is " << h << std::endl; */
 	return 0;
 }
