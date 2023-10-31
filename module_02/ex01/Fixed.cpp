@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:57:11 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/28 20:48:36 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:58:58 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ Fixed::Fixed(const Fixed &source) : rawBits(source.rawBits)
 
 Fixed::Fixed(const int value)
 {
-	std::cout << "Int constructor called" << std::endl;
+	std::cout << "Int constructor called on " << value << std::endl;
 
 	try
 	{
 		if (value < -8388608 || value > 8388607)
 			throw(1);
 		else
-			rawBits = value << fractionalPart;
+			this->rawBits = value << this->fractionalPart;
 	}
 	catch (int e)
 	{
@@ -48,7 +48,7 @@ Fixed::Fixed(const float value)
 		if (value < -8388608 || value > 8388607)
 			throw(1);
 		else
-			rawBits = static_cast<int>(std::roundf(value * (1 << this->fractionalPart)));
+			this->rawBits = static_cast<int>(std::roundf(value * (1 << this->fractionalPart)));
 	}
 	catch (int e)
 	{
@@ -82,12 +82,12 @@ Fixed::~Fixed(void)
 
 int Fixed::getRawBits(void) const
 {
-	return rawBits;
+	return this->rawBits;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	rawBits = raw;
+	this->rawBits = raw;
 }
 
 float Fixed::toFloat(void) const

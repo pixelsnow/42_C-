@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/31 17:00:56 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:21:50 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Fixed::Fixed(const int value)
 		if (value < -8388608 || value > 8388607)
 			throw(1);
 		else
-			rawBits = value << fractionalPart;
+			this->rawBits = value << this->fractionalPart;
 	}
 	catch (int e)
 	{
@@ -40,7 +40,7 @@ Fixed::Fixed(const float value)
 		if (value < -8388608 || value > 8388607)
 			throw(1);
 		else
-			rawBits = static_cast<int>(std::roundf(value * (1 << this->fractionalPart)));
+			this->rawBits = static_cast<int>(std::roundf(value * (1 << this->fractionalPart)));
 	}
 	catch (int e)
 	{
@@ -105,8 +105,7 @@ Fixed Fixed::operator-(const Fixed &other) const
 Fixed Fixed::operator*(const Fixed &other) const
 {
 	Fixed res;
-	int multiplied = static_cast<int64_t>(this->rawBits) * static_cast<int64_t>(other.rawBits);
-	res.rawBits = (multiplied >> this->fractionalPart) + ((multiplied >> (this->fractionalPart - 1)) & 1);
+	res.rawBits = ((static_cast<int64_t>(this->rawBits) * static_cast<int64_t>(other.rawBits)) >> this->fractionalPart) + (((static_cast<int64_t>(this->rawBits) * static_cast<int64_t>(other.rawBits)) >> (this->fractionalPart - 1)) & 1);
 	return res;
 }
 
@@ -121,27 +120,27 @@ Fixed Fixed::operator/(const Fixed &other) const
 
 Fixed &Fixed::operator++(void)
 {
-	++rawBits;
+	++(this->rawBits);
 	return *this;
 }
 
 Fixed &Fixed::operator--(void)
 {
-	--rawBits;
+	--(this->rawBits);
 	return *this;
 }
 
 Fixed Fixed::operator++(int)
 {
 	Fixed original(*this);
-	rawBits++;
+	(this->rawBits)++;
 	return original;
 }
 
 Fixed Fixed::operator--(int)
 {
 	Fixed original(*this);
-	rawBits--;
+	(this->rawBits)--;
 	return original;
 }
 
@@ -151,9 +150,9 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
 	/* UNCOMMENT TO SEE BINARY REPRESENTATION */
 
-	/* std::bitset<32> a(fixed.getRawBits());
+	std::bitset<32> a(fixed.getRawBits());
 	out << "= [" << a << "]";
-	out << " = "; */
+	out << " = ";
 
 	out << fixed.toFloat();
 	return out;
@@ -167,12 +166,12 @@ Fixed::~Fixed(void) {}
 
 int Fixed::getRawBits(void) const
 {
-	return rawBits;
+	return this->rawBits;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	rawBits = raw;
+	this->rawBits = raw;
 }
 
 float Fixed::toFloat(void) const

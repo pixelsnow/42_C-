@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:50:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/31 17:00:31 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:21:58 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void test(const Fixed &a, const Fixed &b)
 {
-	std::cout << "[" << a;
-	std::cout << "; " << b << "] " << std::endl;
+	std::cout << " > a = " << a;
+	std::cout << "; b = " << b << std::endl;
 	std::cout << "a == b: " << (a == b) << std::endl;
 	std::cout << "a != b: " << (a != b) << std::endl;
 	std::cout << "a > b: " << (a > b) << std::endl;
@@ -37,7 +37,7 @@ int main(void)
 
 	/* SUBJECT EXAMPLE */
 
-	/* Fixed a;
+	Fixed a;
 	Fixed const b(Fixed(5.05f) * Fixed(2));
 	std::cout << a << std::endl;
 	std::cout << ++a << std::endl;
@@ -45,7 +45,7 @@ int main(void)
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
-	std::cout << Fixed::max(a, b) << std::endl; */
+	std::cout << Fixed::max(a, b) << std::endl;
 
 	/* MY TESTS */
 
@@ -67,5 +67,9 @@ int main(void)
 	Fixed const k(-10);
 	Fixed const l(10);
 	test(k, l);
+	Fixed const m(4);
+	Fixed const n(2);
+	test(m, n);
+
 	return 0;
 }
