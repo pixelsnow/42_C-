@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:49:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/10/30 22:01:48 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:19:23 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ Fixed Fixed::operator-(const Fixed &other) const
 Fixed Fixed::operator*(const Fixed &other) const
 {
 	Fixed res;
-	int multiplied = static_cast<int64_t>(this->rawBits * other.rawBits);
+	int multiplied = static_cast<int64_t>(this->rawBits) * static_cast<int64_t>(other.rawBits);
 	res.rawBits = (multiplied >> this->fractionalPart) + ((multiplied >> (this->fractionalPart - 1)) & 1);
 	return res;
 }
@@ -125,8 +125,7 @@ Fixed Fixed::operator*(const Fixed &other) const
 Fixed Fixed::operator/(const Fixed &other) const
 {
 	Fixed res;
-	int divided = static_cast<int64_t>(this->rawBits / other.rawBits);
-	res.rawBits = (divided >> this->fractionalPart) + ((divided >> (this->fractionalPart - 1)) & 1);
+	res.rawBits = (static_cast<int64_t>(this->rawBits) << this->fractionalPart) / static_cast<int64_t>(other.rawBits);
 	return res;
 }
 
