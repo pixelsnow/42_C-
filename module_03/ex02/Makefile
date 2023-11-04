@@ -5,18 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/26 17:57:06 by vvagapov          #+#    #+#              #
-#    Updated: 2023/11/04 16:46:36 by vvagapov         ###   ########.fr        #
+#    Created: 2023/11/04 16:45:24 by vvagapov          #+#    #+#              #
+#    Updated: 2023/11/04 16:45:26 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixed
+NAME = trap
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Fixed.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
