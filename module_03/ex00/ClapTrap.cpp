@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:45:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/04 20:37:40 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:44:00 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ ClapTrap::ClapTrap(const ClapTrap &source)
 	: name(source.name), hitPoints(source.hitPoints),
 	  energyPoints(source.energyPoints), attackDamage(source.attackDamage)
 {
-	std::cout << MAGENTA << "ClapTrap " << this->name << " is created in the image of "
-			  << " ClapTrap " << source.name << RESET << std::endl;
+	std::cout << MAGENTA << "ClapTrap " << this->name << " is created in the image of ClapTrap " << source.name << RESET << std::endl;
 }
 
 /* DESTRUCTOR */
@@ -38,6 +37,7 @@ ClapTrap::~ClapTrap(void)
 /* OPERATORS */
 ClapTrap &ClapTrap::operator=(const ClapTrap &source)
 {
+	std::cout << MAGENTA << "ClapTrap " << this->name << " is being turned into a clone of ClapTrap " << source.name << RESET << std::endl;
 	this->name = source.name;
 	this->hitPoints = source.hitPoints;
 	this->energyPoints = source.energyPoints;
