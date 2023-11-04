@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:45:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/04 20:08:38 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:19:09 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,27 @@ void ClapTrap::printTombstone(void) const
 void ClapTrap::printGhost(void) const
 {
 	std::cout << std::endl
-			  << " .-." << std::endl;
-	std::cout << "(o o) boo!" << std::endl;
-	std::cout << "| O \\" << std::endl;
-	std::cout << " \\   \\" << std::endl;
+			  << std::flush;
+	usleep(100000);
+	std::cout << " .-." << std::endl
+			  << std::flush;
+	usleep(100000);
+	std::cout << "(o o) boo!" << std::endl
+			  << std::flush;
+	usleep(100000);
+	std::cout << "| O \\" << std::endl
+			  << std::flush;
+
+	usleep(100000);
+	std::cout << " \\   \\" << std::endl
+			  << std::flush;
+
+	usleep(100000);
 	std::cout << "  `~~~'" << std::endl
-			  << std::endl;
+			  << std::flush;
+	usleep(100000);
+	std::cout << std::endl
+			  << std::flush;
 }
 
 void ClapTrap::attack(const std::string &target)
@@ -76,9 +91,8 @@ void ClapTrap::takeDamage(unsigned int amount)
 	{
 		std::cout << "Stop attacking the corpse of " << this->name << " pls" << std::endl
 				  << std::flush;
-		usleep(500000);
+		usleep(1000000);
 		printGhost();
-		std::cout << std::flush;
 		usleep(500000);
 		std::cout << "That's right, asshole. You're being haunted now." << std::endl;
 	}
