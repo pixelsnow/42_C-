@@ -6,13 +6,14 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:45:02 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/04 19:53:35 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:28:33 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
+#include "colours.hpp"
 #include <iostream>
 #include <unistd.h>
 
