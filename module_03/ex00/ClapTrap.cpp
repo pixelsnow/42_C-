@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:45:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/04 20:19:09 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:24:40 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,25 @@
 /* CONSTRUCTORS */
 
 ClapTrap::ClapTrap(std::string newName)
-	: name(newName), hitPoints(10), energyPoints(10), attackDamage(0) {}
+	: name(newName), hitPoints(10), energyPoints(10), attackDamage(0)
+{
+	std::cout << "ClapTrap " << newName << " is created" << std::endl;
+}
 
 ClapTrap::ClapTrap(const ClapTrap &source)
 	: name(source.name), hitPoints(source.hitPoints),
-	  energyPoints(source.energyPoints), attackDamage(source.attackDamage) {}
+	  energyPoints(source.energyPoints), attackDamage(source.attackDamage)
+{
+	std::cout << "ClapTrap " << this->name << " is created in the image of "
+			  << " ClapTrap " << source.name << std::endl;
+}
 
 /* DESTRUCTOR */
 
-ClapTrap::~ClapTrap(void) {}
+ClapTrap::~ClapTrap(void)
+{
+	std::cout << "ClapTrap " << this->name << " is destroyed" << std::endl;
+}
 
 /* OPERATORS */
 ClapTrap &ClapTrap::operator=(const ClapTrap &source)
