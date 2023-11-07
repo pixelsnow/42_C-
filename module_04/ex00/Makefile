@@ -6,11 +6,11 @@
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 17:27:10 by vvagapov          #+#    #+#              #
-#    Updated: 2023/11/07 17:41:50 by vvagapov         ###   ########.fr        #
+#    Updated: 2023/11/07 21:00:41 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = zoo
+NAME = animals
 
 CC = c++
 
