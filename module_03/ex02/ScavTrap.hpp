@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:44:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/07 20:38:13 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/07 21:04:44 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define SCAVTRAP_HPP
 
 #include "ClapTrap.hpp"
-#include "colours.hpp"
 #include <iostream>
 
 class ScavTrap : public ClapTrap
