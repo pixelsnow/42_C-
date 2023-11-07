@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:44:53 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/04 20:58:53 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:23:49 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ public:
 	ScavTrap(std::string newName);
 	~ScavTrap(void);
 
-	void guardGate();
+	void guardGate(void);
 };
 
 #endif

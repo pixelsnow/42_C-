@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 16:45:09 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/07 16:25:49 by vvagapov         ###   ########.fr       */
+/*   Created: 2023/11/04 16:44:53 by vvagapov          #+#    #+#             */
+/*   Updated: 2023/11/07 16:23:43 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-#define FRAGTRAP_HPP
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 #include "colours.hpp"
 #include <iostream>
 
-class FragTrap : public ScavTrap
+class ScavTrap : public ClapTrap
 {
 private:
 public:
-	FragTrap(std::string newName);
-	~FragTrap(void);
+	ScavTrap(std::string newName);
+	~ScavTrap(void);
 
-	void highFivesGuys(void);
+	void guardGate(void);
 };
 
 #endif
