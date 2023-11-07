@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:37:26 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/07 16:30:18 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:07:32 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int main(void)
 	ScavTrap jussi("Jussi");
 
 	jussi.guardGate();
-	jussi.takeDamage(1000);
+	jussi.attack("Antti");
+	jussi.takeDamage(60);
+	jussi.takeDamage(60);
+	jussi.takeDamage(60);
 
 	return 0;
 }
