@@ -6,18 +6,18 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:02 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 12:29:23 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:38:37 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAT_HPP
 #define CAT_HPP
 
-#include <string>
+#include <iostream>
+#include "Animal.hpp"
 
-class Cat
+class Cat : public Animal
 {
-protected:
 public:
 	Cat(void);
 	Cat(const Cat &source);

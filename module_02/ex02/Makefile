@@ -6,7 +6,7 @@
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 20:50:09 by vvagapov          #+#    #+#              #
-#    Updated: 2023/10/28 20:50:12 by vvagapov         ###   ########.fr        #
+#    Updated: 2023/11/14 16:00:09 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(INC) -o $(NAME)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) -c $(FLAGS) $^
 
 clean:
