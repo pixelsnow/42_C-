@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:26:57 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/07 17:54:16 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:29:11 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ class Animal
 {
 protected:
 	std::string type;
-	virtual void makeSound(void);
+
+	virtual void makeSound(void) const;
 
 public:
 	Animal(void);
