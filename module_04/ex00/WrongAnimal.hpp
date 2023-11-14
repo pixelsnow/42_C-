@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:38:42 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 16:03:21 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:28:47 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define WRONGANIMAL_HPP
 
 #include <iostream>
+#include "colours.hpp"
 
 class WrongAnimal
 {
@@ -23,7 +24,7 @@ protected:
 public:
 	WrongAnimal(void);
 	WrongAnimal(const WrongAnimal &source);
-	~WrongAnimal(void);
+	virtual ~WrongAnimal(void);
 
 	WrongAnimal &operator=(const WrongAnimal &source);
 

@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:08 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 16:12:47 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:57:43 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,18 @@
 
 int main(void)
 {
-	/* PROPER VIRTUAL TEST */
+	const Animal *animals[4];
 
-	const Animal *meta = new Animal();
-	const Animal *dog = new Dog();
-	const Animal *cat = new Cat();
-
-	std::cout << dog->getType() << std::endl;
-	std::cout << cat->getType() << std::endl;
-	cat->makeSound(); // will output the cat sound!
-	dog->makeSound();
-	meta->makeSound();
-
-	delete meta;
-	delete dog;
-	delete cat;
-
-	/* WRONG TEST */
-
-	const WrongAnimal *wrongMeta = new WrongAnimal();
-	const WrongAnimal *wrongCat = new WrongCat();
-
-	std::cout << wrongCat->getType() << std::endl;
-	wrongCat->makeSound(); // will output the WrongAnimal sound!
-	wrongMeta->makeSound();
-
-	delete wrongMeta;
-	delete wrongCat;
-
+	for (int i = 0; i < 4; i++)
+	{
+		if (i < 2)
+			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		delete animals[i];
+	}
 	return 0;
 }

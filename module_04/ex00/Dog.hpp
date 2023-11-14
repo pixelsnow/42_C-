@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:06 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 17:27:44 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:29:00 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 class Dog : public Animal
 {
+
 public:
 	Dog(void);
 	Dog(const Dog &source);

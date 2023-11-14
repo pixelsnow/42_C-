@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:02 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 17:37:36 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:57:42 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 
 #include <iostream>
 #include "Animal.hpp"
+#include "Brain.hpp"
 #include "colours.hpp"
 
 class Cat : public Animal
 {
+private:
+	Brain *brain;
+
 public:
 	Cat(void);
 	Cat(const Cat &source);

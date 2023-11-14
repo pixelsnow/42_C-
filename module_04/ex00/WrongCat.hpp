@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:38:49 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 16:07:10 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:45:06 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "WrongAnimal.hpp"
+#include "colours.hpp"
 
 class WrongCat : public WrongAnimal
 {

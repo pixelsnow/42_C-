@@ -6,17 +6,26 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:38:45 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 16:09:01 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:51:38 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(void) : type("WrongAnimal") {}
+WrongAnimal::WrongAnimal(void) : type("WrongAnimal")
+{
+	std::cout << GREEN << "Wrong undefined Animal was born" << RESET << std::endl;
+}
 
-WrongAnimal::WrongAnimal(const WrongAnimal &source) : type(source.type) {}
+WrongAnimal::WrongAnimal(const WrongAnimal &source) : type(source.type)
+{
+	std::cout << GREEN << "Wrong Undefined Animal was created in the image of another Wrong Animal" << RESET << std::endl;
+}
 
-WrongAnimal::~WrongAnimal(void) {}
+WrongAnimal::~WrongAnimal(void)
+{
+	std::cout << RED << "Wrong Undefined Animal died :(" << RESET << std::endl;
+}
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &source)
 {
@@ -31,5 +40,5 @@ std::string WrongAnimal::getType(void) const
 
 void WrongAnimal::makeSound(void) const
 {
-	std::cout << "<< wrong ???" << std::endl;
+	std::cout << "<< Wrong Undefined Animal sound" << std::endl;
 }
