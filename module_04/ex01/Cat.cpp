@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:26:59 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 18:42:53 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:06:08 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Cat::Cat(const Cat &source) : Animal(source)
 
 Cat::~Cat(void)
 {
-	delete (this->brain);
+	delete this->brain;
 	std::cout << RED << "Cat died :(" << RESET << std::endl;
 }
 
