@@ -6,17 +6,26 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:26:54 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 16:09:31 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:37:40 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Animal::Animal(void) : type("Animal") {}
+Animal::Animal(void) : type("Animal")
+{
+	std::cout << GREEN << "Undefined Animal was born" << RESET << std::endl;
+}
 
-Animal::Animal(const Animal &source) : type(source.type) {}
+Animal::Animal(const Animal &source) : type(source.type)
+{
+	std::cout << GREEN << "Undefined Animal was created in the image of another Animal" << RESET << std::endl;
+}
 
-Animal::~Animal(void) {}
+Animal::~Animal(void)
+{
+	std::cout << RED << "Undefined Animal died :(" << RESET << std::endl;
+}
 
 Animal &Animal::operator=(const Animal &source)
 {
@@ -31,5 +40,5 @@ std::string Animal::getType(void) const
 
 void Animal::makeSound(void) const
 {
-	std::cout << "<< ???" << std::endl;
+	std::cout << "<< Undefined Animal sound" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:26:59 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 16:09:20 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:28:57 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 Cat::Cat(void)
 {
 	this->type = "Cat";
+	std::cout << GREEN << "Cat was born" << RESET << std::endl;
 }
 
-Cat::Cat(const Cat &source) : Animal(source) {}
+Cat::Cat(const Cat &source) : Animal(source)
+{
+	std::cout << GREEN << "Cat was created in the image of another Cat" << RESET << std::endl;
+}
 
-Cat::~Cat(void) {}
+Cat::~Cat(void)
+{
+	std::cout << RED << "Cat died :(" << RESET << std::endl;
+}
 
 Cat &Cat::operator=(const Cat &source)
 {
@@ -29,5 +36,5 @@ Cat &Cat::operator=(const Cat &source)
 
 void Cat::makeSound(void) const
 {
-	std::cout << "<< meow" << std::endl;
+	std::cout << YELLOW << "<< meow" << RESET << std::endl;
 }

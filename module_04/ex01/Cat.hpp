@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:02 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 13:38:37 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:37:36 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "Animal.hpp"
+#include "colours.hpp"
 
 class Cat : public Animal
 {
