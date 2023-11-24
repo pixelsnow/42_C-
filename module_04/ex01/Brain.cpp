@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:21:34 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/24 18:01:16 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:22:27 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void Brain::addIdea(std::string newIdea, int index)
 
 void Brain::printIdeas(void) const
 {
+	std::cout << "Brain contents:" << std::endl;
 	for (int i = 0; i < 100; i++)
 	{
 		if (this->ideas[i].length())

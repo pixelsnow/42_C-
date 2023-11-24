@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:26:59 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 20:06:08 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:41:57 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ Cat &Cat::operator=(const Cat &source)
 void Cat::makeSound(void) const
 {
 	std::cout << YELLOW << "<< meow" << RESET << std::endl;
+}
+
+void Cat::addIdea(std::string newIdea, int index)
+{
+	this->brain->addIdea(newIdea, index);
+}
+
+void Cat::printIdeas(void) const
+{
+	this->brain->printIdeas();
 }

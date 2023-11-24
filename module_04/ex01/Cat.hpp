@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:02 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 19:57:42 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:06:38 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ public:
 	Cat &operator=(const Cat &source);
 
 	void makeSound(void) const;
+
+	// functions for testing
+	void addIdea(std::string newIdea, int index);
+	void printIdeas(void) const;
 };
 
 #endif

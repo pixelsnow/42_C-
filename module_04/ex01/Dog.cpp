@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:04 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/14 19:29:33 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:42:10 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ Dog &Dog::operator=(const Dog &source)
 void Dog::makeSound(void) const
 {
 	std::cout << YELLOW << "<< bark" << RESET << std::endl;
+}
+
+void Dog::addIdea(std::string newIdea, int index)
+{
+	this->brain->addIdea(newIdea, index);
+}
+
+void Dog::printIdeas(void) const
+{
+	this->brain->printIdeas();
 }
