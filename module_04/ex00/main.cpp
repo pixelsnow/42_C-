@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:27:08 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/25 15:23:54 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:43:50 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,16 @@ int main(void)
 
 	const WrongAnimal *wrongMeta = new WrongAnimal();
 	const WrongAnimal *wrongCat = new WrongCat();
+	const WrongCat *wrongCatSound = new WrongCat();
 
 	std::cout << wrongCat->getType() << std::endl;
-	wrongCat->makeSound();	// will output WrongAnimal sound
-	wrongMeta->makeSound(); // will output WrongAnimal sound
+	wrongCat->makeSound();		// will output WrongAnimal sound
+	wrongMeta->makeSound();		// will output WrongAnimal sound
+	wrongCatSound->makeSound(); // will output WrongCat sound
 
 	delete wrongMeta;
 	delete wrongCat;
+	delete wrongCatSound;
 
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:21:39 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/24 20:06:27 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:39:28 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define BRAIN_HPP
 
 #include <iostream>
+#include "colours.hpp"
 
 class Brain
 {

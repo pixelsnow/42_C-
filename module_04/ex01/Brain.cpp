@@ -6,13 +6,16 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:21:34 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/24 20:27:59 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:38:37 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Brain.hpp"
 
-Brain::Brain(void) {}
+Brain::Brain(void)
+{
+	std::cout << GREEN << "Brain created" << RESET << std::endl;
+}
 
 Brain::Brain(const Brain &source)
 {
@@ -20,7 +23,10 @@ Brain::Brain(const Brain &source)
 		this->ideas[i] = source.ideas[i];
 }
 
-Brain::~Brain(void) {}
+Brain::~Brain(void)
+{
+	std::cout << RED << "Brain destroyed" << RESET << std::endl;
+}
 
 Brain &Brain::operator=(const Brain &source)
 {
