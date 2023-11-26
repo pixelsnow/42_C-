@@ -6,7 +6,7 @@
 /*   By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 16:21:34 by vvagapov          #+#    #+#             */
-/*   Updated: 2023/11/25 18:38:37 by vvagapov         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:08:58 by vvagapov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Brain::Brain(const Brain &source)
 {
 	for (int i = 0; i < 100; i++)
 		this->ideas[i] = source.ideas[i];
+	std::cout << GREEN << "Brain created in the image of another brain" << RESET << std::endl;
 }
 
 Brain::~Brain(void)
