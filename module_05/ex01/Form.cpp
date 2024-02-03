@@ -24,6 +24,7 @@ Form::Form(std::string const newName,
 		this->_gradeToExecute = newGradeToExecute;
 	}
 
+// TODO: Think if _isSigned should be always false here
 Form::Form(Form const &source)
 		: _name(source.getName()), _isSigned(source.getIsSigned()),
 		_gradeToSign(source.getGradeToSign()),
