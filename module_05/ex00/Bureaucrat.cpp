@@ -2,7 +2,7 @@
 
 // CONSTRUCTORS
 
-Bureaucrat::Bureaucrat() : _name("DefaultName"), _grade(150) {}
+Bureaucrat::Bureaucrat() : _name("DefaultBureaucrat"), _grade(150) {}
 
 Bureaucrat::Bureaucrat(std::string const newName, int newGrade) : _name(newName)
 {
@@ -37,18 +37,6 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 	return out;
 }
 
-// EXCEPTIONS
-
-const char *Bureaucrat::GradeTooHighException::what() const throw()
-{
-	return ("ERROR: Grade too high!");
-}
-
-const char *Bureaucrat::GradeTooLowException::what() const throw()
-{
-	return ("ERROR: Grade too low!");
-}
-
 // MEMBER FUNCTIONS
 
 std::string const Bureaucrat::getName() const
@@ -77,4 +65,16 @@ void Bureaucrat::decrementGrade()
 		throw GradeTooLowException();
 	}
 	this->_grade++;
+}
+
+// EXCEPTIONS
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("ERROR: Grade too high!");
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("ERROR: Grade too low!");
 }

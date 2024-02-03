@@ -11,6 +11,16 @@ int main(void)
 		std::cout << "After incrementing: " << bureaucratDefault << std::endl;
 		bureaucratDefault.decrementGrade();
 		std::cout << "After decrementing: " << bureaucratDefault << std::endl;
+		std::cout << "Creating a new Bureaucrat with a non-default constructor" << std::endl;
+		Bureaucrat	newBeuraucrat("NewBureaucrat", 22);
+		std::cout << newBeuraucrat << std::endl;
+		std::cout << "Assigning new Bureaucrat to the default Bureaucrat" << std::endl;
+		bureaucratDefault = newBeuraucrat;
+		std::cout << "Default Bureaucrat after assignment:" << std::endl;
+		std::cout << bureaucratDefault << std::endl;
+		std::cout << "Creating a copy of the new Bureaucrat with a copy constructor" << std::endl;
+		Bureaucrat	bureaucratCopy(newBeuraucrat);
+		std::cout << bureaucratCopy << std::endl;
 	}
 	catch (std::exception & e)
 	{
