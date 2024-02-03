@@ -2,15 +2,15 @@
 
 // CONSTRUCTORS
 
-Bureaucrat::Bureaucrat() : _name("DefaultBureaucrat"), _grade(150) {}
+Bureaucrat::Bureaucrat() : _name("DefaultBureaucrat"), _grade(LOWEST_GRADE) {}
 
 Bureaucrat::Bureaucrat(std::string const newName, int newGrade) : _name(newName)
 {
-	if (newGrade < 1)
+	if (newGrade < HIGHEST_GRADE)
 	{
 		throw GradeTooHighException();
 	}
-	if (newGrade > 150)
+	if (newGrade > LOWEST_GRADE)
 	{
 		throw GradeTooLowException();
 	}
@@ -51,7 +51,7 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-	if (this->_grade == 1)
+	if (this->_grade == HIGHEST_GRADE)
 	{
 		throw GradeTooHighException();
 	}
@@ -60,7 +60,7 @@ void Bureaucrat::incrementGrade()
 
 void Bureaucrat::decrementGrade()
 {
-	if (this->_grade == 150)
+	if (this->_grade == LOWEST_GRADE)
 	{
 		throw GradeTooLowException();
 	}

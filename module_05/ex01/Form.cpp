@@ -11,7 +11,18 @@ Form::Form(std::string const newName, bool newIsSigned,
 	int newGradeToSign, int newGradeToExecute)
 		: _name(newName), _isSigned(newIsSigned),
 		_gradeToSign(newGradeToSign), _gradeToExecute(newGradeToExecute)
-	{}
+	{
+		if (newGradeToSign > LOWEST_GRADE || newGradeToExecute > LOWEST_GRADE)
+		{
+			throw GradeTooLowException();
+		}
+		if (newGradeToSign < HIGHEST_GRADE || newGradeToExecute < HIGHEST_GRADE)
+		{
+			throw GradeTooHighException();
+		}
+		this->_gradeToSign = newGradeToSign;
+		this->_gradeToExecute = newGradeToExecute;
+	}
 
 Form::Form(Form const &source)
 		: _name(source.getName()), _isSigned(source.getIsSigned()),
@@ -61,6 +72,15 @@ int Form::getGradeToSign() const
 int Form::getGradeToExecute() const
 {
 	return (this->_gradeToExecute);
+}
+
+void Form::beSigned(const Bureaucrat bureaucrat)
+{
+	if (bureaucrat.getGrade() > this->_gradeToSign)
+	{
+		throw GradeTooLowException();
+	}
+	this->_isSigned = true;
 }
 
 // EXCEPTIONS
