@@ -4,7 +4,7 @@
 #include "consts.hpp"
 #include <iostream>
 #include <cstdbool>
-#include "Bureaucrat.hpp"
+class Bureaucrat;
 
 class Form
 {
