@@ -2,11 +2,18 @@
 
 int main(void)
 {
-	Bureaucrat	bureaucratDefault();
-	Bureaucrat	bureaucratTooLow(151);
-	Bureaucrat	bureaucratTooHigh(0);
-	Bureaucrat	bureaucratLow(150);
-	Bureaucrat	bureaucratHigh(1);
+	try
+	{
+		Bureaucrat	bureaucratDefault;
+		Bureaucrat	bureaucratTooLow("TooLow", 151);
+		Bureaucrat	bureaucratTooHigh("TooHigh", 0);
+		Bureaucrat	bureaucratLow("Low", 150);
+		Bureaucrat	bureaucratHigh("High", 1);
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: vvagapov <vvagapov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 17:27:10 by vvagapov          #+#    #+#              #
-#    Updated: 2024/01/24 14:11:54 by vvagapov         ###   ########.fr        #
+#    Updated: 2024/02/03 16:43:23 by vvagapov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = c++
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+SRC = main.cpp Bureaucrat.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
