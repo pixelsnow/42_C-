@@ -7,9 +7,9 @@ Form::Form()
 		_gradeToSign(1), _gradeToExecute(1)
 	{}
 
-Form::Form(std::string const newName, bool newIsSigned,
+Form::Form(std::string const newName,
 	int newGradeToSign, int newGradeToExecute)
-		: _name(newName), _isSigned(newIsSigned),
+		: _name(newName), _isSigned(false),
 		_gradeToSign(newGradeToSign), _gradeToExecute(newGradeToExecute)
 	{
 		if (newGradeToSign > LOWEST_GRADE || newGradeToExecute > LOWEST_GRADE)
@@ -46,9 +46,9 @@ Form &Form::operator=(Form const &source)
 
 std::ostream &operator<<(std::ostream &out, const Form &form)
 {
-	out << "Form" << form.getName() << ",\n signed: " << form.getIsSigned()
-		<< ",\n grade to sign: " << form.getGradeToSign()
-		<< ",\n grade to execute: " << form.getGradeToExecute() << std::endl;
+	out << "Form" << form.getName() << ":\n\tsigned: " << form.getIsSigned()
+		<< ",\n\tgrade to sign: " << form.getGradeToSign()
+		<< ",\n\tgrade to execute: " << form.getGradeToExecute();
 	return (out);
 }
 

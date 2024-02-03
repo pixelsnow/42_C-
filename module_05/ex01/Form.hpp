@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstdbool>
 #include "Bureaucrat.hpp"
+class Bureaucrat;
 
 class Form
 {
@@ -15,7 +16,7 @@ class Form
 		int _gradeToExecute;
 	public:
 		Form();
-		Form(std::string const newName, bool newIsSigned, int newGradeToSign, int newGradeToExecute);
+		Form(std::string const newName, int newGradeToSign, int newGradeToExecute);
 		Form(Form const &source);
 		~Form();
 

@@ -4,6 +4,7 @@
 #include "consts.hpp"
 #include <iostream>
 #include "Form.hpp"
+class Form;
 
 class Bureaucrat
 {
