@@ -5,8 +5,8 @@ int main(void)
 {
 	try
 	{
-		Bureaucrat	lousyBureaucrat("LousyBureaucrat", 150);
-		std::cout << lousyBureaucrat << std::endl;
+		Bureaucrat	internBureaucrat("InternBureaucrat", 150);
+		std::cout << internBureaucrat << std::endl;
 		Bureaucrat	CEOBureaucrat("CEOBureaucrat", 1);
 		std::cout << CEOBureaucrat << std::endl;
 		Form form("VeryImportantForm", 20, 10);
@@ -15,7 +15,7 @@ int main(void)
 		std::cout << form << std::endl;
 		Form otherForm("OtherVeryImportantForm", 20, 10);
 		std::cout << otherForm << std::endl;
-		lousyBureaucrat.signForm(otherForm);
+		internBureaucrat.signForm(otherForm);
 		std::cout << otherForm << std::endl;
 	}
 	catch (std::exception & e)

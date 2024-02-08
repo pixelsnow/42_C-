@@ -24,7 +24,6 @@ Form::Form(std::string const newName,
 		this->_gradeToExecute = newGradeToExecute;
 	}
 
-// TODO: Think if _isSigned should be always false here
 Form::Form(Form const &source)
 		: _name(source.getName()), _isSigned(source.getIsSigned()),
 		_gradeToSign(source.getGradeToSign()),
@@ -47,7 +46,7 @@ Form &Form::operator=(Form const &source)
 
 std::ostream &operator<<(std::ostream &out, const Form &form)
 {
-	out << "Form" << form.getName() << ":\n\tsigned: " << form.getIsSigned()
+	out << "Form " << form.getName() << ":\n\tsigned: " << form.getIsSigned()
 		<< ",\n\tgrade to sign: " << form.getGradeToSign()
 		<< ",\n\tgrade to execute: " << form.getGradeToExecute();
 	return (out);
