@@ -1,6 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main(void)
 {
@@ -18,7 +19,10 @@ int main(void)
 		bureaucrat137.signForm(form);
 		std::cout << form << std::endl;
 		bureaucrat137.executeForm(form);
-		internBureaucrat.executeForm(form);
+		//internBureaucrat.executeForm(form);
+
+		PresidentialPardonForm presidentialForm("presidentialTarget");
+		bureaucrat137.executeForm(presidentialForm);
 	}
 	catch (std::exception e)
 	{
