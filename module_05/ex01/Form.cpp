@@ -37,6 +37,8 @@ Form::~Form() {}
 
 Form &Form::operator=(Form const &source)
 {
+	if (this == &source)
+		return (*this);
 	this->_isSigned = source.getIsSigned();
 	this->_gradeToSign = source.getGradeToSign();
 	this->_gradeToExecute = source.getGradeToExecute();

@@ -38,6 +38,8 @@ AForm::~AForm() {}
 
 AForm &AForm::operator=(AForm const &source)
 {
+	if (this == &source)
+		return (*this);
 	this->_isSigned = source.getIsSigned();
 	this->_gradeToSign = source.getGradeToSign();
 	this->_gradeToExecute = source.getGradeToExecute();

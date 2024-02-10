@@ -27,6 +27,8 @@ Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &source)
 {
+	if (this == &source)
+		return (*this);
 	this->_grade = source.getGrade();
 	return (*this);
 }

@@ -1,14 +1,10 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-	: ShrubberyCreationForm("DefaultTarget")
-{}
+	: ShrubberyCreationForm("DefaultTarget") {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string newTarget)
-	: AForm("ShrubberyCreationForm", 145, 137, newTarget)
-{
-	std::cout << "target is " << this->getTarget() << std::endl;
-}
+	: AForm("ShrubberyCreationForm", 145, 137, newTarget) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &source) : AForm(source) {}
 
@@ -47,5 +43,5 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 
 const char *ShrubberyCreationForm::FileCreationFailException::what() const throw()
 {
-	return ("ERROR: Creating shrubbery failed 🍂");
+	return ("ERROR: Creating shrubbery file failed 🍂");
 }
