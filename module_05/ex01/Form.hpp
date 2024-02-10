@@ -27,7 +27,7 @@ class Form
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
 
-		void beSigned(const Bureaucrat bureaucrat);
+		void beSigned(Bureaucrat const &bureaucrat);
 
 		class GradeTooLowException: public std::exception
 		{
@@ -41,6 +41,6 @@ class Form
 		};
 };
 
-std::ostream &operator<<(std::ostream &out, const Form &form);
+std::ostream &operator<<(std::ostream &out, Form const &form);
 
 #endif

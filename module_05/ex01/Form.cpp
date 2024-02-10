@@ -9,8 +9,7 @@ Form::Form()
 
 Form::Form(std::string const newName,
 	int newGradeToSign, int newGradeToExecute)
-		: _name(newName), _isSigned(false),
-		_gradeToSign(newGradeToSign), _gradeToExecute(newGradeToExecute)
+		: _name(newName), _isSigned(false)
 	{
 		if (newGradeToSign > LOWEST_GRADE || newGradeToExecute > LOWEST_GRADE)
 		{
@@ -44,7 +43,7 @@ Form &Form::operator=(Form const &source)
 	return (*this);
 }
 
-std::ostream &operator<<(std::ostream &out, const Form &form)
+std::ostream &operator<<(std::ostream &out, Form const &form)
 {
 	out << "Form " << form.getName() << ":\n\tsigned: " << form.getIsSigned()
 		<< ",\n\tgrade to sign: " << form.getGradeToSign()
@@ -74,7 +73,7 @@ int Form::getGradeToExecute() const
 	return (this->_gradeToExecute);
 }
 
-void Form::beSigned(const Bureaucrat bureaucrat)
+void Form::beSigned(Bureaucrat const &bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->_gradeToSign)
 	{
