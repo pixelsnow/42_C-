@@ -1,16 +1,15 @@
-#include "FormA.hpp"
+#include "AForm.hpp"
 
 // CONSTRUCTORS
 
-FormA::FormA()
+AForm::AForm()
 		: _name("DefaultForm"), _isSigned(false),
 		_gradeToSign(1), _gradeToExecute(1)
 	{}
 
-FormA::FormA(std::string const newName,
-	int newGradeToSign, int newGradeToExecute)
-		: _name(newName), _isSigned(false),
-		_gradeToSign(newGradeToSign), _gradeToExecute(newGradeToExecute)
+AForm::AForm(std::string const newName,
+	int newGradeToSign, int newGradeToExecute, std::string const newTarget)
+		: _name(newName), _isSigned(false), _target(newTarget)
 	{
 		if (newGradeToSign > LOWEST_GRADE || newGradeToExecute > LOWEST_GRADE)
 		{
@@ -24,27 +23,29 @@ FormA::FormA(std::string const newName,
 		this->_gradeToExecute = newGradeToExecute;
 	}
 
-FormA::FormA(FormA const &source)
+AForm::AForm(AForm const &source)
 		: _name(source.getName()), _isSigned(source.getIsSigned()),
 		_gradeToSign(source.getGradeToSign()),
-		_gradeToExecute(source.getGradeToExecute())
+		_gradeToExecute(source.getGradeToExecute()),
+		_target(source.getTarget())
 	{}
 
 // DESTRUCTOR
 
-FormA::~FormA() {}
+AForm::~AForm() {}
 
 // OPERATORS
 
-FormA &FormA::operator=(FormA const &source)
+AForm &AForm::operator=(AForm const &source)
 {
 	this->_isSigned = source.getIsSigned();
 	this->_gradeToSign = source.getGradeToSign();
 	this->_gradeToExecute = source.getGradeToExecute();
+	this->_target = source.getTarget();
 	return (*this);
 }
 
-std::ostream &operator<<(std::ostream &out, const FormA &form)
+std::ostream &operator<<(std::ostream &out, AForm const &form)
 {
 	out << "Form " << form.getName() << ":\n\tsigned: " << form.getIsSigned()
 		<< ",\n\tgrade to sign: " << form.getGradeToSign()
@@ -54,27 +55,32 @@ std::ostream &operator<<(std::ostream &out, const FormA &form)
 
 // MEMBER FUNCTIONS
 
-std::string const FormA::getName() const
+std::string const AForm::getName() const
 {
 	return (this->_name);
 }
 
-bool FormA::getIsSigned() const
+bool AForm::getIsSigned() const
 {
 	return (this->_isSigned);
 }
 
-int FormA::getGradeToSign() const
+int AForm::getGradeToSign() const
 {
 	return (this->_gradeToSign);
 }
 
-int FormA::getGradeToExecute() const
+int AForm::getGradeToExecute() const
 {
 	return (this->_gradeToExecute);
 }
 
-void FormA::beSigned(const Bureaucrat bureaucrat)
+std::string const AForm::getTarget() const
+{
+	return (this->_target);
+}
+
+void AForm::beSigned(Bureaucrat const &bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->_gradeToSign)
 	{
@@ -85,12 +91,12 @@ void FormA::beSigned(const Bureaucrat bureaucrat)
 
 // EXCEPTIONS
 
-const char *FormA::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
 	return ("ERROR: Grade too low!");
 }
 
-const char *FormA::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
 	return ("ERROR: Grade too high!");
 }

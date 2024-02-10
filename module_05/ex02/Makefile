@@ -1,10 +1,10 @@
 NAME = bureaucrat
 
-CC = c++
+CC = c++ -std=c++11
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp 
 
 OBJ = $(SRC:%.cpp=%.o)
 

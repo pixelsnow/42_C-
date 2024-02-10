@@ -1,24 +1,26 @@
 #include "Bureaucrat.hpp"
-#include "FormA.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main(void)
 {
 	try
 	{
+		Bureaucrat	bureaucrat137("Bureaucrat137", 137);
+		std::cout << bureaucrat137 << std::endl;
 		Bureaucrat	internBureaucrat("InternBureaucrat", 150);
 		std::cout << internBureaucrat << std::endl;
 		Bureaucrat	CEOBureaucrat("CEOBureaucrat", 1);
 		std::cout << CEOBureaucrat << std::endl;
-		FormA form("VeryImportantForm", 20, 10);
+
+		ShrubberyCreationForm form("myTarget");
 		std::cout << form << std::endl;
-		CEOBureaucrat.signForm(form);
+		bureaucrat137.signForm(form);
 		std::cout << form << std::endl;
-		FormA otherForm("OtherVeryImportantForm", 20, 10);
-		std::cout << otherForm << std::endl;
-		internBureaucrat.signForm(otherForm);
-		std::cout << otherForm << std::endl;
+		bureaucrat137.executeForm(form);
+		internBureaucrat.executeForm(form);
 	}
-	catch (std::exception & e)
+	catch (std::exception e)
 	{
 		std::cerr << e.what() << std::endl;
 	}

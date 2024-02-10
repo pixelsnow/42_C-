@@ -1,5 +1,5 @@
-#ifndef FORMA_HPP
-#define FORMA_HPP
+#ifndef AForm_HPP
+#define AForm_HPP
 
 #include "consts.hpp"
 #include <iostream>
@@ -7,27 +7,30 @@
 #include "Bureaucrat.hpp"
 class Bureaucrat;
 
-class FormA
+class AForm
 {
 	private:
 		std::string const _name;
 		bool _isSigned;
 		int _gradeToSign;
 		int _gradeToExecute;
+		std::string _target;
 	public:
-		FormA();
-		FormA(std::string const newName, int newGradeToSign, int newGradeToExecute);
-		FormA(FormA const &source);
-		~FormA();
+		AForm();
+		AForm(std::string const newName, int newGradeToSign, int newGradeToExecute, std::string const newTarget);
+		AForm(AForm const &source);
+		~AForm();
 
-		FormA &operator=(FormA const &source);
+		AForm &operator=(AForm const &source);
 
 		std::string const getName() const;
 		bool getIsSigned() const;
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
+		std::string const getTarget() const;
 
-		void beSigned(const Bureaucrat bureaucrat);
+		void beSigned(Bureaucrat const &bureaucrat);
+		virtual void execute(Bureaucrat const &executor) const = 0;
 
 		class GradeTooLowException: public std::exception
 		{
@@ -41,6 +44,6 @@ class FormA
 		};
 };
 
-std::ostream &operator<<(std::ostream &out, const FormA &form);
+std::ostream &operator<<(std::ostream &out, AForm const &form);
 
 #endif

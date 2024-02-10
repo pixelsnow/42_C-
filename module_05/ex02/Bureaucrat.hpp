@@ -3,8 +3,8 @@
 
 #include "consts.hpp"
 #include <iostream>
-#include "FormA.hpp"
-class FormA;
+#include "AForm.hpp"
+class AForm;
 
 class Bureaucrat
 {
@@ -24,7 +24,8 @@ class Bureaucrat
 		void incrementGrade();
 		void decrementGrade();
 
-		void signForm(FormA &form) const;
+		void signForm(AForm &form) const;
+		void executeForm(AForm const &form) const;
 
 		class GradeTooHighException : public std::exception
 		{
@@ -38,6 +39,6 @@ class Bureaucrat
 		};
 };
 
-std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
+std::ostream &operator<<(std::ostream &out, Bureaucrat const &bureaucrat);
 
 #endif
