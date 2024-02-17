@@ -14,7 +14,7 @@ int main(void)
 		Bureaucrat	CEOBureaucrat("CEOBureaucrat", 1);
 		std::cout << CEOBureaucrat << std::endl;
 
-		ShrubberyCreationForm form("myTarget");
+		ShrubberyCreationForm form("shrubberyTarget");
 		std::cout << form << std::endl;
 		bureaucrat137.signForm(form);
 		std::cout << form << std::endl;
@@ -22,12 +22,14 @@ int main(void)
 		//internBureaucrat.executeForm(form);
 
 		PresidentialPardonForm presidentialForm("presidentialTarget");
+		CEOBureaucrat.signForm(presidentialForm);
+		std::cout << presidentialForm << std::endl;
+		CEOBureaucrat.executeForm(presidentialForm);
 		bureaucrat137.executeForm(presidentialForm);
 	}
 	catch (std::exception e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	std::cout << std::endl;
 	return (0);
 }
