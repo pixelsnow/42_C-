@@ -31,6 +31,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	}
 	std::cout << std::endl << std::flush; 
 	usleep(500000);
+	srand(time(NULL));
 	if (rand() % 2)
 	{
 		std::cout << this->getTarget() << " has been robotomized successfully" << std::endl;

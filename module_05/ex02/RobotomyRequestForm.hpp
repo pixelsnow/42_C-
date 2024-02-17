@@ -4,6 +4,7 @@
 #include "AForm.hpp"
 #include <fstream>
 #include <unistd.h>
+#include <stdlib.h>
 
 class RobotomyRequestForm : public AForm
 {
