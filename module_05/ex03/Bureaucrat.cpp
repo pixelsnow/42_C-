@@ -76,7 +76,7 @@ void Bureaucrat::signForm(AForm &form) const
 		form.beSigned(*this);
 		std::cout << this->_name << " signed " << form.getName() << std::endl;
 	}
-	catch (const std::exception e)
+	catch (const std::exception &e)
 	{
 		std::cerr << this->_name << " couldn’t sign " << form.getName() << " because " << e.what() << std::endl;
 	}

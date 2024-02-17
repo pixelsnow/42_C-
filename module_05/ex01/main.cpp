@@ -18,7 +18,7 @@ int main(void)
 		internBureaucrat.signForm(otherForm);
 		std::cout << otherForm << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}

@@ -31,7 +31,7 @@ int main(void)
 		CEOBureaucrat.executeForm(presidentialForm);
 		bureaucrat137.executeForm(presidentialForm);
 	}
-	catch (std::exception e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}

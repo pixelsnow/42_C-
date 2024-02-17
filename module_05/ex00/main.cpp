@@ -22,7 +22,7 @@ int main(void)
 		Bureaucrat	bureaucratCopy(newBeuraucrat);
 		std::cout << bureaucratCopy << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
@@ -33,7 +33,7 @@ int main(void)
 		Bureaucrat	bureaucratTooLow("TooLow", 151);
 		std::cout << bureaucratTooLow << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
@@ -44,7 +44,7 @@ int main(void)
 		Bureaucrat	bureaucratTooHigh("TooHigh", 0);
 		std::cout << bureaucratTooHigh << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
@@ -58,7 +58,7 @@ int main(void)
 		bureaucratLow.decrementGrade();
 		std::cout << bureaucratLow << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
@@ -72,7 +72,7 @@ int main(void)
 		bureaucratHigh.incrementGrade();
 		std::cout << bureaucratHigh << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
