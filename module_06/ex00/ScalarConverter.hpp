@@ -2,6 +2,9 @@
 #define SCALAR_CONVERTER_HPP
 
 #include <iostream>
+#include <cctype>
+#include <iomanip>
+#include <limits>
 
 enum CharType
 {
@@ -21,9 +24,6 @@ enum Type
 	MINUS_INF,
 	PLUS_INF,
 	NAN,
-	MINUS_INF_FLOAT,
-	PLUS_INF_FLOAT,
-	NAN_FLOAT,
 	INVALID
 };
 
@@ -35,6 +35,12 @@ class ScalarConverter
 		~ScalarConverter();
 
 		ScalarConverter &operator=(ScalarConverter const &source);
+
+		static CharType getCharType(char c);
+		static Type detectSpecialType(std::string const literal);
+		static Type detectNumericType(std::string const literal);
+		static Type detectLiteralType(std::string const literal);
+
 
 	public:
 		static void convert (std::string const literal);
