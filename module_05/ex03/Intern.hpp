@@ -22,6 +22,7 @@ class Intern
 		static AForm* createShrubberyForm(std::string const formTarget);
 		static AForm* createRobotomyForm(std::string const formTarget);
 		static AForm* createPresidentialForm(std::string const formTarget);
+
 	public:
 		Intern();
 		Intern(Intern const &source);

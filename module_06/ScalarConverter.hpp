@@ -3,6 +3,15 @@
 
 #include <iostream>
 
+enum CharType
+{
+	MINUS,
+    DOT,
+    F,
+    DIGIT,
+    INVALID_CHAR
+};
+
 enum Type
 {
 	CHAR,
@@ -14,7 +23,8 @@ enum Type
 	NAN,
 	MINUS_INF_FLOAT,
 	PLUS_INF_FLOAT,
-	NAN_FLOAT
+	NAN_FLOAT,
+	INVALID
 };
 
 class ScalarConverter
