@@ -23,6 +23,8 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &source)
 
 // MEMBER FUNCTIONS
 
+// TYPE DETECTION
+
 Type ScalarConverter::detectSpecialType(std::string const literal)
 {
 	if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
@@ -88,101 +90,7 @@ Type ScalarConverter::detectLiteralType(std::string const literal)
 	return detectNumericType(literal);
 }
 
-void printInvalid()
-{
-	std::cout << "Not a valid literal" << std::endl;
-}
-
-void printConversions(std::string charValue, std::string intValue, std::string floatValue, std::string doubleValue)
-{
-	std::cout << "char: " << charValue << std::endl;
-	std::cout << "int: " << intValue << std::endl;
-	std::cout << "float: " << floatValue << std::endl;
-	std::cout << "double: " << doubleValue << std::endl;
-}
-
-void printPlusInf()
-{
-	printConversions("impossible", "impossible", "+inff", "+inf");
-}
-
-void printMinusInf()
-{
-	printConversions("impossible", "impossible", "-inff", "-inf");
-}
-
-void printNaN()
-{
-	printConversions("impossible", "impossible", "nanf", "nan");
-}
-
-void printChar(std::string const literal)
-{
-	char c = literal[1];
-	std::string charValue;
-	if (!std::isprint(c))
-		charValue = "Non-displayable";
-	else
-		charValue = literal;
-	std::cout << "char: " << charValue << std::endl;
-	std::cout << "int: " << static_cast<int>(c) << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(c) << std::endl;
-}
-
-void printInt(std::string const literal)
-{
-	try
-	{
-		int num;
-		num = std::stoi(literal);
-		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
-			std::cout << "char: " << "impossible" << std::endl;
-		else
-			std::cout << "char: " << "\'" << static_cast<char>(num) << "\'" << std::endl;
-		std::cout << "int: " << num << std::endl;
-		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(num) << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(num) << std::endl;
-	}
-	catch(const std::exception &e)
-	{
-		std::cout << "Could not convert " << literal << " to int" << std::endl;
-	}
-}
-
-void printFloat(std::string const literal)
-{
-	try
-	{
-		int num;
-		num = std::stof(literal);
-		std::cout << "char: " << static_cast<char>(num) << std::endl;
-		std::cout << "int: " << static_cast<int>(num) << std::endl;
-		std::cout << "float: " << std::fixed << std::setprecision(1) << num << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(num) << std::endl;
-	}
-	catch(const std::exception &e)
-	{
-		std::cout << "Could not convert " << literal << " to float" << std::endl;
-	}
-}
-
-void printDouble(std::string const literal)
-{
-	try
-	{
-		int num;
-		num = std::stod(literal);
-		std::cout << "char: " << static_cast<char>(num) << std::endl;
-		std::cout << "int: " << static_cast<int>(num) << std::endl;
-		std::cout << "float: " << std::fixed << std::setprecision(1) << num << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(num) << std::endl;
-	}
-	catch(const std::exception &e)
-	{
-		std::cout << "Could not convert " << literal << " to double" << std::endl;
-	}
-}
+// DEBUGGING
 
 const char* getTypeString(Type type) {
 	switch (type) {
@@ -205,6 +113,154 @@ const char* getTypeString(Type type) {
 	}
 }
 
+// PRINTING
+
+void printInvalidConversions()
+{
+	std::cout << "Not a valid literal" << std::endl;
+}
+
+void printStringValue(std::string typeName, std::string stringValue)
+{
+	std::cout << typeName << ": " << stringValue << std::endl;
+}
+
+void printConversionsStrings(std::string charValue, std::string intValue, std::string floatValue, std::string doubleValue)
+{
+	printStringValue("char", charValue);
+	printStringValue("int", intValue);
+	printStringValue("float", floatValue);
+	printStringValue("double", doubleValue);
+}
+
+void printCharValue(char charValue)
+{
+	if (std::isprint(charValue))
+		std::cout << "char: " << "\'" << charValue << "\'" << std::endl;
+	else
+		printStringValue("char", "Non displayable");
+}
+
+void printIntValue(int intValue)
+{
+	std::cout << "int: " << intValue << std::endl;
+}
+
+void printFloatValue(float floatValue)
+{
+	std::cout << "float: " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
+}
+
+void printDoubleValue(double doubleValue)
+{
+	std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue << std::endl;
+}
+
+void printPlusInfConversions()
+{
+	printConversionsStrings("impossible", "impossible", "+inff", "+inf");
+}
+
+void printMinusInfConversions()
+{
+	printConversionsStrings("impossible", "impossible", "-inff", "-inf");
+}
+
+void printNaNConversions()
+{
+	printConversionsStrings("impossible", "impossible", "nanf", "nan");
+}
+
+void printCharConversions(std::string const literal)
+{
+	char c = literal[1];
+	printCharValue(c);
+	printIntValue(static_cast<int>(c));
+	printFloatValue(static_cast<float>(c));
+	printDoubleValue(static_cast<double>(c));
+}
+
+void printIntConversions(std::string const literal)
+{
+	try
+	{
+		int num;
+		num = std::stoi(literal);
+
+		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
+			printStringValue("char", "impossible");
+		else
+			printCharValue(static_cast<char>(num));
+
+		printIntValue(num);
+		printFloatValue(static_cast<float>(num));
+		printDoubleValue(static_cast<double>(num));
+	}
+	catch(const std::exception &e)
+	{
+		std::cout << "Could not convert " << literal << " to int. " << e.what() << std::endl;
+	}
+}
+
+void printFloatConversions(std::string const literal)
+{
+	try
+	{
+		float num;
+		num = std::stof(literal);
+
+		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
+			printStringValue("char", "impossible");
+		else
+			printCharValue(static_cast<char>(num));
+
+		if (num < std::numeric_limits<int>::lowest()
+			|| num > std::numeric_limits<int>::max())
+			printStringValue("int", "impossible");
+		else
+			printIntValue(static_cast<int>(num));
+
+		printFloatValue(num);
+		printDoubleValue(static_cast<double>(num));
+	}
+	catch(const std::exception &e)
+	{
+		std::cout << "Could not convert " << literal << " to float. " << e.what() << std::endl;
+	}
+}
+
+void printDoubleConversions(std::string const literal)
+{
+	try
+	{
+		double num;
+		num = std::stod(literal);
+
+		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
+			printStringValue("char", "impossible");
+		else
+			printCharValue(static_cast<char>(num));
+
+		if (num < std::numeric_limits<int>::lowest()
+			|| num > std::numeric_limits<int>::max())
+			printStringValue("int", "impossible");
+		else
+			printIntValue(static_cast<int>(num));
+
+		if (num < std::numeric_limits<float>::lowest()
+			|| num > std::numeric_limits<float>::max())
+			printStringValue("float", "impossible");
+		else
+			printFloatValue(static_cast<float>(num));
+
+		printDoubleValue(num);
+	}
+	catch(const std::exception &e)
+	{
+		std::cout << "Could not convert " << literal << " to double. " << e.what() << std::endl;
+	}
+}
+
 void ScalarConverter::convert (std::string const literal)
 {
 	Type literalType = detectLiteralType(literal);
@@ -212,27 +268,27 @@ void ScalarConverter::convert (std::string const literal)
 	switch (literalType)
 	{
 		case INVALID:
-			printInvalid();
+			printInvalidConversions();
 			break;
 		case PLUS_INF:
-			printPlusInf();
+			printPlusInfConversions();
 			break;
 		case MINUS_INF:
-			printMinusInf();
+			printMinusInfConversions();
 			break;
 		case NAN:
-			printNaN();
+			printNaNConversions();
 			break;
 		case CHAR:
-			printChar(literal);
+			printCharConversions(literal);
 			break;
 		case INT:
-			printInt(literal);
+			printIntConversions(literal);
 			break;
 		case FLOAT:
-			printFloat(literal);
+			printFloatConversions(literal);
 			break;
 		case DOUBLE:
-			printDouble(literal);
+			printDoubleConversions(literal);
 	}
 }
