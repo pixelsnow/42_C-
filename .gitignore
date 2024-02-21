@@ -26,3 +26,5 @@ module_05/ex02/bureaucrat
 module_05/ex03/bureaucrat
 module_05/*/*_shrubbery
 module_06/ex00/convert
+module_06/ex01/serializer
+module_06/ex02/real_type
