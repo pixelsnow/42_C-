@@ -49,6 +49,8 @@ CharType ScalarConverter::getCharType(char c)
 
 Type ScalarConverter::detectNumericType(std::string const literal)
 {
+	if (!literal.length())
+		return INVALID;
 	bool dot = false;
 	for (std::size_t i = 0; i < literal.length(); i++)
 	{
@@ -90,42 +92,14 @@ Type ScalarConverter::detectLiteralType(std::string const literal)
 	return detectNumericType(literal);
 }
 
-// DEBUGGING
-
-const char* getTypeString(Type type) {
-	switch (type) {
-		case CHAR:
-			return "CHAR";
-		case INT:
-			return "INT";
-		case FLOAT:
-			return "FLOAT";
-		case DOUBLE:
-			return "DOUBLE";
-		case MINUS_INF:
-			return "MINUS_INF";
-		case PLUS_INF:
-			return "PLUS_INF";
-		case NAN:
-			return "NAN";
-		case INVALID:
-			return "INVALID";
-	}
-}
-
 // PRINTING
 
-void printInvalidConversions()
-{
-	std::cout << "Not a valid literal" << std::endl;
-}
-
-void printStringValue(std::string typeName, std::string stringValue)
+void ScalarConverter::printStringValue(std::string typeName, std::string stringValue)
 {
 	std::cout << typeName << ": " << stringValue << std::endl;
 }
 
-void printConversionsStrings(std::string charValue, std::string intValue, std::string floatValue, std::string doubleValue)
+void ScalarConverter::printConversionsStrings(std::string charValue, std::string intValue, std::string floatValue, std::string doubleValue)
 {
 	printStringValue("char", charValue);
 	printStringValue("int", intValue);
@@ -133,7 +107,7 @@ void printConversionsStrings(std::string charValue, std::string intValue, std::s
 	printStringValue("double", doubleValue);
 }
 
-void printCharValue(char charValue)
+void ScalarConverter::printCharValue(char charValue)
 {
 	if (std::isprint(charValue))
 		std::cout << "char: " << "\'" << charValue << "\'" << std::endl;
@@ -141,37 +115,44 @@ void printCharValue(char charValue)
 		printStringValue("char", "Non displayable");
 }
 
-void printIntValue(int intValue)
+void ScalarConverter::printIntValue(int intValue)
 {
 	std::cout << "int: " << intValue << std::endl;
 }
 
-void printFloatValue(float floatValue)
+void ScalarConverter::printFloatValue(float floatValue)
 {
 	std::cout << "float: " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
 }
 
-void printDoubleValue(double doubleValue)
+void ScalarConverter::printDoubleValue(double doubleValue)
 {
 	std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue << std::endl;
 }
 
-void printPlusInfConversions()
+// CONVERTERS
+
+void ScalarConverter::convertInvalid()
+{
+	std::cout << "Not a valid literal" << std::endl;
+}
+
+void ScalarConverter::convertPlusInf()
 {
 	printConversionsStrings("impossible", "impossible", "+inff", "+inf");
 }
 
-void printMinusInfConversions()
+void ScalarConverter::convertMinusInf()
 {
 	printConversionsStrings("impossible", "impossible", "-inff", "-inf");
 }
 
-void printNaNConversions()
+void ScalarConverter::convertNaN()
 {
 	printConversionsStrings("impossible", "impossible", "nanf", "nan");
 }
 
-void printCharConversions(std::string const literal)
+void ScalarConverter::convertChar(std::string const literal)
 {
 	char c = literal[1];
 	printCharValue(c);
@@ -180,7 +161,7 @@ void printCharConversions(std::string const literal)
 	printDoubleValue(static_cast<double>(c));
 }
 
-void printIntConversions(std::string const literal)
+void ScalarConverter::convertInt(std::string const literal)
 {
 	try
 	{
@@ -202,7 +183,7 @@ void printIntConversions(std::string const literal)
 	}
 }
 
-void printFloatConversions(std::string const literal)
+void ScalarConverter::convertFloat(std::string const literal)
 {
 	try
 	{
@@ -229,7 +210,7 @@ void printFloatConversions(std::string const literal)
 	}
 }
 
-void printDoubleConversions(std::string const literal)
+void ScalarConverter::convertDouble(std::string const literal)
 {
 	try
 	{
@@ -264,31 +245,30 @@ void printDoubleConversions(std::string const literal)
 void ScalarConverter::convert (std::string const literal)
 {
 	Type literalType = detectLiteralType(literal);
-	std::cout << "type detected: " << getTypeString(literalType) << std::endl;
 	switch (literalType)
 	{
 		case INVALID:
-			printInvalidConversions();
+			convertInvalid();
 			break;
 		case PLUS_INF:
-			printPlusInfConversions();
+			convertPlusInf();
 			break;
 		case MINUS_INF:
-			printMinusInfConversions();
+			convertMinusInf();
 			break;
 		case NAN:
-			printNaNConversions();
+			convertNaN();
 			break;
 		case CHAR:
-			printCharConversions(literal);
+			convertChar(literal);
 			break;
 		case INT:
-			printIntConversions(literal);
+			convertInt(literal);
 			break;
 		case FLOAT:
-			printFloatConversions(literal);
+			convertFloat(literal);
 			break;
 		case DOUBLE:
-			printDoubleConversions(literal);
+			convertDouble(literal);
 	}
 }
