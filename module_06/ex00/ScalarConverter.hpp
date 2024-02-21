@@ -41,7 +41,6 @@ class ScalarConverter
 		static Type detectNumericType(std::string const literal);
 		static Type detectLiteralType(std::string const literal);
 
-
 	public:
 		static void convert (std::string const literal);
 };

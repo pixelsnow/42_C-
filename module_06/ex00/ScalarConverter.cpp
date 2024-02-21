@@ -33,7 +33,7 @@ Type ScalarConverter::detectSpecialType(std::string const literal)
 		return PLUS_INF;
 	else if (literal == "nan" || literal == "nanf")
 		return NAN;
-	return (INVALID);
+	return INVALID;
 }
 
 CharType ScalarConverter::getCharType(char c)
@@ -175,8 +175,8 @@ void printDouble(std::string const literal)
 		num = std::stod(literal);
 		std::cout << "char: " << static_cast<char>(num) << std::endl;
 		std::cout << "int: " << static_cast<int>(num) << std::endl;
-		std::cout << "float: " << num << std::endl;
-		std::cout << "double: " << static_cast<double>(num) << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(1) << num << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(num) << std::endl;
 	}
 	catch(const std::exception &e)
 	{
@@ -184,9 +184,31 @@ void printDouble(std::string const literal)
 	}
 }
 
+const char* getTypeString(Type type) {
+	switch (type) {
+		case CHAR:
+			return "CHAR";
+		case INT:
+			return "INT";
+		case FLOAT:
+			return "FLOAT";
+		case DOUBLE:
+			return "DOUBLE";
+		case MINUS_INF:
+			return "MINUS_INF";
+		case PLUS_INF:
+			return "PLUS_INF";
+		case NAN:
+			return "NAN";
+		case INVALID:
+			return "INVALID";
+	}
+}
+
 void ScalarConverter::convert (std::string const literal)
 {
 	Type literalType = detectLiteralType(literal);
+	std::cout << "type detected: " << getTypeString(literalType) << std::endl;
 	switch (literalType)
 	{
 		case INVALID:
