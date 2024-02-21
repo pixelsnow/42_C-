@@ -41,8 +41,11 @@ class ScalarConverter
 		static Type detectNumericType(std::string const literal);
 		static Type detectLiteralType(std::string const literal);
 
-		static void printStringValue(std::string typeName, std::string stringValue);
-		static void printConversionsStrings(std::string charValue, std::string intValue, std::string floatValue, std::string doubleValue);
+		static void printStringValue(std::string typeName,
+			std::string stringValue);
+		static void printConversionsStrings(std::string charValue,
+			std::string intValue, std::string floatValue,
+			std::string doubleValue);
 		static void printCharValue(char charValue);
 		static void printIntValue(int intValue);
 		static void printFloatValue(float floatValue);

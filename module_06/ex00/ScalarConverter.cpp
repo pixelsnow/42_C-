@@ -94,12 +94,14 @@ Type ScalarConverter::detectLiteralType(std::string const literal)
 
 // PRINTING
 
-void ScalarConverter::printStringValue(std::string typeName, std::string stringValue)
+void ScalarConverter::printStringValue(std::string typeName,
+	std::string stringValue)
 {
 	std::cout << typeName << ": " << stringValue << std::endl;
 }
 
-void ScalarConverter::printConversionsStrings(std::string charValue, std::string intValue, std::string floatValue, std::string doubleValue)
+void ScalarConverter::printConversionsStrings(std::string charValue,
+	std::string intValue, std::string floatValue, std::string doubleValue)
 {
 	printStringValue("char", charValue);
 	printStringValue("int", intValue);
@@ -122,12 +124,14 @@ void ScalarConverter::printIntValue(int intValue)
 
 void ScalarConverter::printFloatValue(float floatValue)
 {
-	std::cout << "float: " << std::fixed << std::setprecision(1) << floatValue << "f" << std::endl;
+	std::cout << "float: " << std::fixed << std::setprecision(1) << floatValue
+		<< "f" << std::endl;
 }
 
 void ScalarConverter::printDoubleValue(double doubleValue)
 {
-	std::cout << "double: " << std::fixed << std::setprecision(1) << doubleValue << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(1)
+		<< doubleValue << std::endl;
 }
 
 // CONVERTERS
@@ -168,7 +172,8 @@ void ScalarConverter::convertInt(std::string const literal)
 		int num;
 		num = std::stoi(literal);
 
-		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
+		if (num < std::numeric_limits<char>::min()
+			|| num > std::numeric_limits<char>::max())
 			printStringValue("char", "impossible");
 		else
 			printCharValue(static_cast<char>(num));
@@ -179,7 +184,8 @@ void ScalarConverter::convertInt(std::string const literal)
 	}
 	catch(const std::exception &e)
 	{
-		std::cout << "Could not convert " << literal << " to int. " << e.what() << std::endl;
+		std::cout << "Could not convert " << literal << " to int. " << e.what()
+			<< std::endl;
 	}
 }
 
@@ -190,7 +196,8 @@ void ScalarConverter::convertFloat(std::string const literal)
 		float num;
 		num = std::stof(literal);
 
-		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
+		if (num < std::numeric_limits<char>::min()
+			|| num > std::numeric_limits<char>::max())
 			printStringValue("char", "impossible");
 		else
 			printCharValue(static_cast<char>(num));
@@ -206,7 +213,8 @@ void ScalarConverter::convertFloat(std::string const literal)
 	}
 	catch(const std::exception &e)
 	{
-		std::cout << "Could not convert " << literal << " to float. " << e.what() << std::endl;
+		std::cout << "Could not convert " << literal << " to float. "
+			<< e.what() << std::endl;
 	}
 }
 
@@ -217,7 +225,8 @@ void ScalarConverter::convertDouble(std::string const literal)
 		double num;
 		num = std::stod(literal);
 
-		if (num < std::numeric_limits<char>::min() || num > std::numeric_limits<char>::max())
+		if (num < std::numeric_limits<char>::min()
+			|| num > std::numeric_limits<char>::max())
 			printStringValue("char", "impossible");
 		else
 			printCharValue(static_cast<char>(num));
@@ -238,7 +247,8 @@ void ScalarConverter::convertDouble(std::string const literal)
 	}
 	catch(const std::exception &e)
 	{
-		std::cout << "Could not convert " << literal << " to double. " << e.what() << std::endl;
+		std::cout << "Could not convert " << literal << " to double. "
+			<< e.what() << std::endl;
 	}
 }
 
