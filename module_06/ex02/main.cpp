@@ -7,14 +7,16 @@ Base* generate(void)
 {
 	srand(time(NULL));
 	int num = rand() % 3;
-	//std::cout << "num: " << num << std::endl;
 	switch (num)
 	{
 		case 0:
+			std::cout << "CREATED: A" << std::endl;
 			return new A;
 		case 1:
+			std::cout << "CREATED: B" << std::endl;
 			return new B;
 		case 2:
+			std::cout << "CREATED: C" << std::endl;
 			return new C;
 		default:
 			return NULL;
