@@ -18,7 +18,6 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &s
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
-	// TODO: refactor to move grade check to the base class	
 	if (executor.getGrade() > this->getGradeToExecute())
 	{
 		throw GradeTooLowException();

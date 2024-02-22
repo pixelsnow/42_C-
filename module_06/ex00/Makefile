@@ -1,6 +1,6 @@
 NAME = convert
 
-CC = c++ -std=c++11
+CC = c++
 
 FLAGS = -Wall -Wextra -Werror
 

@@ -22,6 +22,5 @@ int main(void)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	std::cout << std::endl;
 	return (0);
 }

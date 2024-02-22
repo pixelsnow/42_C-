@@ -18,7 +18,6 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
 
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
-	// TODO: refactor to move grade check to the base class
 	if (executor.getGrade() > this->getGradeToExecute())
 	{
 		throw GradeTooLowException();

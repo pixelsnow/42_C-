@@ -23,6 +23,7 @@ int main(void)
 
 		RobotomyRequestForm robotomyFrom("RobotomyTarget");
 		CEOBureaucrat.signForm(robotomyFrom);
+		std::cout << robotomyFrom << std::endl;
 		CEOBureaucrat.executeForm(robotomyFrom);
 
 		PresidentialPardonForm presidentialForm("PresidentialTarget");

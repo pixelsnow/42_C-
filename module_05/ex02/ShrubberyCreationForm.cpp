@@ -18,7 +18,6 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	// TODO: refactor to move grade check to the base class
 	if (executor.getGrade() > this->getGradeToExecute())
 	{
 		throw GradeTooLowException();
@@ -37,7 +36,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	file << "       |o|        | |         | |\n";
 	file << "       |.|        | |         | |\n";
 	file << "_/_ \\\\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_";
-	file << std::endl;
 	file.close();
 }
 
