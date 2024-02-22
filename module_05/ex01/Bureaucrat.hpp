@@ -1,9 +1,12 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include "consts.hpp"
 #include <iostream>
 #include "Form.hpp"
+
+#define LOWEST_GRADE 150
+#define HIGHEST_GRADE 1
+
 class Form;
 
 class Bureaucrat

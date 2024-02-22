@@ -1,10 +1,13 @@
 #ifndef AForm_HPP
 #define AForm_HPP
 
-#include "consts.hpp"
 #include <iostream>
 #include <cstdbool>
 #include "Bureaucrat.hpp"
+
+#define LOWEST_GRADE 150
+#define HIGHEST_GRADE 1
+
 class Bureaucrat;
 
 class AForm

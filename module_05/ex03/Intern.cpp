@@ -50,7 +50,10 @@ AForm *Intern::makeForm(std::string const formName, std::string const formTarget
 	for (int i = 0; i < NUM_FORM_TYPES; i++)
 	{
 		if (formName == formMatch[i].formName)
+		{
+			std::cout << "Intern creates " << formName << " form" << std::endl;
 			return ((*(formMatch[i].formConstructorPtr))(formTarget));
+		}
 	}
 	throw WrongFormNameException();
 }
