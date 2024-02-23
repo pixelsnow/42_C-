@@ -1,45 +1,55 @@
 template<typename T>
-Array<T>::Array() : arrSize(0) {
-	this->arr = new T[0];
+Array<T>::Array() : _arrSize(0), _arr(NULL) {
+	std::cout << "default constructor called" << std::endl;
 }
 
 template<typename T>
-Array<T>::Array(unsigned int n) : arrSize(n) {
-	this->arr = new T[n];
+Array<T>::Array(unsigned int n) : _arrSize(n) {
+	if (n < 0)
+		throw IndexOutOfBoundsException();
+	if (n == 0)
+		this->_arr = NULL;
+	else
+		this->_arr = new T[n];
 }
 
 template<typename T>
-Array<T>::Array(Array const & source) {
-	*this = source;
+Array<T>::Array(Array const & source) : _arrSize(source._arrSize) {
+	std::cout << "copy constructor called" << std::endl;
+	this->_arr = new T[source._arrSize];
+	for (unsigned int i = 0; i < this->_arrSize; i++)
+		this->_arr[i] = source._arr[i];
 }
 
 template<typename T>
 Array<T>::~Array() {
-	delete[] this->arr;
+	delete[] this->_arr;
 }
 
 template<typename T>
 Array<T>& Array<T>::operator=(Array const & source) {
+	std::cout << "assignment called" << std::endl;
 	if (&source == this)
 		return (*this);
-	this->arrSize = source.arrSize;
-	free (this->arr);
-	this->arr = new T[source.arrSize];
-	for (unsigned int i = 0; i < this->arrSize; i++)
-		this->arr[i] = source.arr[i];
+	if (this->_arrSize)
+		delete[] this->_arr;
+	this->_arrSize = source._arrSize;
+	this->_arr = new T[source._arrSize];
+	for (unsigned int i = 0; i < this->_arrSize; i++)
+		this->_arr[i] = source._arr[i];
 	return *this;
 }
 
 template<typename T>
 T& Array<T>::operator[](unsigned int n) {
-	if (n < 0 || n >= this->arrSize)
+	if (n < 0 || n >= this->_arrSize)
 		throw IndexOutOfBoundsException();
-	return this->arr[n];
+	return this->_arr[n];
 }
 
 template<typename T>
 unsigned int Array<T>::size() const {
-	return this->arrSize;
+	return this->_arrSize;
 }
 
 template<typename T>

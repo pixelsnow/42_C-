@@ -1,39 +1,22 @@
 #include <iostream>
 #include "Array.hpp"
 
-#define MAX_VAL 5
+#define SIZE 5
 
-int main(int, char**)
+int main(void)
 {
-	/* Array<int> numbers(MAX_VAL);
-	for (int i = 0; i < MAX_VAL; i++)
-	{
-		numbers[i] = i;
-	}
-	for (int i = 0; i < MAX_VAL; i++)
-	{
-		std::cout << numbers[i] << " ";
-	}
-	std::cout << std::endl;
-
-	{
-		Array<int> tmp = numbers;
-		Array<int> test(tmp);
-	} */
-	Array<int> numbers(MAX_VAL);
+	Array<int> numbers(SIZE);
 	std::cout << "numbers: " <<  &numbers << std::endl;
-	int* mirror = new int[MAX_VAL];
+	int* mirror = new int[SIZE];
 	std::cout << "mirror: " << &mirror << std::endl;
 	srand(time(NULL));
-	for (unsigned int i = 0; i < numbers.size(); i++)
+	for (unsigned int i = 0; i < SIZE; i++)
 	{
 		const int value = rand();
 		numbers[i] = value;
 		mirror[i] = value;
 	}
-	//SCOPE
-	
-	for (int i = 0; i < MAX_VAL; i++)
+	for (unsigned int i = 0; i < SIZE; i++)
 	{
 		if (mirror[i] != numbers[i])
 		{
@@ -41,6 +24,13 @@ int main(int, char**)
 			return 1;
 		}
 	}
+
+	for (unsigned int i = 0; i < numbers.size(); i++)
+	{
+		std::cout << numbers[i] << " ";
+	}
+	std::cout << std::endl;
+
 	try
 	{
 		numbers[-2] = 0;
@@ -51,19 +41,21 @@ int main(int, char**)
 	}
 	try
 	{
-		numbers[MAX_VAL] = 0;
+		numbers[SIZE] = 0;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
 
-	for (int i = 0; i < MAX_VAL; i++)
+	for (int i = 0; i < SIZE; i++)
 	{
 		numbers[i] = rand();
 	}
 	{
+		std::cout << "before" << std::endl;
 		Array<int> tmp = numbers;
+		std::cout << "between" << std::endl;
 		Array<int> test(numbers);
 	}
 	delete[] mirror;
