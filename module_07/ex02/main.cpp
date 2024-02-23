@@ -3,12 +3,22 @@
 
 #define SIZE 5
 
+template<typename T>
+void printArray(Array<T> arr)
+{
+	for (unsigned int i = 0; i < arr.size(); i++)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
 int main(void)
 {
 	Array<int> numbers(SIZE);
-	std::cout << "numbers: " <<  &numbers << std::endl;
+
+	// Check that array works as a normal array
 	int* mirror = new int[SIZE];
-	std::cout << "mirror: " << &mirror << std::endl;
 	srand(time(NULL));
 	for (unsigned int i = 0; i < SIZE; i++)
 	{
@@ -24,13 +34,10 @@ int main(void)
 			return 1;
 		}
 	}
+	delete[] mirror;
 
-	for (unsigned int i = 0; i < numbers.size(); i++)
-	{
-		std::cout << numbers[i] << " ";
-	}
-	std::cout << std::endl;
-
+	printArray(numbers);
+	// Check index exceptions
 	try
 	{
 		numbers[-2] = 0;
@@ -41,23 +48,24 @@ int main(void)
 	}
 	try
 	{
-		numbers[SIZE] = 0;
+		numbers[numbers.size()] = 0;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-
-	for (int i = 0; i < SIZE; i++)
+	// Edit the array using subscript operator
+	for (unsigned int i = 0; i < numbers.size(); i++)
 	{
-		numbers[i] = rand();
+		numbers[i] = i;
 	}
+	printArray(numbers);
+
+	// Check assignment and copy constructor
 	{
-		std::cout << "before" << std::endl;
 		Array<int> tmp = numbers;
-		std::cout << "between" << std::endl;
 		Array<int> test(numbers);
 	}
-	delete[] mirror;
+
 	return 0;
 }

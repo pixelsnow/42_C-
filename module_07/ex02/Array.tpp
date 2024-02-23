@@ -1,7 +1,5 @@
 template<typename T>
-Array<T>::Array() : _arrSize(0), _arr(NULL) {
-	std::cout << "default constructor called" << std::endl;
-}
+Array<T>::Array() : _arrSize(0), _arr(NULL) {}
 
 template<typename T>
 Array<T>::Array(unsigned int n) : _arrSize(n) {
@@ -15,7 +13,6 @@ Array<T>::Array(unsigned int n) : _arrSize(n) {
 
 template<typename T>
 Array<T>::Array(Array const & source) : _arrSize(source._arrSize) {
-	std::cout << "copy constructor called" << std::endl;
 	this->_arr = new T[source._arrSize];
 	for (unsigned int i = 0; i < this->_arrSize; i++)
 		this->_arr[i] = source._arr[i];
@@ -28,7 +25,6 @@ Array<T>::~Array() {
 
 template<typename T>
 Array<T>& Array<T>::operator=(Array const & source) {
-	std::cout << "assignment called" << std::endl;
 	if (&source == this)
 		return (*this);
 	if (this->_arrSize)
