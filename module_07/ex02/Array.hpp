@@ -6,7 +6,7 @@ class Array
 {
 	private:
 		T* arr;
-		unsigned int size;
+		unsigned int arrSize;
 	public:
 		Array();
 		Array(unsigned int n);
@@ -25,5 +25,7 @@ class Array
 				virtual const char * what() const throw();
 		};
 };
+
+#include "Array.tpp"
 
 #endif
