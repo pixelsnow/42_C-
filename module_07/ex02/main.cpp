@@ -36,6 +36,7 @@ int main(void)
 	}
 	delete[] mirror;
 
+	std::cout << "Original array:" << std::endl;
 	printArray(numbers);
 	// Check index exceptions
 	try
@@ -59,13 +60,23 @@ int main(void)
 	{
 		numbers[i] = i;
 	}
+	std::cout << "Original array after rewriting:" << std::endl;
 	printArray(numbers);
 
+	Array<int> emptyArr(0);
+	std::cout << "Empty array:" << std::endl;
+	printArray(emptyArr);
 	// Check assignment and copy constructor
 	{
 		Array<int> tmp = numbers;
+		std::cout << "Assignment test:" << std::endl;
+		printArray(tmp);
 		Array<int> test(numbers);
+		std::cout << "Copy constructor test:" << std::endl;
+		printArray(test);
+		emptyArr = test;
+		std::cout << "Empty array after assignment:" << std::endl;
+		printArray(emptyArr);
 	}
-
 	return 0;
 }
