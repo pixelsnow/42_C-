@@ -1,7 +1,6 @@
 #include "iter.hpp"
 #include <iostream>
 
-
 template <typename T>
 void printArg(T const &arg)
 {

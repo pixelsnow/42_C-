@@ -1,4 +1,5 @@
-#include <iostream>
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
 
 template<typename T>
 T const & max(T const & a, T const & b)
@@ -19,3 +20,5 @@ void swap(T & a, T & b)
 	a = b;
 	b = temp;
 }
+
+#endif
