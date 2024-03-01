@@ -1,5 +1,6 @@
 template<typename T>
-class Span {
+class Span
+{
 	private:
 		unsigned int N;
 	public:
