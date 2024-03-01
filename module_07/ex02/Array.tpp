@@ -49,7 +49,6 @@ unsigned int Array<T>::size() const {
 }
 
 template<typename T>
-const char * Array<T>::IndexOutOfBoundsException::what() const throw()
-{
+const char * Array<T>::IndexOutOfBoundsException::what() const throw() {
 	return "ERROR: Index out of bounds!";
 }
