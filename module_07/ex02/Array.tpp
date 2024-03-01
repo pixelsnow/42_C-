@@ -1,3 +1,6 @@
+#ifndef ARRAY_TPP
+#define ARRAY_TPP
+
 template<typename T>
 Array<T>::Array() : _arrSize(0), _arr(NULL) {}
 
@@ -52,3 +55,5 @@ template<typename T>
 const char * Array<T>::IndexOutOfBoundsException::what() const throw() {
 	return "ERROR: Index out of bounds!";
 }
+
+#endif
