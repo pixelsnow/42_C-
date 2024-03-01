@@ -1,8 +1,6 @@
 #ifndef EASYFIND_TPP
 #define EASYFIND_TPP
 
-#include <exception>
-
 template<typename T>
 typename T::iterator easyfind(T & haystack, int needle)
 {
