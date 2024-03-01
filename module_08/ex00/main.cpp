@@ -1,8 +1,13 @@
 #include "easyfind.hpp"
 
-#include <iostream>
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define BLUE_BOLD "\033[1;34m"
+#define RESET "\033[0m"
 
+#include <iostream>
 #include <regex>
+//#include <iterator> // distance()
 
 #include <array>
 #include <vector>
@@ -19,30 +24,36 @@ void testCase(T & container, int testValue) {
 	std::cout << "Test [" << testValue << "]:\n";
 	try {
 		typename T::iterator res = easyfind(container, testValue);
-		std::cout <<  *res << std::endl;
+		std::cout << GREEN << "Value " <<  *res
+			<< " found at index [" << std::distance(container.begin(), res) 
+			<< "]" << RESET << std::endl;
 	}
 	catch(const std::exception& e) {
-		std::cerr << e.what() << '\n';
+		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 }
 
 std::string trimName(const std::string& mangledName) {
 	// Trim "IiNS_9allocatorIiEEEE" from the end
 	std::regex endTrimPattern(R"(Ii.*$)");
-	std::string trimmedEnd = std::regex_replace(mangledName, endTrimPattern, "");
+	std::string trimmedEnd = std::regex_replace(mangledName,
+		endTrimPattern, "");
 
 	// Trim "NSt3__" and all numbers right after it from the beginning
 	std::regex startTrimPattern(R"(^NSt3__\d+)");
-	std::string trimmedStart = std::regex_replace(trimmedEnd, startTrimPattern, "");
+	std::string trimmedStart = std::regex_replace(trimmedEnd,
+		startTrimPattern, "");
 
 	return trimmedStart;
 }
 
 template<typename T>
 void test(T & container) {
-	std::cout << "TESTING " << trimName(typeid(container).name())
-		<< ":" << std::endl;
+	std::cout << BLUE_BOLD << "TESTING "
+		<< trimName(typeid(container).name())
+		<< ":" << RESET << std::endl;
 	testCase(container, 1);
+	testCase(container, 3);
 	testCase(container, 0);
 	testCase(container, -6);
 }
