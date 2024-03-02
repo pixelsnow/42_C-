@@ -7,7 +7,7 @@ class Span
 {
 	private:
 		unsigned int N;
-		std::multiset<int, std::greater<int>> span;
+		std::multiset<int, std::greater<int> > span;
 	public:
 		Span();
 		Span(unsigned int newN);
@@ -18,14 +18,16 @@ class Span
 
 		void addNumber(int newNum);
 
-		/* template<typename Container>
-		void addNumber(typename Container::const_iterator & iterStart,
-			typename Container::const_iterator & iterEnd); */
 		template<typename Container>
-		void addNumber(typename Container::const_iterator & range);
+		void addNumber(typename Container::const_iterator & rangeStart,
+			typename Container::const_iterator & rangeEnd);
+		/* template<typename Container>
+		void addNumber(typename Container::const_iterator & range); */
 
 		unsigned int shortestSpan();
 		unsigned int longestSpan();
+		std::multiset<int, std::greater<int> >::const_iterator getBegin() const;
+		std::multiset<int, std::greater<int> >::const_iterator getEnd() const;
 
 		class OverCapacityException : public std::exception
 		{
@@ -39,5 +41,7 @@ class Span
 				virtual const char * what() const throw();
 		};
 };
+
+std::ostream &operator<<(std::ostream &out, Span const &span);
 
 #endif

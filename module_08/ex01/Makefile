@@ -2,7 +2,7 @@ NAME = span
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++11
+FLAGS = -Wall -Wextra -Werror
 
 SRC = main.cpp Span.cpp
 
