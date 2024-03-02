@@ -34,8 +34,8 @@ int main()
 		++it;
 	}
 	std::cout << GREEN << "::const_iterator:" << RESET << std::endl;
-	MutantStack<int>::const_iterator cit = mstack.begin();
-	MutantStack<int>::const_iterator cite = mstack.end();
+	MutantStack<int>::const_iterator cit = mstack.cbegin();
+	MutantStack<int>::const_iterator cite = mstack.cend();
 	++cit;
 	--cit;
 	while (cit != cite)
@@ -91,8 +91,8 @@ int main()
 		++itL;
 	}
 	std::cout << GREEN << "::const_iterator:" << RESET << std::endl;
-	std::list<int>::const_iterator citL = myList.begin();
-	std::list<int>::const_iterator citeL = myList.end();
+	std::list<int>::const_iterator citL = myList.cbegin();
+	std::list<int>::const_iterator citeL = myList.cend();
 	++citL;
 	--citL;
 	while (citL != citeL)
