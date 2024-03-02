@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <regex>
-//#include <iterator> // distance()
 
 #include <array>
 #include <vector>
