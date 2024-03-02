@@ -3,7 +3,7 @@
 
 #include <stack>
 
-template<typename T, typename C>
+template<typename T, typename C = std::deque<T>>
 class MutantStack : public std::stack<T,C>
 {
 public:

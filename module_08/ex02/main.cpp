@@ -12,21 +12,42 @@ int main()
 {
 	std::cout << BLUE_BOLD << "\nMUTANT STACK TEST\n" << RESET << std::endl;
 
-	MutantStack<int> mstack;
-	mstack.push(5);
-	mstack.push(17);
-	std::cout << "Top: " << mstack.top() << std::endl;
-	mstack.pop();
-	std::cout << "Top: " << mstack.top() << std::endl;
-	std::cout << "Size: " << mstack.size() << std::endl;
-	mstack.push(3);
-	mstack.push(5);
-	mstack.push(737);
-	mstack.push(0);
-	
+	MutantStack<int> myStack;
+	myStack.push(5);
+	myStack.push(17);
+	std::cout << "Top: " << myStack.top() << std::endl;
+	myStack.pop();
+	std::cout << "Top: " << myStack.top() << std::endl;
+	std::cout << "Size: " << myStack.size() << std::endl;
+	myStack.push(3);
+	myStack.push(5);
+	myStack.push(737);
+	myStack.push(0);
+
+	std::cout << RED << "copyStack created using copy constructor:" << RESET << std::endl;
+	MutantStack<int> copyStack(myStack);
+	MutantStack<int>::iterator copyIt = copyStack.begin();
+	MutantStack<int>::iterator copyIte = copyStack.end();
+	while (copyIt != copyIte)
+	{
+		std::cout << *copyIt << std::endl;
+		++copyIt;
+	}
+
+	std::cout << RED << "assignStack copied using = :" << RESET << std::endl;
+	MutantStack<int> assignStack;
+	assignStack = myStack;
+	MutantStack<int>::iterator assignIt = copyStack.begin();
+	MutantStack<int>::iterator assignIte = copyStack.end();
+	while (assignIt != assignIte)
+	{
+		std::cout << *assignIt << std::endl;
+		++assignIt;
+	}
+
 	std::cout << GREEN << "::iterator:" << RESET << std::endl;
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
+	MutantStack<int>::iterator it = myStack.begin();
+	MutantStack<int>::iterator ite = myStack.end();
 	++it;
 	--it;
 	while (it != ite)
@@ -35,8 +56,8 @@ int main()
 		++it;
 	}
 	std::cout << GREEN << "::const_iterator:" << RESET << std::endl;
-	MutantStack<int>::const_iterator cit = mstack.cbegin();
-	MutantStack<int>::const_iterator cite = mstack.cend();
+	MutantStack<int>::const_iterator cit = myStack.cbegin();
+	MutantStack<int>::const_iterator cite = myStack.cend();
 	++cit;
 	--cit;
 	while (cit != cite)
@@ -45,8 +66,8 @@ int main()
 		++cit;
 	}
 	std::cout << GREEN << "::reverse_iterator:" << RESET << std::endl;
-	MutantStack<int>::reverse_iterator rit = mstack.rbegin();
-	MutantStack<int>::reverse_iterator rite = mstack.rend();
+	MutantStack<int>::reverse_iterator rit = myStack.rbegin();
+	MutantStack<int>::reverse_iterator rite = myStack.rend();
 	++rit;
 	--rit;
 	while (rit != rite)
@@ -55,8 +76,8 @@ int main()
 		++rit;
 	}
 	std::cout << GREEN << "::const_reverse_iterator:" << RESET << std::endl;
-	MutantStack<int>::const_reverse_iterator crit = mstack.rbegin();
-	MutantStack<int>::const_reverse_iterator crite = mstack.rend();
+	MutantStack<int>::const_reverse_iterator crit = myStack.rbegin();
+	MutantStack<int>::const_reverse_iterator crite = myStack.rend();
 	++crit;
 	--crit;
 	while (crit != crite)
@@ -65,7 +86,7 @@ int main()
 		++crit;
 	}
 
-	std::stack<int> s(mstack);
+	std::stack<int> s(myStack);
 
 	std::cout << BLUE_BOLD << "\nLIST TEST\n" << RESET << std::endl;
 

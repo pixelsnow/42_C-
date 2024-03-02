@@ -6,9 +6,7 @@ MutantStack<T,C>::MutantStack() {}
 
 template<typename T, typename C>
 MutantStack<T,C>::MutantStack(const MutantStack & source)
-{
-	(void) source;
-}
+	: std::stack<T,C>(source) {}
 
 template<typename T, typename C>
 MutantStack<T,C>::~MutantStack() {}
@@ -16,8 +14,7 @@ MutantStack<T,C>::~MutantStack() {}
 template<typename T, typename C>
 MutantStack<T,C> & MutantStack<T,C>::operator=(const MutantStack & source)
 {
-	(void) source;
-	//*this = source;
+	std::stack<T,C>::operator=(source);
 	return *this;
 }
 

@@ -4,7 +4,7 @@ CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++11
 
-SRC = main.cpp MutantStack.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
