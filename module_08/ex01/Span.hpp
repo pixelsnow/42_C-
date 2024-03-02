@@ -2,12 +2,13 @@
 #define SPAN_HPP
 
 #include <set>
+#include <iostream>
 
 class Span
 {
 	private:
 		unsigned int N;
-		std::multiset<int, std::greater<int> > span;
+		std::multiset<int, std::less<int> > span;
 	public:
 		Span();
 		Span(unsigned int newN);
@@ -19,15 +20,13 @@ class Span
 		void addNumber(int newNum);
 
 		template<typename Container>
-		void addNumber(typename Container::const_iterator & rangeStart,
-			typename Container::const_iterator & rangeEnd);
-		/* template<typename Container>
-		void addNumber(typename Container::const_iterator & range); */
+		void addNumbers(typename Container::const_iterator rangeStart,
+			typename Container::const_iterator rangeEnd);
 
 		unsigned int shortestSpan();
 		unsigned int longestSpan();
-		std::multiset<int, std::greater<int> >::const_iterator getBegin() const;
-		std::multiset<int, std::greater<int> >::const_iterator getEnd() const;
+		std::multiset<int, std::less<int> >::const_iterator getBegin() const;
+		std::multiset<int, std::less<int> >::const_iterator getEnd() const;
 
 		class OverCapacityException : public std::exception
 		{
@@ -43,5 +42,14 @@ class Span
 };
 
 std::ostream &operator<<(std::ostream &out, Span const &span);
+
+template<typename Container>
+void Span::addNumbers(typename Container::const_iterator rangeStart,
+	typename Container::const_iterator rangeEnd)
+{
+	if (std::distance(rangeStart, rangeEnd) + (this->span.size()) > N)
+		throw OverCapacityException();
+	this->span.insert(rangeStart, rangeEnd);
+}
 
 #endif

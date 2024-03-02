@@ -1,11 +1,4 @@
-/* int min=a[0],ans=0;
-for (int i=1;i<n;i++)
-	if (a[i]<min) min=a[i];
-	else ans=max(ans,a[i]-min);
-return ans; */
-
 #include "Span.hpp"
-#include <iostream>
 
 Span::Span() : N(0) {}
 
@@ -32,26 +25,17 @@ void Span::addNumber(int newNum)
 	this->span.insert(newNum);
 }
 
-template<typename Container>
-void Span::addNumber(typename Container::const_iterator & rangeStart,
-			typename Container::const_iterator & rangeEnd)
-{
-	if ((rangeEnd - rangeStart) + (this->span.size()) > N)
-		throw OverCapacityException();
-	this->span.insert(rangeStart, rangeEnd);
-}
-
 unsigned int Span::shortestSpan()
 {
 	if (this->span.size() < 2)
 		throw NotEnoughElementsException();
 
-	unsigned int minDiff = *this->span.begin() - *next(this->span.begin());
+	unsigned int minDiff = *next(this->span.begin()) - *this->span.begin();
 
-	std::multiset<int, std::greater<int> >::iterator itr;
+	std::multiset<int, std::less<int> >::iterator itr;
 	for (itr = this->span.begin(); itr != prev(this->span.end()); ++itr)
 	{
-		unsigned int newDiff = (*itr - *next(itr));
+		unsigned int newDiff = (*next(itr) - *itr);
 		if (newDiff < minDiff)
 			minDiff = newDiff;
 		if (minDiff == 0)
@@ -64,15 +48,15 @@ unsigned int Span::longestSpan()
 {
 	if (this->span.size() < 2)
 		throw NotEnoughElementsException();
-	return (*this->span.begin() - *this->span.rbegin());
+	return (*this->span.rbegin() - *this->span.begin());
 }
 
-std::multiset<int, std::greater<int> >::const_iterator Span::getBegin() const
+std::multiset<int, std::less<int> >::const_iterator Span::getBegin() const
 {
 	return this->span.begin();
 }
 
-std::multiset<int, std::greater<int> >::const_iterator Span::getEnd() const
+std::multiset<int, std::less<int> >::const_iterator Span::getEnd() const
 {
 	return this->span.end();
 }
@@ -89,7 +73,7 @@ const char * Span::NotEnoughElementsException::what() const throw()
 
 std::ostream &operator<<(std::ostream &out, Span const &span)
 {
-	std::multiset<int, std::greater<int> >::iterator itr;
+	std::multiset<int, std::less<int> >::iterator itr;
 	bool first = true;
 	for (itr = span.getBegin(); itr != span.getEnd(); ++itr)
 	{
