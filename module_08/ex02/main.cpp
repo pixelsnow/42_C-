@@ -23,6 +23,7 @@ int main()
 	mstack.push(5);
 	mstack.push(737);
 	mstack.push(0);
+	
 	std::cout << GREEN << "::iterator:" << RESET << std::endl;
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
