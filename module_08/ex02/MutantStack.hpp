@@ -3,30 +3,33 @@
 
 #include <stack>
 
-template<typename T>
-class MutantStack : public std::stack<T>
+template<typename T, typename C>
+class MutantStack : public std::stack<T,C>
 {
-	public:
-		MutantStack(){};
-		MutantStack(const MutantStack & source);
-		~MutantStack(){};
+public:
+	MutantStack();
+	MutantStack(const MutantStack & source);
+	~MutantStack();
 
-		MutantStack &operator=(const MutantStack & source);
+	MutantStack &operator=(const MutantStack & source);
 
-		using iterator = typename std::stack<T>::container_type::iterator;
-		using const_iterator = typename std::stack<T>::container_type::const_iterator;
-		using reverse_iterator = typename std::stack<T>::container_type::reverse_iterator;
-		using const_reverse_iterator = typename std::stack<T>::container_type::const_reverse_iterator;
+	using iterator
+		= typename std::stack<T,C>::container_type::iterator;
+	using const_iterator
+		= typename std::stack<T,C>::container_type::const_iterator;
+	using reverse_iterator
+		= typename std::stack<T,C>::container_type::reverse_iterator;
+	using const_reverse_iterator
+		= typename std::stack<T,C>::container_type::const_reverse_iterator;
 
-		iterator begin();
-		const_iterator begin() const;
-		const_iterator cbegin() const;
-		reverse_iterator rbegin();
-		const_reverse_iterator rbegin();
-		iterator end();
-		const_iterator cend() const;
-		reverse_iterator rend();
-		const_reverse_iterator rend() const;
+	iterator begin();
+	const_iterator cbegin() const;
+	reverse_iterator rbegin();
+	const_reverse_iterator rbegin() const;
+	iterator end();
+	const_iterator cend() const;
+	reverse_iterator rend();
+	const_reverse_iterator rend() const;
 
 };
 
