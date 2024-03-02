@@ -23,6 +23,7 @@ int main()
 	mstack.push(5);
 	mstack.push(737);
 	mstack.push(0);
+	std::cout << GREEN << "::iterator:" << RESET << std::endl;
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
 	++it;
@@ -32,6 +33,37 @@ int main()
 		std::cout << *it << std::endl;
 		++it;
 	}
+	std::cout << GREEN << "::const_iterator:" << RESET << std::endl;
+	MutantStack<int>::const_iterator cit = mstack.begin();
+	MutantStack<int>::const_iterator cite = mstack.end();
+	++cit;
+	--cit;
+	while (cit != cite)
+	{
+		std::cout << *cit << std::endl;
+		++cit;
+	}
+	std::cout << GREEN << "::reverse_iterator:" << RESET << std::endl;
+	MutantStack<int>::reverse_iterator rit = mstack.rbegin();
+	MutantStack<int>::reverse_iterator rite = mstack.rend();
+	++rit;
+	--rit;
+	while (rit != rite)
+	{
+		std::cout << *rit << std::endl;
+		++rit;
+	}
+	std::cout << GREEN << "::const_reverse_iterator:" << RESET << std::endl;
+	MutantStack<int>::const_reverse_iterator crit = mstack.rbegin();
+	MutantStack<int>::const_reverse_iterator crite = mstack.rend();
+	++crit;
+	--crit;
+	while (crit != crite)
+	{
+		std::cout << *crit << std::endl;
+		++crit;
+	}
+
 	std::stack<int> s(mstack);
 
 	std::cout << BLUE_BOLD << "\nLIST TEST\n" << RESET << std::endl;
@@ -47,6 +79,8 @@ int main()
 	myList.push_back(5);
 	myList.push_back(737);
 	myList.push_back(0);
+
+	std::cout << GREEN << "::iterator:" << RESET << std::endl;
 	std::list<int>::iterator itL = myList.begin();
 	std::list<int>::iterator iteL = myList.end();
 	++itL;
@@ -55,6 +89,36 @@ int main()
 	{
 		std::cout << *itL << std::endl;
 		++itL;
+	}
+	std::cout << GREEN << "::const_iterator:" << RESET << std::endl;
+	std::list<int>::const_iterator citL = myList.begin();
+	std::list<int>::const_iterator citeL = myList.end();
+	++citL;
+	--citL;
+	while (citL != citeL)
+	{
+		std::cout << *citL << std::endl;
+		++citL;
+	}
+	std::cout << GREEN << "::reverse_iterator:" << RESET << std::endl;
+	std::list<int>::reverse_iterator ritL = myList.rbegin();
+	std::list<int>::reverse_iterator riteL = myList.rend();
+	++ritL;
+	--ritL;
+	while (ritL != riteL)
+	{
+		std::cout << *ritL << std::endl;
+		++ritL;
+	}
+	std::cout << GREEN << "::const_reverse_iterator:" << RESET << std::endl;
+	std::list<int>::const_reverse_iterator critL = myList.rbegin();
+	std::list<int>::const_reverse_iterator criteL = myList.rend();
+	++critL;
+	--critL;
+	while (critL != criteL)
+	{
+		std::cout << *critL << std::endl;
+		++critL;
 	}
 
 	return 0;
