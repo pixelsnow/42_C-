@@ -2,16 +2,40 @@
 #include <fstream>
 #include <iostream>
 
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define BLUE_BOLD "\033[1;34m"
+#define RESET "\033[0m"
+
 int main(int ac, char **av)
 {
 	std::fstream db;
+	std::fstream input;
 
-	db.open("data.csv", std::ios::in);
-	if (!db) {
-		std::cerr << "Unable to open file";
+	if (ac != 2)
+	{
+		std::cerr << "Wrong number of arguments";
 		return 1;
 	}
 
+	db.open("data.csv", std::ios::in);
+	if (!db)
+	{
+		std::cerr << "Unable to open database file";
+		return 1;
+	}
+
+	input.open(av[1], std::ios::in);
+	if (!input)
+	{
+		std::cerr << "Unable to open input file";
+		return 1;
+	}
+
+	BitcoinExchange btc(db);
+	btc.displayConversions(input);
+
 	db.close();
+	input.close();
 	return (0);
 }
