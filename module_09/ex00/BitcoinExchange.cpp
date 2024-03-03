@@ -1,5 +1,10 @@
 #include "BitcoinExchange.hpp"
 
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define BLUE_BOLD "\033[1;34m"
+#define RESET "\033[0m"
+
 BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & source)
@@ -70,11 +75,17 @@ double BitcoinExchange::getExchangeRate(const std::string &dateStr) const
 {
 	std::map<std::string,double>::const_iterator it;
 	it = this->rates.lower_bound(dateStr);
-	if (it == this->rates.begin() && it->first != dateStr)
+	if (it->first == dateStr)
+	{
+		std::cout << GREEN "matched date " << it->first << " for date " << dateStr << RESET << std::endl;
+		return it->second;
+	}
+	else if (it == this->rates.begin())
 	{
 		throw NoConversion();
 	}
-	return it->second;
+	std::cout << GREEN "matched date " << prev(it)->first << " for date " << dateStr << RESET << std::endl;
+	return prev(it)->second;
 }
 
 void BitcoinExchange::displayConversions(std::fstream &input) const
