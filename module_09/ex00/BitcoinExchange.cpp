@@ -28,6 +28,7 @@ BitcoinExchange::~BitcoinExchange() {}
 BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & source)
 {
 	this->rates = source.rates;
+	return *this;
 }
 
 bool BitcoinExchange::dateValid(const std::string &dateStr) const
@@ -77,21 +78,24 @@ double BitcoinExchange::getExchangeRate(const std::string &dateStr) const
 void BitcoinExchange::displayConversions(std::fstream &input) const
 {
 	std::string line;
-	std::regex inputFormat("^(\d{4}-\d{2}-\d{2}) \| ([-+]?\d*\.?\d+)$");
+	std::regex inputFormat("^(\\d{4}-\\d{2}-\\d{2}) \\| ([-+]?\\d*\\.?\\d+)$");
 	std::smatch matches;
+
+	// Skip header line
+	std::getline(input, line);
 
 	while (std::getline(input, line)) {
 		// Validate the line against regex
 		if (!std::regex_match(line, matches, inputFormat))
 		{
 			std::cout << "ERROR: Bad input => " << line << std::endl;
-			return;
+			continue;
 		}
 		// Validate date
 		if (!this->dateValid(matches[1]))
 		{
 			std::cout << "ERROR: Invalid date => " << matches[1] << std::endl;
-			return;
+			continue;
 		}
 		// Validate value
 		// Convert value to float
@@ -112,12 +116,12 @@ void BitcoinExchange::displayConversions(std::fstream &input) const
 		if (value < 0)
 		{
 			std::cout << "ERROR: Value negative => " << matches[2] << std::endl;
-			return;
+			continue;
 		}
 		if (value > 1000)
 		{
 			std::cout << "ERROR: Value too large => " << matches[2] << std::endl;
-			return;
+			continue;
 		}
 		
 		// SUCCESS case
