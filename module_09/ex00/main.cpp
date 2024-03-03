@@ -14,21 +14,21 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		std::cerr << "Wrong number of arguments";
+		std::cerr << "Wrong number of arguments\n";
 		return 1;
 	}
 
 	db.open("data.csv", std::ios::in);
 	if (!db)
 	{
-		std::cerr << "Unable to open database file";
+		std::cerr << "Unable to open database file\n";
 		return 1;
 	}
 
 	input.open(av[1], std::ios::in);
 	if (!input)
 	{
-		std::cerr << "Unable to open input file";
+		std::cerr << "Unable to open input file\n";
 		return 1;
 	}
 

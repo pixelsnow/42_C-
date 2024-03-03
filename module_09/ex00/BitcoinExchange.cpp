@@ -70,8 +70,10 @@ double BitcoinExchange::getExchangeRate(const std::string &dateStr) const
 {
 	std::map<std::string,double>::const_iterator it;
 	it = this->rates.lower_bound(dateStr);
-	if (it == this->rates.end())
+	if (it == this->rates.begin() && it->first != dateStr)
+	{
 		throw NoConversion();
+	}
 	return it->second;
 }
 
@@ -133,6 +135,7 @@ void BitcoinExchange::displayConversions(std::fstream &input) const
 		catch(const std::exception& e)
 		{
 			std::cout << "ERROR: No bitcoin conversion rate for the date => " << matches[1] << std::endl;
+			continue;
 		}
 		
 		std::cout << matches[1] << " => " << value << " = " << value * rate << std::endl;

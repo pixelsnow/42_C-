@@ -19,6 +19,7 @@ private:
 	std::map<std::string,double> rates;
 	
 	bool dateValid(const std::string &dateStr) const;
+	bool dateValid(const std::string &dateStr, const std::string &valueStr) const;
 	double getExchangeRate(const std::string &dateStr) const;
 
 public:
