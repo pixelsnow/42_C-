@@ -77,79 +77,82 @@ double BitcoinExchange::getExchangeRate(const std::string &dateStr) const
 	it = this->rates.lower_bound(dateStr);
 	if (it->first == dateStr)
 	{
-		std::cout << GREEN "matched date " << it->first << " for date " << dateStr << RESET << std::endl;
 		return it->second;
 	}
 	else if (it == this->rates.begin())
 	{
 		throw NoConversion();
 	}
-	std::cout << GREEN "matched date " << prev(it)->first << " for date " << dateStr << RESET << std::endl;
 	return prev(it)->second;
+}
+
+void BitcoinExchange::displayLine(const std::string &line) const
+{
+	std::regex inputFormat("^(\\d{4}-\\d{2}-\\d{2}) \\| ([-+]?\\d*\\.?\\d+)$");
+	std::smatch matches;
+	// Validate the line against regex
+	if (!std::regex_match(line, matches, inputFormat))
+	{
+		std::cout << "ERROR: Bad input => " << line << std::endl;
+		return;
+	}
+	// Validate date
+	if (!this->dateValid(matches[1]))
+	{
+		std::cout << "ERROR: Invalid date => " << matches[1] << std::endl;
+		return;
+	}
+	// Validate value
+	// Convert value to float
+	float value;
+	try
+	{
+		value = std::stof(matches[2]);
+	}
+	catch(const std::invalid_argument& e)
+	{
+		std::cout << "ERROR: Invalid value => " << matches[2] << std::endl;
+	}
+	catch(const std::out_of_range& e)
+	{
+		std::cout << "ERROR: Value out of range => " << matches[2] << std::endl;
+	}
+	// Check that value is between 0 and 1000
+	if (value < 0)
+	{
+		std::cout << "ERROR: Value negative => " << matches[2] << std::endl;
+		return;
+	}
+	if (value > 1000)
+	{
+		std::cout << "ERROR: Value too large => " << matches[2] << std::endl;
+		return;
+	}
+	
+	// SUCCESS case
+	double rate;
+	try
+	{
+		rate = this->getExchangeRate(matches[1]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "ERROR: There's no exchange rate data for this date  => " << matches[1] << std::endl;
+		return;
+	}
+	
+	std::cout << matches[1] << " => " << value << " = " << value * rate << std::endl;
 }
 
 void BitcoinExchange::displayConversions(std::fstream &input) const
 {
 	std::string line;
-	std::regex inputFormat("^(\\d{4}-\\d{2}-\\d{2}) \\| ([-+]?\\d*\\.?\\d+)$");
-	std::smatch matches;
 
 	// Skip header line
 	std::getline(input, line);
-
-	while (std::getline(input, line)) {
-		// Validate the line against regex
-		if (!std::regex_match(line, matches, inputFormat))
-		{
-			std::cout << "ERROR: Bad input => " << line << std::endl;
-			continue;
-		}
-		// Validate date
-		if (!this->dateValid(matches[1]))
-		{
-			std::cout << "ERROR: Invalid date => " << matches[1] << std::endl;
-			continue;
-		}
-		// Validate value
-		// Convert value to float
-		float value;
-		try
-		{
-			value = std::stof(matches[2]);
-		}
-		catch(const std::invalid_argument& e)
-		{
-			std::cout << "ERROR: Invalid value => " << matches[2] << std::endl;
-		}
-		catch(const std::out_of_range& e)
-		{
-			std::cout << "ERROR: Value out of range => " << matches[2] << std::endl;
-		}
-		// Check that value is between 0 and 1000
-		if (value < 0)
-		{
-			std::cout << "ERROR: Value negative => " << matches[2] << std::endl;
-			continue;
-		}
-		if (value > 1000)
-		{
-			std::cout << "ERROR: Value too large => " << matches[2] << std::endl;
-			continue;
-		}
-		
-		// SUCCESS case
-		double rate;
-		try
-		{
-			rate = this->getExchangeRate(matches[1]);
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << "ERROR: No bitcoin conversion rate for the date => " << matches[1] << std::endl;
-			continue;
-		}
-		
-		std::cout << matches[1] << " => " << value << " = " << value * rate << std::endl;
+	while (std::getline(input, line))
+	{
+		this->displayLine(line);
 	}
 }
 

@@ -21,6 +21,7 @@ private:
 	bool dateValid(const std::string &dateStr) const;
 	bool dateValid(const std::string &dateStr, const std::string &valueStr) const;
 	double getExchangeRate(const std::string &dateStr) const;
+	void displayLine(const std::string &line) const;
 
 public:
 	BitcoinExchange();
