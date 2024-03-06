@@ -1,2 +1,2 @@
-# School 42 C++ modules
+# Hive Helsinki C++ modules
 
