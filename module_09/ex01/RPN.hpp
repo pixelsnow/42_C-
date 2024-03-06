@@ -8,6 +8,7 @@
 class RPN
 {
 private:
+	bool isOperator(char c) const;
 public:
 	RPN();
 	RPN(const RPN & source);
