@@ -13,6 +13,12 @@
 #include <iomanip>
  */
 
+#define RED "\033[1;31m"
+#define GREEN "\033[1;32m"
+#define CYAN "\033[1;37m"
+#define BLUE "\033[1;34m"
+#define RESET "\033[0m"
+
 class BitcoinExchange
 {
 private:
@@ -22,6 +28,9 @@ private:
 	bool dateValid(const std::string &dateStr, const std::string &valueStr) const;
 	double getExchangeRate(const std::string &dateStr) const;
 	void displayLine(const std::string &line) const;
+	void displayMatchedLine(const std::string &dateMatch,
+		const std::string &valueMatch) const;
+	void displayError(const std::string &message, const std::string &value) const;
 
 public:
 	BitcoinExchange();

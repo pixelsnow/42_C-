@@ -2,9 +2,10 @@
 #include <fstream>
 #include <iostream>
 
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define BLUE_BOLD "\033[1;34m"
+#define RED "\033[1;31m"
+#define GREEN "\033[1;32m"
+#define CYAN "\033[1;37m"
+#define BLUE "\033[1;34m"
 #define RESET "\033[0m"
 
 int main(int ac, char **av)
