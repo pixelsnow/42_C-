@@ -44,6 +44,7 @@ bool BitcoinExchange::dateValid(const std::string &dateStr) const
 	{
 		return false;
 	}
+	
 	// A copy to compare the values to after date normalization
 	std::tm tm_copy = tm;
 
@@ -51,7 +52,8 @@ bool BitcoinExchange::dateValid(const std::string &dateStr) const
 	// mktime() normalizes the tm structure and checks if the date is valid.
 	// If the date is valid, mktime() will return a non-negative time_t value.
 	std::time_t tt = std::mktime(&tm);
-	if (tt == -1) {
+	if (tt == -1)
+	{
 		return false;
 	}
 
@@ -62,7 +64,6 @@ bool BitcoinExchange::dateValid(const std::string &dateStr) const
 	{
 		return false;
 	}
-
 	return true;
 }
 
@@ -84,7 +85,7 @@ double BitcoinExchange::getExchangeRate(const std::string &dateStr) const
 void BitcoinExchange::displayError(const std::string &message,
 	const std::string &value) const
 {
-	std::cout << RED << "ERROR: " << message << RESET << " => " << value << std::endl;
+	std::cout << RED << "ERROR: " << message << BLUE << " => " << RESET << value << std::endl;
 }
 
 void BitcoinExchange::displayMatchedLine(const std::string &dateMatch,
@@ -95,23 +96,16 @@ void BitcoinExchange::displayMatchedLine(const std::string &dateMatch,
 	{
 		return (displayError("Invalid date", dateMatch));
 	}
-
-	// Validate value
-	// Convert value to float
+	// Validate value and convert it to float
 	float value;
 	try
 	{
 		value = std::stof(valueMatch);
 	}
-	catch(const std::invalid_argument& e)
+	catch(const std::exception& e)
 	{
-		return (displayError("Not a valid float number", valueMatch));
+		return (displayError("Value not a valid float number", valueMatch));
 	}
-	catch(const std::out_of_range& e)
-	{
-		return (displayError("Value out of range of float", valueMatch));
-	}
-	// Check that value is between 0 and 1000
 	if (value < 0)
 	{
 		return (displayError("Value negative", valueMatch));
@@ -120,7 +114,7 @@ void BitcoinExchange::displayMatchedLine(const std::string &dateMatch,
 	{
 		return (displayError("Value too large", valueMatch));
 	}
-	// SUCCESS case
+	// If date and value are valid, calculate rate
 	double rate;
 	try
 	{
@@ -130,14 +124,13 @@ void BitcoinExchange::displayMatchedLine(const std::string &dateMatch,
 	{
 		return (displayError("There's no exchange rate data for this date", dateMatch));
 	}
-	std::cout << dateMatch << " => " << value << " = " << value * rate << std::endl;
+	std::cout << dateMatch << BLUE << " => " << RESET << value << BLUE << " = " << RESET << value * rate << std::endl;
 }
 
 void BitcoinExchange::displayLine(const std::string &line) const
 {
 	std::regex inputFormat("^(\\d{4}-\\d{2}-\\d{2}) \\| ([-+]?\\d*\\.?\\d+)$");
 	std::smatch matches;
-	// Validate the line against regex
 	if (!std::regex_match(line, matches, inputFormat))
 	{
 		return (displayError("Bad input", line));
@@ -149,8 +142,11 @@ void BitcoinExchange::displayConversions(std::fstream &input) const
 {
 	std::string line;
 
-	// Skip header line
 	std::getline(input, line);
+	if (line != "date | value")
+	{
+		displayError("Even your header is bullshit", line);
+	}
 	while (std::getline(input, line))
 	{
 		this->displayLine(line);
