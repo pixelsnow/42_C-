@@ -64,13 +64,53 @@ void PMerge::displaySummary(std::chrono::nanoseconds duration,
 	std::cout << "Time to process " << numOfElements << "elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
 }
 
+std::vector<std::pair<unsigned int, unsigned int>> pairUp
+	(std::vector<unsigned int> & vect)
+{
+	std::vector<std::pair<unsigned int, unsigned int>> res;
+	for (size_t i = 0; i < vect.size(); i += 2)
+	{
+		res.emplace_back(std::minmax(vect[i], vect[i + 1]));
+	}
+	return res;
+}
+
 // Sorting
+
+/* void sortVectorPairs(std::vector<std::pair<unsigned int, unsigned int> > &vect)
+{
+	if (vect.size() < 2)
+		return;
+	
+} */
+void sortVector(std::vector<unsigned int> &vect)
+{
+	if (vect.size() < 2)
+		return;
+
+	bool hasExtraElem = vect.size() % 2 != 0;
+	int lastElem;
+	if (hasExtraElem)
+	{
+		lastElem = vect.back();
+		vect.pop_back();
+	}
+
+	std::vector<std::pair<unsigned int, unsigned int> > pairVect
+		= pairUp(vect);
+
+	std::vector<unsigned int> sorted;
+}
+
 
 std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 {
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
+
 	std::vector<unsigned int> vect = parseArgsToVector(ac, av);
+	//std::vector<std::pair<unsigned int, unsigned int> > pairVect = pairUp(vect);
+	sortVector(vect);
 
 
 	std::chrono::high_resolution_clock::time_point endTime

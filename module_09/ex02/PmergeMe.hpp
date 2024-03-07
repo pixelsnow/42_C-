@@ -57,4 +57,5 @@ TODO:
 - add consts where needed
 - test with out of range numbers
 - check copy and assignment
+- check that every function is a method
 */
