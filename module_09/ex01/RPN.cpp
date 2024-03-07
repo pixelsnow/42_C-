@@ -122,6 +122,10 @@ void RPN::calculate(std::string const & expression) const
 				return displayError();
 			}
 		}
+		else
+		{
+			return displayError();
+		}
 	}
 	if (st.size() != 1)
 	{
