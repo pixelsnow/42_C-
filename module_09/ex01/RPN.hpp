@@ -25,13 +25,13 @@ public:
 
 	void calculate(std::string const & expression) const;
 
-	class OverflowException : std::exception
+	class OverflowException : public std::exception
 	{
 	public:
 		virtual const char * what() const throw();
 	};
 
-	class UndefinedException : std::exception
+	class UndefinedException : public std::exception
 	{
 	public:
 		virtual const char * what() const throw();

@@ -33,7 +33,6 @@ int RPN::addNumbers(int a, int b) const
 		throw OverflowException();
 	if (a < 0 && b < std::numeric_limits<int>::min() - a)
 		throw OverflowException();
-	//std::cout << "addNumbers: " << a + b << std::endl;
 	return (a + b);
 }
 
@@ -45,7 +44,6 @@ int RPN::subtractNumbers(int a, int b) const
 	// if it's subtraction and we're going under min
 	if (b > 0 && a < std::numeric_limits<int>::min() + b)
 		throw OverflowException();
-	//std::cout << "subtractNumbers: " << a - b << std::endl;
 	return (a - b);
 }
 
@@ -59,7 +57,6 @@ int RPN::multiplyNumbers(int a, int b) const
 		throw OverflowException();
 	if (a != 0 && b < std::numeric_limits<int>::min() / a)
 		throw OverflowException();
-	//std::cout << "multiplyNumbers: " << a * b << std::endl;
 	return (a * b);
 }
 
@@ -71,7 +68,6 @@ int RPN::divideNumbers(int a, int b) const
 	// Division by 0 is undefined
 	if (b == 0)
 		throw UndefinedException();
-	//std::cout << "divideNumbers: " << a / b << std::endl;
 	return (a / b);
 }
 
@@ -98,7 +94,6 @@ void RPN::calculate(std::string const & expression) const
 
 	while (std::getline(iss, token, ' '))
 	{
-		std::cout << token << std::endl;
 		if (token.length() != 1)
 		{
 			return displayError();
@@ -113,15 +108,16 @@ void RPN::calculate(std::string const & expression) const
 			{
 				return displayError();
 			}
-			int num1 = st.top();
-			st.pop();
 			int num2 = st.top();
+			st.pop();
+			int num1 = st.top();
 			st.pop();
 			try
 			{
-				st.push(performOperation(token[0], num1, num2));
+				int res = performOperation(token[0], num1, num2);
+				st.push(res);
 			}
-			catch(const std::exception& e)
+			catch(const std::exception & e)
 			{
 				return displayError();
 			}
