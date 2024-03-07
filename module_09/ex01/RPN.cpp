@@ -24,7 +24,7 @@ bool RPN::isOperator(char c) const
 
 void RPN::displayError() const
 {
-	std::cerr << "Error" << std::endl;
+	std::cerr << RED << "Error" << RESET << std::endl;
 }
 
 int RPN::addNumbers(int a, int b) const
@@ -127,7 +127,7 @@ void RPN::calculate(std::string const & expression) const
 	{
 		return displayError();
 	}
-	std::cout << st.top() << std::endl;
+	std::cout << GREEN << st.top() << RESET << std::endl;
 }
 
 const char * RPN::OverflowException::what() const throw()
