@@ -17,28 +17,25 @@
 class PMerge
 {
 private:
-	std::vector<unsigned int> _numbers;
-	std::vector<unsigned int> _sortedNumbers;
-
 	// Parsing
 	bool isAllDigits(const std::string& str) const;
-	void parseCommandLineArgs(int ac, char** av);
+	std::vector<unsigned int> parseArgsToVector(int ac, char** av);
 	// Sorting
 	void sort(std::vector<unsigned int> set);
-	double sortOnVector();
+	std::chrono::nanoseconds timeVector(int ac, char **av);
 	void recursiveSort(std::vector<std::pair<unsigned int, unsigned int> > set);
 	// Printing
 	void displayError();
-	void displaySummary(double vectorTime);
+	void displaySummary(std::chrono::nanoseconds duration,
+		std::string containerName, int numOfElements) const;
 public:
 	PMerge();
-	PMerge(int ac, char ** av);
 	PMerge(const PMerge & source);
 	~PMerge();
 
 	PMerge & operator=(const PMerge & source);
 
-	void timeSorts();
+	void timeSorts(int ac, char** av);
 
 	class InvalidInputException : public std::exception
 	{

@@ -2,8 +2,8 @@
 
 int main(int ac, char ** av)
 {
-	PMerge pmerge(ac, av);
-	pmerge.timeSorts();
+	PMerge pmerge;
+	pmerge.timeSorts(ac, av);
 
 	return 0;
 }

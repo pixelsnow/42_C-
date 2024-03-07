@@ -1,72 +1,92 @@
 #include "PmergeMe.hpp"
 
+// CONSTRUCTORS
+
 PMerge::PMerge() {}
+
+PMerge::PMerge(const PMerge & source)
+{
+	(void)source;
+}
+
+// DESTRUCTOR
+
+PMerge::~PMerge() {}
+
+// OPERATORS
+
+PMerge & PMerge::operator=(const PMerge & source)
+{
+	(void)source;
+	return *this;
+}
+
+// METHODS
+
+// Parsing
 
 bool PMerge::isAllDigits(const std::string& str) const
 {
-	return std::all_of(str.begin(), str.end(),
-		[](unsigned char c)
-		{
-			return std::isdigit(c);
-		}
-	);
+	return std::all_of(str.begin(), str.end(), ::isdigit);
 }
 
-void PMerge::parseCommandLineArgs(int ac, char** av)
+std::vector<unsigned int> PMerge::parseArgsToVector(int ac, char** av)
 {
+	std::vector<unsigned int> vect;
 	for (unsigned int i = 1; i < ac; i++)
 	{
 		if (!isAllDigits(av[i]))
 			throw InvalidInputException();
 		try
 		{
-			_numbers.push_back(std::stoul(av[i]));
+			vect.push_back(std::stoul(av[i]));
 		}
 		catch(const std::exception & e)
 		{
 			throw InvalidInputException();
 		}
 	}
+	return vect;
 }
+
+// Printing
 
 void PMerge::displayError()
 {
 	std::cerr << RED << "Error" << RESET << std::endl;
 }
 
-void PMerge::displaySummary(double vectorTime)
+void PMerge::displaySummary(std::chrono::nanoseconds duration,
+	std::string containerName, int numOfElements) const
 {
 	std::cout << "Before: " << std::endl;
 	std::cout << "After: " << std::endl;
-	std::cout << "Time to process " << _numbers.size() << "elements with std::vector : " << vectorTime << " us" << std::endl;
+	std::cout << "Time to process " << numOfElements << "elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
 }
 
-PMerge::PMerge(int ac, char ** av)
+// Sorting
+
+std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 {
+	std::chrono::high_resolution_clock::time_point startTime
+		= std::chrono::high_resolution_clock::now();
+	std::vector<unsigned int> vect = parseArgsToVector(ac, av);
 
+
+	std::chrono::high_resolution_clock::time_point endTime
+		= std::chrono::high_resolution_clock::now();
+	std::chrono::nanoseconds duration
+		= std::chrono::duration_cast<std::chrono::nanoseconds>
+			(endTime - startTime);
+	return duration;
 }
 
-PMerge::PMerge(const PMerge & source) : _numbers(source._numbers) {}
-
-PMerge::~PMerge() {}
-
-PMerge & PMerge::operator=(const PMerge & source)
-{
-	_numbers = source._numbers;
-	return *this;
-}
-
-double PMerge::sortOnVector()
-{
-
-}
-
-void PMerge::timeSorts()
+void PMerge::timeSorts(int ac, char** av)
 {
 	try
 	{
-		double vectorTime = sortOnVector();
-		displaySummary(vectorTime);
+		std::chrono::nanoseconds vectorTime = timeVector(ac, av);
+		displaySummary(vectorTime, "vector", ac - 1);
 	}
 	catch(const std::exception& e)
 	{
@@ -74,6 +94,7 @@ void PMerge::timeSorts()
 	}
 }
 
+// EXCEPTIONS
 
 const char * PMerge::InvalidInputException::what() const throw()
 {
