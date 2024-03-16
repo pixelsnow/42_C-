@@ -98,7 +98,13 @@ void sortVector(std::vector<unsigned int> &vect)
 
 	std::vector<std::pair<unsigned int, unsigned int> > pairVect
 		= pairUp(vect);
-
+	// make a vector of bigger elements
+	// sortVector(biggerElems)
+	// make a vector of smaller elements in matching order
+	// push the odd elem to the back if it exists
+	// insert the elem paired with the smallest sorted into the beginning
+	// if there's only one unsorted left, insert into the beginning
+	// otherwise do the algo with partitions
 	std::vector<unsigned int> sorted;
 }
 
