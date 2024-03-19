@@ -1,5 +1,23 @@
 #include "PmergeMe.hpp"
 
+void PMerge::printVector(const std::vector<unsigned int> &vec)
+{
+	for (const int &element : vec)
+	{
+		std::cout << element << " ";
+	}
+	std::cout << "\n";
+}
+
+void PMerge::printVectors(const std::vector<std::vector<unsigned int>> &vec)
+{
+	for (const std::vector<unsigned int> &element : vec)
+	{
+		printVector(element);
+	}
+	std::cout << "\n";
+}
+
 // CONSTRUCTORS
 
 PMerge::PMerge() {}
@@ -96,16 +114,29 @@ void sortVector(std::vector<unsigned int> &vect)
 		vect.pop_back();
 	}
 
-	std::vector<std::pair<unsigned int, unsigned int> > pairVect
-		= pairUp(vect);
+	std::vector<std::pair<unsigned int, unsigned int> > paired = pairUp(vect);
+	std::map<unsigned int, unsigned int> largerToSmaller = connectPairs(paired);
 	// make a vector of bigger elements
+	std::vector<unsigned int> vect = makeLargerVect(paired);
 	// sortVector(biggerElems)
+	sortVector(vect);
 	// make a vector of smaller elements in matching order
-	// push the odd elem to the back if it exists
+	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, paired);
 	// insert the elem paired with the smallest sorted into the beginning
-	// if there's only one unsorted left, insert into the beginning
+	vect.insert(vect.begin(), smallerElems[0]);
+	smallerElems.erase(smallerElems.begin());
+	// CHANGE ORDER OF THIS AND PREVIOUS?
+	// push the odd elem to the back if it exists
+	if (hasExtraElem)
+	{
+		smallerElems.push_back(lastElem);
+	}
+	// if there's only one unsorted left, insert into the sorted with binary
+	if (smallerElems.size() <= 1)
+	{
+		
+	}
 	// otherwise do the algo with partitions
-	std::vector<unsigned int> sorted;
 }
 
 
@@ -131,6 +162,7 @@ void PMerge::timeSorts(int ac, char** av)
 {
 	try
 	{
+		// remember to check if has repeat elems
 		std::chrono::nanoseconds vectorTime = timeVector(ac, av);
 		displaySummary(vectorTime, "vector", ac - 1);
 	}

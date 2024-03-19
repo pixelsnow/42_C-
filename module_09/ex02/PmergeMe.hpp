@@ -1,12 +1,14 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+// check if all imports are necessary
 #include <chrono>
 #include <iostream>
 #include <algorithm>
 #include <utility>
 #include <vector>
 #include <list>
+#include <map>
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -28,6 +30,9 @@ private:
 	void displayError();
 	void displaySummary(std::chrono::nanoseconds duration,
 		std::string containerName, int numOfElements) const;
+	// Extras
+	void printVector(const std::vector<unsigned int> &vec);
+	void printVectors(const std::vector<std::vector<unsigned int>> &vec);
 public:
 	PMerge();
 	PMerge(const PMerge & source);
