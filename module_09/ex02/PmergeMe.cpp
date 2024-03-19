@@ -128,6 +128,23 @@ std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vec
 	return smaller;
 }
 
+std::vector<unsigned int> generatePowerSequence(unsigned int vectSize)
+{
+	std::vector<unsigned int> sequence;
+
+	unsigned int pow = 2;
+	unsigned int sum = 0;
+	for (unsigned int i = 2; i <= vectSize; i++)
+	{
+		sequence.emplace_back(pow);
+		sum += pow;
+		if (sum > vectSize)
+			break;
+		pow = std::pow(2, i) - pow;
+	}
+	return sequence;
+}
+
 void sortVector(std::vector<unsigned int> & vect)
 {
 	if (vect.size() < 2)
@@ -163,7 +180,6 @@ void sortVector(std::vector<unsigned int> & vect)
 	// if there's only one unsorted left, insert into the sorted with binary
 	if (smallerElems.size() <= 1)
 	{
-		
 		unsigned int elem = smallerElems.front();
 		std::vector<unsigned int>::iterator endIt = vect.end();
 		if (elem != lastElem)
@@ -173,7 +189,25 @@ void sortVector(std::vector<unsigned int> & vect)
 	// otherwise do the algo with partitions
 	else
 	{
-		
+		std::vector<int> groupSizes = generatePowerSequence(smallerElems.size());
+		unsigned int groupsSorted = 0;
+		//unsigned int numsSorted = 0;
+		for (const unsigned int groupSize : groupSizes)
+		{
+			unsigned int numsSorted = 0;
+			for (unsigned int i = 0; i < groupSize; i++)
+			{
+				unsigned int elemIndex = groupsSorted + groupSize - i;
+				unsigned int elem = smallerElems[elemIndex];
+				// TODO: name sure case with extra elem is handled
+				std::vector<unsigned int>::iterator endIt
+					= vect.end()
+						- (smallerElems.size() - elemIndex - 1 - hasExtraElem);
+				vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
+				//smallerElems[groupsSorted + groupSize - i];
+			}
+			groupsSorted += groupSize;
+		}
 	}
 	
 }
