@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 #include <list>
-#include <map>
+#include <unordered_map>
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -59,7 +59,7 @@ public:
 
 /*
 TODO:
-- add consts where needed
+- add consts where possible/needed
 - test with out of range numbers
 - check copy and assignment
 - check that every function is a method

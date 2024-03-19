@@ -95,13 +95,40 @@ std::vector<std::pair<unsigned int, unsigned int>> pairUp
 
 // Sorting
 
-/* void sortVectorPairs(std::vector<std::pair<unsigned int, unsigned int> > &vect)
+std::unordered_map<unsigned int, unsigned int> connectPairs
+	(const std::vector<std::pair<unsigned int, unsigned int> > & paired)
 {
-	if (vect.size() < 2)
-		return;
-	
-} */
-void sortVector(std::vector<unsigned int> &vect)
+	std::unordered_map<unsigned int, unsigned int> pairMap;
+	for (const std::pair<unsigned int, unsigned int> &element : paired)
+	{
+		pairMap[element.second] = element.first;
+	}
+	return pairMap;
+}
+
+std::vector<unsigned int> makeLargerVect
+	(const std::vector<std::pair<unsigned int, unsigned int> > & paired)
+{
+	std::vector<unsigned int> vect;
+	for (const std::pair<unsigned int, unsigned int> &element : paired)
+	{
+		vect.emplace_back(element.second);
+	}
+	return vect;
+}
+
+std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vect,
+	std::unordered_map<unsigned int, unsigned int> & pairMap)
+{
+	std::vector<unsigned int> smaller;
+	for (const unsigned int element : vect)
+	{
+		smaller.emplace_back(pairMap[element]);
+	}
+	return smaller;
+}
+
+void sortVector(std::vector<unsigned int> & vect)
 {
 	if (vect.size() < 2)
 		return;
@@ -115,30 +142,41 @@ void sortVector(std::vector<unsigned int> &vect)
 	}
 
 	std::vector<std::pair<unsigned int, unsigned int> > paired = pairUp(vect);
-	std::map<unsigned int, unsigned int> largerToSmaller = connectPairs(paired);
+	std::unordered_map<unsigned int, unsigned int> pairMap
+		= connectPairs(paired);
 	// make a vector of bigger elements
 	std::vector<unsigned int> vect = makeLargerVect(paired);
 	// sortVector(biggerElems)
 	sortVector(vect);
 	// make a vector of smaller elements in matching order
-	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, paired);
+	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, pairMap);
 	// insert the elem paired with the smallest sorted into the beginning
-	vect.insert(vect.begin(), smallerElems[0]);
+	vect.insert(vect.begin(), smallerElems.front());
 	smallerElems.erase(smallerElems.begin());
-	// CHANGE ORDER OF THIS AND PREVIOUS?
+	// CHANGE ORDER OF THIS AND PREVIOUS PART?
 	// push the odd elem to the back if it exists
 	if (hasExtraElem)
 	{
-		smallerElems.push_back(lastElem);
+		smallerElems.emplace_back(lastElem);
 	}
+
 	// if there's only one unsorted left, insert into the sorted with binary
 	if (smallerElems.size() <= 1)
 	{
 		
+		unsigned int elem = smallerElems.front();
+		std::vector<unsigned int>::iterator endIt = vect.end();
+		if (elem != lastElem)
+			endIt--;
+		vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
 	}
 	// otherwise do the algo with partitions
+	else
+	{
+		
+	}
+	
 }
-
 
 std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 {
