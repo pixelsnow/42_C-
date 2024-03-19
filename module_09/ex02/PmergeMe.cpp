@@ -189,7 +189,7 @@ void sortVector(std::vector<unsigned int> & vect)
 	// otherwise do the algo with partitions
 	else
 	{
-		std::vector<int> groupSizes = generatePowerSequence(smallerElems.size());
+		std::vector<unsigned int> groupSizes = generatePowerSequence(smallerElems.size());
 		unsigned int groupsSorted = 0;
 		//unsigned int numsSorted = 0;
 		for (const unsigned int groupSize : groupSizes)
