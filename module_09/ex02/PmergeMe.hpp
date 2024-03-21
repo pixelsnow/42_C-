@@ -9,6 +9,7 @@
 #include <vector>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -32,7 +33,7 @@ private:
 		std::string containerName, int numOfElements) const;
 	// Extras
 	void printVector(const std::vector<unsigned int> &vec);
-	void printVectors(const std::vector<std::vector<unsigned int>> &vec);
+	void printVectors(const std::vector<std::vector<unsigned int> > &vec);
 public:
 	PMerge();
 	PMerge(const PMerge & source);

@@ -51,13 +51,20 @@ bool PMerge::isAllDigits(const std::string& str) const
 std::vector<unsigned int> PMerge::parseArgsToVector(int ac, char** av)
 {
 	std::vector<unsigned int> vect;
-	for (unsigned int i = 1; i < ac; i++)
+	std::unordered_set<unsigned int> seen;
+	for (int i = 1; i < ac; i++)
 	{
 		if (!isAllDigits(av[i]))
 			throw InvalidInputException();
 		try
 		{
-			vect.push_back(std::stoul(av[i]));
+			unsigned int value = std::stoul(av[i]);
+			if (seen.find(value) != seen.end()) // O(1)
+			{
+				throw InvalidInputException();
+			}
+			seen.insert(value);
+			vect.push_back(value);
 		}
 		catch(const std::exception & e)
 		{
@@ -77,9 +84,7 @@ void PMerge::displayError()
 void PMerge::displaySummary(std::chrono::nanoseconds duration,
 	std::string containerName, int numOfElements) const
 {
-	std::cout << "Before: " << std::endl;
-	std::cout << "After: " << std::endl;
-	std::cout << "Time to process " << numOfElements << "elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
+	std::cout << "Time to process " << numOfElements << " elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
 }
 
 std::vector<std::pair<unsigned int, unsigned int>> pairUp
@@ -128,7 +133,7 @@ std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vec
 	return smaller;
 }
 
-std::vector<unsigned int> generatePowerSequence(unsigned int vectSize)
+std::vector<unsigned int> generateGroupSizes(unsigned int vectSize)
 {
 	std::vector<unsigned int> sequence;
 
@@ -145,13 +150,28 @@ std::vector<unsigned int> generatePowerSequence(unsigned int vectSize)
 	return sequence;
 }
 
+
+unsigned int calculateNextIndex(const std::vector<unsigned int>& groupSizes, unsigned int totalElements, unsigned int currentIndex) {
+	unsigned int groupsSorted = 0;
+	for (const unsigned int groupSize : groupSizes) {
+		if (currentIndex < groupsSorted + groupSize) {
+			// Calculate the index within the current group
+			unsigned int indexWithinGroup = groupsSorted + groupSize - currentIndex;
+			return groupsSorted + groupSize - indexWithinGroup;
+		}
+		groupsSorted += groupSize;
+	}
+	// If the current index is beyond the last group, return the total number of elements
+	return totalElements;
+}
+
 void sortVector(std::vector<unsigned int> & vect)
 {
 	if (vect.size() < 2)
 		return;
 
 	bool hasExtraElem = vect.size() % 2 != 0;
-	int lastElem;
+	unsigned int lastElem;
 	if (hasExtraElem)
 	{
 		lastElem = vect.back();
@@ -162,12 +182,12 @@ void sortVector(std::vector<unsigned int> & vect)
 	std::unordered_map<unsigned int, unsigned int> pairMap
 		= connectPairs(paired);
 	// make a vector of bigger elements
-	std::vector<unsigned int> vect = makeLargerVect(paired);
-	// sortVector(biggerElems)
+	vect = makeLargerVect(paired);
+	// sort recursively
 	sortVector(vect);
 	// make a vector of smaller elements in matching order
 	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, pairMap);
-	// insert the elem paired with the smallest sorted into the beginning
+	// move the elem paired with the smallest sorted into the beginning
 	vect.insert(vect.begin(), smallerElems.front());
 	smallerElems.erase(smallerElems.begin());
 	// CHANGE ORDER OF THIS AND PREVIOUS PART?
@@ -176,7 +196,6 @@ void sortVector(std::vector<unsigned int> & vect)
 	{
 		smallerElems.emplace_back(lastElem);
 	}
-
 	// if there's only one unsorted left, insert into the sorted with binary
 	if (smallerElems.size() <= 1)
 	{
@@ -189,27 +208,29 @@ void sortVector(std::vector<unsigned int> & vect)
 	// otherwise do the algo with partitions
 	else
 	{
-		std::vector<unsigned int> groupSizes = generatePowerSequence(smallerElems.size());
-		unsigned int groupsSorted = 0;
-		//unsigned int numsSorted = 0;
-		for (const unsigned int groupSize : groupSizes)
+		unsigned int totalElements = smallerElems.size();
+		std::vector<unsigned int> groupSizes = generateGroupSizes(totalElements);
+		for (unsigned int i = 0; i < totalElements; i++)
 		{
-			unsigned int numsSorted = 0;
-			for (unsigned int i = 0; i < groupSize; i++)
+			unsigned int nextIndex = calculateNextIndex(groupSizes, totalElements, i);
+			unsigned int elem = smallerElems[nextIndex];
+			unsigned int matchingIndexFromEnd = totalElements - i;
+			if (hasExtraElem)
 			{
-				unsigned int elemIndex = groupsSorted + groupSize - i;
-				unsigned int elem = smallerElems[elemIndex];
-				// TODO: name sure case with extra elem is handled
-				std::vector<unsigned int>::iterator endIt
-					= vect.end()
-						- (smallerElems.size() - elemIndex - 1 - hasExtraElem);
-				vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
-				//smallerElems[groupsSorted + groupSize - i];
+				if (elem == lastElem)
+				{
+					matchingIndexFromEnd = 0;
+				}
+				else
+				{
+					matchingIndexFromEnd--;
+				}
 			}
-			groupsSorted += groupSize;
+			std::vector<unsigned int>::iterator endIt
+					= vect.end() - matchingIndexFromEnd;
+			vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
 		}
 	}
-	
 }
 
 std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
@@ -217,11 +238,17 @@ std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
 
+
 	std::vector<unsigned int> vect = parseArgsToVector(ac, av);
+	std::cout << "Before: ";
+	printVector(vect);
+	std::cout << std::endl;
+	
 	//std::vector<std::pair<unsigned int, unsigned int> > pairVect = pairUp(vect);
 	sortVector(vect);
-
-
+	std::cout << "After:";
+	printVector(vect);
+	std::cout << std::endl;
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();
 	std::chrono::nanoseconds duration
