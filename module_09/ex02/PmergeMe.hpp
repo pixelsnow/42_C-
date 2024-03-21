@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <utility>
 #include <vector>
-#include <list>
+#include <deque>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -23,6 +23,7 @@ private:
 	bool isAllDigits(const std::string& str) const;
 	// Sorting
 	std::chrono::nanoseconds timeVector(int ac, char **av);
+	std::chrono::nanoseconds timeDeque(int ac, char **av);
 
 	template <typename Container>
 	Container parseArgsToVector(int ac, char** av);
