@@ -155,13 +155,11 @@ unsigned int PMerge::calculateNextIndex(const std::vector<unsigned int>& groupSi
 	unsigned int groupsSorted = 0;
 	for (const unsigned int groupSize : groupSizes) {
 		if (currentIndex < groupsSorted + groupSize) {
-			// Calculate the index within the current group
 			unsigned int indexWithinGroup = groupsSorted + groupSize - currentIndex;
 			return groupsSorted + groupSize - indexWithinGroup;
 		}
 		groupsSorted += groupSize;
 	}
-	// If the current index is beyond the last group, return the total number of elements
 	return totalElements;
 }
 
@@ -175,7 +173,6 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 		printVector(vect); */
 		return;
 	}
-		
 
 	bool hasExtraElem = vect.size() % 2 != 0;
 	unsigned int lastElem;
