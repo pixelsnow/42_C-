@@ -52,6 +52,8 @@ std::vector<unsigned int> PMerge::parseArgsToVector(int ac, char** av)
 {
 	std::vector<unsigned int> vect;
 	std::unordered_set<unsigned int> seen;
+	if (ac < 2)
+		throw InvalidInputException();
 	for (int i = 1; i < ac; i++)
 	{
 		if (!isAllDigits(av[i]))
@@ -263,7 +265,6 @@ std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 {
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
-
 
 	std::vector<unsigned int> vect = parseArgsToVector(ac, av);
 
