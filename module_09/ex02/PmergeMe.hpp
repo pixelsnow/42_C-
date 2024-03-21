@@ -1,7 +1,6 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-// check if all imports are necessary
 #include <chrono>
 #include <iostream>
 #include <algorithm>
@@ -16,51 +15,52 @@
 #define CYAN "\033[37m"
 #define BLUE "\033[34m"
 #define RESET "\033[0m"
+
 class PMerge
 {
 private:
 
 	bool isAllDigits(const std::string& str) const;
 
-	std::chrono::nanoseconds timeVector(int ac, char **av);
+	std::chrono::nanoseconds timeVector(int ac, char **av) const;
 
-	std::chrono::nanoseconds timeDeque(int ac, char **av);
+	std::chrono::nanoseconds timeDeque(int ac, char **av) const;
 
 	template <typename Container>
-	Container parseArgsToVector(int ac, char** av);
+	Container parseArgsToVector(int ac, char** av) const;
 
 	template <typename Container, typename PairContainer>
-	PairContainer pairUp(Container & vect);
+	PairContainer pairUp(Container & vect) const;
 
 	template <typename PairContainer>
 	std::unordered_map<unsigned int, unsigned int> connectPairs
-		(const PairContainer & paired);
+		(const PairContainer & paired) const;
 
 	template <typename Container>
 	std::unordered_map<unsigned int, unsigned int> connectReversePairs
-		(Container & larger, Container & smaller);
+		(Container & larger, Container & smaller) const;
 
 	template <typename Container, typename PairContainer>
-	Container makeLargerVect(const PairContainer & paired);
+	Container makeLargerVect(const PairContainer & paired) const;
 
 	template <typename Container>
 	Container makeSmallerVect(const Container & vect,
-		std::unordered_map<unsigned int, unsigned int> & pairMap);
+		std::unordered_map<unsigned int, unsigned int> & pairMap) const;
 
 	template <typename Container>
-	Container generateGroupSizes(unsigned int vectSize);
+	Container generateGroupSizes(unsigned int vectSize) const;
 
 	template <typename Container>
-	unsigned int calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex);
+	unsigned int calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex) const;
 
 	template <typename Container, typename PairContainer>
-	void sortVector(Container & vect);
+	void sortVector(Container & vect) const;
 
 
 	template <typename Container>
-	void printVector(const Container &vec);
+	void printVector(const Container &vec) const;
 
-	void displayError();
+	void displayError() const;
 
 	void displaySummary(std::chrono::nanoseconds duration,
 		std::string containerName, int numOfElements) const;
@@ -72,7 +72,7 @@ public:
 
 	PMerge & operator=(const PMerge & source);
 
-	void timeSorts(int ac, char** av);
+	void timeSorts(int ac, char** av) const;
 
 	class InvalidInputException : public std::exception
 	{
@@ -89,7 +89,7 @@ public:
 
 
 template <typename Container>
-void PMerge::printVector(const Container &vec)
+void PMerge::printVector(const Container &vec) const
 {
 	for (const unsigned int &element : vec)
 	{
@@ -99,7 +99,7 @@ void PMerge::printVector(const Container &vec)
 }
 
 template <typename Container>
-Container PMerge::parseArgsToVector(int ac, char** av)
+Container PMerge::parseArgsToVector(int ac, char** av) const
 {
 	Container vect;
 	std::unordered_set<unsigned int> seen;
@@ -133,7 +133,7 @@ Container PMerge::parseArgsToVector(int ac, char** av)
 }
 
 template <typename Container, typename PairContainer>
-PairContainer PMerge::pairUp (Container & vect)
+PairContainer PMerge::pairUp (Container & vect) const
 {
 	PairContainer res;
 	for (size_t i = 0; i < vect.size(); i += 2)
@@ -145,7 +145,7 @@ PairContainer PMerge::pairUp (Container & vect)
 
 template <typename PairContainer>
 std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
-	(const PairContainer & paired)
+	(const PairContainer & paired) const
 {
 	std::unordered_map<unsigned int, unsigned int> pairMap;
 	for (const auto &element : paired)
@@ -157,7 +157,7 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
 
 template <typename Container>
 std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
-	(Container & larger, Container & smaller)
+	(Container & larger, Container & smaller) const
 {
 	std::unordered_map<unsigned int, unsigned int> reversePairMap;
 	auto itSmall = smaller.begin();
@@ -172,7 +172,7 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
 }
 
 template <typename Container, typename PairContainer>
-Container PMerge::makeLargerVect(const PairContainer & paired)
+Container PMerge::makeLargerVect(const PairContainer & paired) const
 {
 	Container vect;
 	for (const auto &element : paired)
@@ -184,7 +184,7 @@ Container PMerge::makeLargerVect(const PairContainer & paired)
 
 template <typename Container>
 Container PMerge::makeSmallerVect (const Container & vect,
-	std::unordered_map<unsigned int, unsigned int> & pairMap)
+	std::unordered_map<unsigned int, unsigned int> & pairMap) const
 {
 	Container smaller;
 	for (const unsigned int element : vect)
@@ -195,7 +195,7 @@ Container PMerge::makeSmallerVect (const Container & vect,
 }
 
 template <typename Container>
-Container PMerge::generateGroupSizes(unsigned int vectSize)
+Container PMerge::generateGroupSizes(unsigned int vectSize) const
 {
 	Container sequence;
 
@@ -213,7 +213,8 @@ Container PMerge::generateGroupSizes(unsigned int vectSize)
 }
 
 template <typename Container>
-unsigned int PMerge::calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex)
+unsigned int PMerge::calculateNextIndex(const Container & groupSizes,
+	unsigned int totalElements, unsigned int currentIndex) const
 {
 	unsigned int groupSum = 0;
 	for (const unsigned int groupSize : groupSizes)
@@ -232,7 +233,7 @@ unsigned int PMerge::calculateNextIndex(const Container & groupSizes, unsigned i
 }
 
 template <typename Container, typename PairContainer>
-void PMerge::sortVector(Container & vect)
+void PMerge::sortVector(Container & vect) const
 {
 	if (vect.size() < 2)
 	{
@@ -298,10 +299,3 @@ void PMerge::sortVector(Container & vect)
 }
 
 #endif
-
-/*
-TODO:
-- add consts where possible/needed
-- test with out of range numbers
-- check copy and assignment
-*/

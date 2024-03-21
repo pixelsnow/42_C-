@@ -17,7 +17,7 @@ PMerge & PMerge::operator=(const PMerge & source)
 
 // METHODS
 
-void PMerge::displayError()
+void PMerge::displayError() const
 {
 	std::cerr << RED << "Error" << RESET << std::endl;
 }
@@ -33,7 +33,7 @@ bool PMerge::isAllDigits(const std::string& str) const
 	return std::all_of(str.begin(), str.end(), ::isdigit);
 }
 
-std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
+std::chrono::nanoseconds PMerge::timeVector(int ac, char **av) const
 {
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
@@ -56,8 +56,7 @@ std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 	return duration;
 }
 
-
-std::chrono::nanoseconds PMerge::timeDeque(int ac, char **av)
+std::chrono::nanoseconds PMerge::timeDeque(int ac, char **av) const
 {
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
@@ -74,7 +73,7 @@ std::chrono::nanoseconds PMerge::timeDeque(int ac, char **av)
 	return duration;
 }
 
-void PMerge::timeSorts(int ac, char** av)
+void PMerge::timeSorts(int ac, char** av) const
 {
 	try
 	{
