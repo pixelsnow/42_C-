@@ -1,93 +1,7 @@
-#ifndef PMERGEME_HPP
-#define PMERGEME_HPP
-
-// check if all imports are necessary
-#include <chrono>
-#include <iostream>
-#include <algorithm>
-#include <utility>
-#include <vector>
-#include <list>
-#include <unordered_map>
-#include <unordered_set>
-
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define CYAN "\033[37m"
-#define BLUE "\033[34m"
-#define RESET "\033[0m"
-class PMerge
-{
-private:
-	// Parsing
-	bool isAllDigits(const std::string& str) const;
-	// Sorting
-	std::chrono::nanoseconds timeVector(int ac, char **av);
-
-	template <typename Container>
-	Container parseArgsToVector(int ac, char** av);
-
-	template <typename Container, typename PairContainer>
-	PairContainer pairUp(Container & vect);
-
-	template <typename PairContainer>
-	std::unordered_map<unsigned int, unsigned int> connectPairs
-		(const PairContainer & paired);
-
-	template <typename Container>
-	std::unordered_map<unsigned int, unsigned int> connectReversePairs
-		(Container & larger, Container & smaller);
-
-	template <typename Container, typename PairContainer>
-	Container makeLargerVect(const PairContainer & paired);
-
-	template <typename Container>
-	Container makeSmallerVect(const Container & vect,
-		std::unordered_map<unsigned int, unsigned int> & pairMap);
-
-	template <typename Container>
-	Container generateGroupSizes(unsigned int vectSize);
-
-	template <typename Container>
-	unsigned int calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex);
-
-	template <typename Container, typename PairContainer>
-	void sortVector(Container & vect);
-
-
-	template <typename Container>
-	void printVector(const Container &vec);
-
-	// Printing
-	void displayError();
-	void displaySummary(std::chrono::nanoseconds duration,
-		std::string containerName, int numOfElements) const;
-	
-public:
-	PMerge();
-	PMerge(const PMerge & source);
-	~PMerge();
-
-	PMerge & operator=(const PMerge & source);
-
-	void timeSorts(int ac, char** av);
-
-	class InvalidInputException : public std::exception
-	{
-	public:
-		virtual const char * what() const throw();
-	};
-
-	class SortErrorException : public std::exception
-	{
-	public:
-		virtual const char * what() const throw();
-	};
-};
-
+#include "PmergeMe.hpp"
 
 template <typename Container>
-void PMerge::printVector(const Container &vec)
+void PMerge<Container>::printVector(const Container &vec)
 {
 	for (const unsigned int &element : vec)
 	{
@@ -97,7 +11,52 @@ void PMerge::printVector(const Container &vec)
 }
 
 template <typename Container>
-Container PMerge::parseArgsToVector(int ac, char** av)
+void PMerge<Container>::printVectors(const std::vector<Container> &vec)
+{
+	for (const Container &element : vec)
+	{
+		printVector(element);
+	}
+	std::cout << "\n";
+}
+
+// CONSTRUCTORS
+
+template <typename Container>
+PMerge<Container>::PMerge() {}
+
+template <typename Container>
+PMerge<Container>::PMerge(const PMerge<Container> & source)
+{
+	(void)source;
+}
+
+// DESTRUCTOR
+
+template <typename Container>
+PMerge<Container>::~PMerge() {}
+
+// OPERATORS
+
+template <typename Container>
+PMerge<Container> & PMerge<Container>::operator=(const PMerge<Container> & source)
+{
+	(void)source;
+	return *this;
+}
+
+// METHODS
+
+// Parsing
+
+template <typename Container>
+bool PMerge<Container>::isAllDigits(const std::string& str) const
+{
+	return std::all_of(str.begin(), str.end(), ::isdigit);
+}
+
+template <typename Container>
+Container PMerge<Container>::parseArgsToVector(int ac, char** av)
 {
 	Container vect;
 	std::unordered_set<unsigned int> seen;
@@ -125,10 +84,26 @@ Container PMerge::parseArgsToVector(int ac, char** av)
 	return vect;
 }
 
-template <typename Container, typename PairContainer>
-PairContainer PMerge::pairUp (Container & vect)
+// Printing
+
+template <typename Container>
+void PMerge<Container>::displayError()
 {
-	PairContainer res;
+	std::cerr << RED << "Error" << RESET << std::endl;
+}
+
+template <typename Container>
+void PMerge<Container>::displaySummary(std::chrono::nanoseconds duration,
+	std::string containerName, int numOfElements) const
+{
+	std::cout << "Time to process " << numOfElements << " elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
+}
+
+template <typename Container>
+Container PMerge<Container>::pairUp
+	(Container & vect)
+{
+	Container res;
 	for (size_t i = 0; i < vect.size(); i += 2)
 	{
 		res.emplace_back(std::minmax(vect[i], vect[i + 1]));
@@ -138,9 +113,9 @@ PairContainer PMerge::pairUp (Container & vect)
 
 // Sorting
 
-template <typename PairContainer>
-std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
-	(const PairContainer & paired)
+template <typename Container>
+std::unordered_map<unsigned int, unsigned int> PMerge<Container>::connectPairs
+	(const Container & paired)
 {
 	std::unordered_map<unsigned int, unsigned int> pairMap;
 	for (const auto &element : paired)
@@ -151,7 +126,7 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
 }
 
 template <typename Container>
-std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
+std::unordered_map<unsigned int, unsigned int> PMerge<Container>::connectReversePairs
 	(Container & larger, Container & smaller)
 {
 	std::unordered_map<unsigned int, unsigned int> reversePairMap;
@@ -165,9 +140,9 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
 	}
 	return reversePairMap;
 }
-
-template <typename Container, typename PairContainer>
-Container PMerge::makeLargerVect(const PairContainer & paired)
+template <typename Container>
+Container PMerge<Container>::makeLargerVect
+	(const Container & paired)
 {
 	Container vect;
 	for (const auto &element : paired)
@@ -178,7 +153,7 @@ Container PMerge::makeLargerVect(const PairContainer & paired)
 }
 
 template <typename Container>
-Container PMerge::makeSmallerVect (const Container & vect,
+Container PMerge<Container>::makeSmallerVect (const Container & vect,
 	std::unordered_map<unsigned int, unsigned int> & pairMap)
 {
 	Container smaller;
@@ -190,7 +165,7 @@ Container PMerge::makeSmallerVect (const Container & vect,
 }
 
 template <typename Container>
-Container PMerge::generateGroupSizes(unsigned int vectSize)
+Container PMerge<Container>::generateGroupSizes(unsigned int vectSize)
 {
 	Container sequence;
 
@@ -208,7 +183,7 @@ Container PMerge::generateGroupSizes(unsigned int vectSize)
 }
 
 template <typename Container>
-unsigned int PMerge::calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex)
+unsigned int PMerge<Container>::calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex)
 {
 	unsigned int groupSum = 0;
 	for (const unsigned int groupSize : groupSizes)
@@ -226,8 +201,8 @@ unsigned int PMerge::calculateNextIndex(const Container & groupSizes, unsigned i
 	return totalElements;
 }
 
-template <typename Container, typename PairContainer>
-void PMerge::sortVector(Container & vect)
+template <typename Container>
+void PMerge<Container>::sortVector(Container & vect)
 {
 	if (vect.size() < 2)
 	{
@@ -242,13 +217,13 @@ void PMerge::sortVector(Container & vect)
 		vect.pop_back();
 	}
 
-	PairContainer paired = pairUp<Container, PairContainer>(vect);
+	Container paired = pairUp(vect);
 	std::unordered_map<unsigned int, unsigned int> pairMap
 		= connectPairs(paired);
 	// make a vector of bigger elements
-	vect = makeLargerVect<Container, PairContainer>(paired);
+	vect = makeLargerVect(paired);
 	// sort recursively
-	sortVector<Container, PairContainer>(vect);
+	sortVector(vect);
 	// make a vector of smaller elements in matching order
 	Container smallerElems = makeSmallerVect(vect, pairMap);
 	std::unordered_map<unsigned int, unsigned int> reversePairMap
@@ -276,7 +251,7 @@ void PMerge::sortVector(Container & vect)
 	else
 	{
 		unsigned int totalElements = smallerElems.size();
-		Container groupSizes = generateGroupSizes<Container>(totalElements);
+		Container groupSizes = generateGroupSizes(totalElements);
 		for (unsigned int i = 0; i < totalElements; i++)
 		{
 			unsigned int nextIndex = calculateNextIndex(groupSizes, totalElements, i);
@@ -292,12 +267,54 @@ void PMerge::sortVector(Container & vect)
 	}
 }
 
-#endif
+template <typename Container>
+std::chrono::nanoseconds PMerge<Container>::timeVector(int ac, char **av)
+{
+	std::chrono::high_resolution_clock::time_point startTime
+		= std::chrono::high_resolution_clock::now();
 
-/*
-TODO:
-- add consts where possible/needed
-- test with out of range numbers
-- check copy and assignment
-- check that every function is a method
-*/
+	Container vect = parseArgsToVector<std::vector<unsigned int, unsigned int> >(ac, av);
+
+	std::cout << "Before:	";
+	printVector(vect);
+
+	sortVector(vect);
+
+	std::cout << "After:	";
+	printVector(vect);
+
+	std::chrono::high_resolution_clock::time_point endTime
+		= std::chrono::high_resolution_clock::now();
+	std::chrono::nanoseconds duration
+		= std::chrono::duration_cast<std::chrono::nanoseconds>
+			(endTime - startTime);
+	return duration;
+}
+
+template <typename Container>
+void PMerge<Container>::timeSorts(int ac, char** av)
+{
+	try
+	{
+		std::chrono::nanoseconds vectorTime = timeVector(ac, av);
+		displaySummary(vectorTime, "vector", ac - 1);
+	}
+	catch(const std::exception& e)
+	{
+		displayError();
+	}
+}
+
+// EXCEPTIONS
+
+template <typename Container>
+const char * PMerge<Container>::InvalidInputException::what() const throw()
+{
+	return "Invalid input";
+}
+
+template <typename Container>
+const char * PMerge<Container>::SortErrorException::what() const throw()
+{
+	return "Error during sorting";
+}
