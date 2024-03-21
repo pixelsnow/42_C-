@@ -2,8 +2,8 @@
 #include <random>
 #include <set>
 
-#define MAX 1
-#define MIN 100000
+#define MIN 1
+#define MAX 100000
 
 int main(int ac, char ** av)
 {
