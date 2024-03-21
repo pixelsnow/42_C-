@@ -19,10 +19,11 @@
 class PMerge
 {
 private:
-	// Parsing
+
 	bool isAllDigits(const std::string& str) const;
-	// Sorting
+
 	std::chrono::nanoseconds timeVector(int ac, char **av);
+
 	std::chrono::nanoseconds timeDeque(int ac, char **av);
 
 	template <typename Container>
@@ -59,8 +60,8 @@ private:
 	template <typename Container>
 	void printVector(const Container &vec);
 
-	// Printing
 	void displayError();
+
 	void displaySummary(std::chrono::nanoseconds duration,
 		std::string containerName, int numOfElements) const;
 	
@@ -110,7 +111,12 @@ Container PMerge::parseArgsToVector(int ac, char** av)
 			throw InvalidInputException();
 		try
 		{
-			unsigned int value = std::stoul(av[i]);
+			unsigned long longValue = std::stoul(av[i]);
+			if (longValue > std::numeric_limits<unsigned int>::max())
+			{
+				throw InvalidInputException();
+			}
+			unsigned int value = longValue;
 			if (seen.find(value) != seen.end()) // O(1)
 			{
 				throw InvalidInputException();
@@ -136,8 +142,6 @@ PairContainer PMerge::pairUp (Container & vect)
 	}
 	return res;
 }
-
-// Sorting
 
 template <typename PairContainer>
 std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
@@ -300,5 +304,4 @@ TODO:
 - add consts where possible/needed
 - test with out of range numbers
 - check copy and assignment
-- check that every function is a method
 */
