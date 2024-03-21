@@ -28,6 +28,8 @@ private:
 	(std::vector<unsigned int> & vect);
 	std::unordered_map<unsigned int, unsigned int> connectPairs
 	(const std::vector<std::pair<unsigned int, unsigned int> > & paired);
+	std::unordered_map<unsigned int, unsigned int> connectReversePairs
+	(std::vector<unsigned int> & larger, std::vector<unsigned int> & smaller);
 	std::vector<unsigned int> makeLargerVect
 	(const std::vector<std::pair<unsigned int, unsigned int> > & paired);
 	std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vect,

@@ -113,6 +113,21 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
 	return pairMap;
 }
 
+std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
+	(std::vector<unsigned int> & larger, std::vector<unsigned int> & smaller)
+{
+	std::unordered_map<unsigned int, unsigned int> reversePairMap;
+	std::vector<unsigned int>::iterator itSmall = smaller.begin();
+	std::vector<unsigned int>::iterator itLarge = larger.begin();
+	while (itSmall != smaller.end() && itLarge != larger.end())
+	{
+		reversePairMap[*itSmall] = *itLarge;
+		++itSmall;
+		++itLarge;
+	}
+	return reversePairMap;
+}
+
 std::vector<unsigned int> PMerge::makeLargerVect
 	(const std::vector<std::pair<unsigned int, unsigned int> > & paired)
 {
@@ -154,13 +169,23 @@ std::vector<unsigned int> PMerge::generateGroupSizes(unsigned int vectSize)
 
 unsigned int PMerge::calculateNextIndex(const std::vector<unsigned int>& groupSizes, unsigned int totalElements, unsigned int currentIndex)
 {
-	unsigned int groupsSorted = 0;
-	for (const unsigned int groupSize : groupSizes) {
-		if (currentIndex < groupsSorted + groupSize) {
-			unsigned int indexWithinGroup = groupsSorted + groupSize - currentIndex;
-			return groupsSorted + groupSize - indexWithinGroup;
+	unsigned int groupSum = 0;
+	for (const unsigned int groupSize : groupSizes)
+	{
+		//std::cout << "groupSum: " << groupSum << std::endl;
+		// If index is within this group
+		//std::cout << currentIndex << " < " << groupSum + groupSize << "?" << std::endl;
+		if (currentIndex < groupSum + groupSize)
+		{
+			unsigned int ceiling = groupSum + groupSize;
+			if (ceiling > totalElements)
+				ceiling = totalElements;
+			//std::cout << "ceiling: " << ceiling << std::endl;
+			unsigned int reversedIndex = ceiling - 1 - (currentIndex - groupSum);
+			//std::cout << "reversedIndex: " << reversedIndex << std::endl;
+			return reversedIndex;
 		}
-		groupsSorted += groupSize;
+		groupSum += groupSize;
 	}
 	return totalElements;
 }
@@ -199,6 +224,8 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, pairMap);
 	std::cout << "Smaller vector:	";
 	printVector(smallerElems);
+	std::unordered_map<unsigned int, unsigned int> reversePairMap
+		= connectReversePairs(vect, smallerElems);
 	// move the elem paired with the smallest sorted into the beginning
 	vect.insert(vect.begin(), smallerElems.front());
 	smallerElems.erase(smallerElems.begin());
@@ -230,14 +257,14 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 		unsigned int totalElements = smallerElems.size();
 		std::vector<unsigned int> groupSizes = generateGroupSizes(totalElements);
 		std::cout << "Group sizes:	";
-		printVector(vect);
+		printVector(groupSizes);
 		std::cout << "Index matches:	" << std::endl;
 		for (unsigned int i = 0; i < totalElements; i++)
 		{
-			std::cout << "[ ";
+			std::cout << "i = " << i << "	[ ";
 			unsigned int nextIndex = calculateNextIndex(groupSizes, totalElements, i);
 			unsigned int elem = smallerElems[nextIndex];
-			unsigned int matchingIndexFromEnd = totalElements - i;
+			/* unsigned int matchingIndexFromEnd = totalElements - nextIndex;
 			if (hasExtraElem)
 			{
 				if (elem == lastElem)
@@ -248,11 +275,17 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 				{
 					matchingIndexFromEnd--;
 				}
-			}
+			} */
 			std::cout << nextIndex << "(" << elem << ")" << " -> ";
-			std::vector<unsigned int>::iterator endIt
-				= vect.end() - matchingIndexFromEnd;
-			std::cout << matchingIndexFromEnd << "(" << *endIt << ")";
+			/* std::vector<unsigned int>::iterator endIt
+				= vect.end() - matchingIndexFromEnd; */
+			auto sortedMatchIt = reversePairMap.find(elem);
+			std::vector<unsigned int>::iterator endIt = vect.end();
+			if (sortedMatchIt != reversePairMap.end())
+			{
+				endIt = std::lower_bound(vect.begin(), vect.end(), elem);
+				std::cout << "(" << *endIt << ")";
+			}
 			vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
 			std::cout << " ]" << std::endl;
 		}
