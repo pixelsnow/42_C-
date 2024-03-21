@@ -87,7 +87,7 @@ void PMerge::displaySummary(std::chrono::nanoseconds duration,
 	std::cout << "Time to process " << numOfElements << " elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
 }
 
-std::vector<std::pair<unsigned int, unsigned int>> pairUp
+std::vector<std::pair<unsigned int, unsigned int>> PMerge::pairUp
 	(std::vector<unsigned int> & vect)
 {
 	std::vector<std::pair<unsigned int, unsigned int>> res;
@@ -100,7 +100,7 @@ std::vector<std::pair<unsigned int, unsigned int>> pairUp
 
 // Sorting
 
-std::unordered_map<unsigned int, unsigned int> connectPairs
+std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
 	(const std::vector<std::pair<unsigned int, unsigned int> > & paired)
 {
 	std::unordered_map<unsigned int, unsigned int> pairMap;
@@ -111,7 +111,7 @@ std::unordered_map<unsigned int, unsigned int> connectPairs
 	return pairMap;
 }
 
-std::vector<unsigned int> makeLargerVect
+std::vector<unsigned int> PMerge::makeLargerVect
 	(const std::vector<std::pair<unsigned int, unsigned int> > & paired)
 {
 	std::vector<unsigned int> vect;
@@ -122,7 +122,7 @@ std::vector<unsigned int> makeLargerVect
 	return vect;
 }
 
-std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vect,
+std::vector<unsigned int> PMerge::makeSmallerVect (const std::vector<unsigned int> & vect,
 	std::unordered_map<unsigned int, unsigned int> & pairMap)
 {
 	std::vector<unsigned int> smaller;
@@ -133,7 +133,7 @@ std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vec
 	return smaller;
 }
 
-std::vector<unsigned int> generateGroupSizes(unsigned int vectSize)
+std::vector<unsigned int> PMerge::generateGroupSizes(unsigned int vectSize)
 {
 	std::vector<unsigned int> sequence;
 
@@ -150,8 +150,8 @@ std::vector<unsigned int> generateGroupSizes(unsigned int vectSize)
 	return sequence;
 }
 
-
-unsigned int calculateNextIndex(const std::vector<unsigned int>& groupSizes, unsigned int totalElements, unsigned int currentIndex) {
+unsigned int PMerge::calculateNextIndex(const std::vector<unsigned int>& groupSizes, unsigned int totalElements, unsigned int currentIndex)
+{
 	unsigned int groupsSorted = 0;
 	for (const unsigned int groupSize : groupSizes) {
 		if (currentIndex < groupsSorted + groupSize) {
@@ -165,10 +165,17 @@ unsigned int calculateNextIndex(const std::vector<unsigned int>& groupSizes, uns
 	return totalElements;
 }
 
-void sortVector(std::vector<unsigned int> & vect)
+void PMerge::sortVector(std::vector<unsigned int> & vect)
 {
+	std::cout << "RECURSION call:	";
+	printVector(vect);
 	if (vect.size() < 2)
+	{
+		std::cout << "RECURSION end case:	";
+		printVector(vect);
 		return;
+	}
+		
 
 	bool hasExtraElem = vect.size() % 2 != 0;
 	unsigned int lastElem;
@@ -183,19 +190,33 @@ void sortVector(std::vector<unsigned int> & vect)
 		= connectPairs(paired);
 	// make a vector of bigger elements
 	vect = makeLargerVect(paired);
+	std::cout << "Larger vector before sorting:	";
+	printVector(vect);
 	// sort recursively
 	sortVector(vect);
+	std::cout << "Larger vector after sorting:	";
+	printVector(vect);
 	// make a vector of smaller elements in matching order
 	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, pairMap);
+	std::cout << "Smaller vector:	";
+	printVector(smallerElems);
 	// move the elem paired with the smallest sorted into the beginning
 	vect.insert(vect.begin(), smallerElems.front());
 	smallerElems.erase(smallerElems.begin());
+	std::cout << "Larger vector after adding first elem:	";
+	printVector(vect);
+	std::cout << "Smaller vector after adding first elem:	";
+	printVector(smallerElems);
 	// CHANGE ORDER OF THIS AND PREVIOUS PART?
 	// push the odd elem to the back if it exists
 	if (hasExtraElem)
 	{
 		smallerElems.emplace_back(lastElem);
 	}
+	std::cout << "Smaller vector after adding last elem:	";
+	printVector(smallerElems);
+	if (!smallerElems.size())
+		return;
 	// if there's only one unsorted left, insert into the sorted with binary
 	if (smallerElems.size() <= 1)
 	{
@@ -231,6 +252,8 @@ void sortVector(std::vector<unsigned int> & vect)
 			vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
 		}
 	}
+	std::cout << "RECURSION return:	";
+	printVector(vect);
 }
 
 std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
@@ -240,15 +263,15 @@ std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
 
 
 	std::vector<unsigned int> vect = parseArgsToVector(ac, av);
-	std::cout << "Before: ";
+
+	std::cout << "Before:	";
 	printVector(vect);
-	std::cout << std::endl;
-	
-	//std::vector<std::pair<unsigned int, unsigned int> > pairVect = pairUp(vect);
+
 	sortVector(vect);
-	std::cout << "After:";
+
+	std::cout << "After:	";
 	printVector(vect);
-	std::cout << std::endl;
+
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();
 	std::chrono::nanoseconds duration
@@ -261,7 +284,6 @@ void PMerge::timeSorts(int ac, char** av)
 {
 	try
 	{
-		// remember to check if has repeat elems
 		std::chrono::nanoseconds vectorTime = timeVector(ac, av);
 		displaySummary(vectorTime, "vector", ac - 1);
 	}

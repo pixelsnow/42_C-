@@ -24,9 +24,18 @@ private:
 	bool isAllDigits(const std::string& str) const;
 	std::vector<unsigned int> parseArgsToVector(int ac, char** av);
 	// Sorting
-	void sort(std::vector<unsigned int> set);
+	std::vector<std::pair<unsigned int, unsigned int>> pairUp
+	(std::vector<unsigned int> & vect);
+	std::unordered_map<unsigned int, unsigned int> connectPairs
+	(const std::vector<std::pair<unsigned int, unsigned int> > & paired);
+	std::vector<unsigned int> makeLargerVect
+	(const std::vector<std::pair<unsigned int, unsigned int> > & paired);
+	std::vector<unsigned int> makeSmallerVect (const std::vector<unsigned int> & vect,
+	std::unordered_map<unsigned int, unsigned int> & pairMap);
+	std::vector<unsigned int> generateGroupSizes(unsigned int vectSize);
+	unsigned int calculateNextIndex(const std::vector<unsigned int>& groupSizes, unsigned int totalElements, unsigned int currentIndex);
+	void sortVector(std::vector<unsigned int> & vect);
 	std::chrono::nanoseconds timeVector(int ac, char **av);
-	void recursiveSort(std::vector<std::pair<unsigned int, unsigned int> > set);
 	// Printing
 	void displayError();
 	void displaySummary(std::chrono::nanoseconds duration,
