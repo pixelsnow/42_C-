@@ -165,12 +165,12 @@ unsigned int PMerge::calculateNextIndex(const std::vector<unsigned int>& groupSi
 
 void PMerge::sortVector(std::vector<unsigned int> & vect)
 {
-	/* std::cout << "RECURSION call:	";
-	printVector(vect); */
+	std::cout << "RECURSION call:	";
+	printVector(vect);
 	if (vect.size() < 2)
 	{
-		/* std::cout << "RECURSION end case:	";
-		printVector(vect); */
+		std::cout << "RECURSION end case:	";
+		printVector(vect);
 		return;
 	}
 
@@ -187,31 +187,30 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 		= connectPairs(paired);
 	// make a vector of bigger elements
 	vect = makeLargerVect(paired);
-	/* std::cout << "Larger vector before sorting:	";
-	printVector(vect); */
+	std::cout << "Larger vector before sorting:	";
+	printVector(vect);
 	// sort recursively
 	sortVector(vect);
-	/* std::cout << "Larger vector after sorting:	";
-	printVector(vect); */
+	std::cout << "Larger vector after sorting:	";
+	printVector(vect);
 	// make a vector of smaller elements in matching order
 	std::vector<unsigned int> smallerElems = makeSmallerVect(vect, pairMap);
-	/* std::cout << "Smaller vector:	";
-	printVector(smallerElems); */
+	std::cout << "Smaller vector:	";
+	printVector(smallerElems);
 	// move the elem paired with the smallest sorted into the beginning
 	vect.insert(vect.begin(), smallerElems.front());
 	smallerElems.erase(smallerElems.begin());
-	/* std::cout << "Larger vector after adding first elem:	";
-	printVector(vect); */
-	/* std::cout << "Smaller vector after adding first elem:	";
-	printVector(smallerElems); */
-	// CHANGE ORDER OF THIS AND PREVIOUS PART?
+	std::cout << "Larger vector after adding first elem:	";
+	printVector(vect);
+	std::cout << "Smaller vector after adding first elem:	";
+	printVector(smallerElems);
 	// push the odd elem to the back if it exists
 	if (hasExtraElem)
 	{
 		smallerElems.emplace_back(lastElem);
 	}
-	/* std::cout << "Smaller vector after adding last elem:	";
-	printVector(smallerElems); */
+	std::cout << "Smaller vector after adding last elem:	";
+	printVector(smallerElems);
 	if (!smallerElems.size())
 		return;
 	// if there's only one unsorted left, insert into the sorted with binary
@@ -228,8 +227,12 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 	{
 		unsigned int totalElements = smallerElems.size();
 		std::vector<unsigned int> groupSizes = generateGroupSizes(totalElements);
+		std::cout << "Group sizes:	";
+		printVector(vect);
+		std::cout << "Index matches:	" << std::endl;
 		for (unsigned int i = 0; i < totalElements; i++)
 		{
+			std::cout << "[ ";
 			unsigned int nextIndex = calculateNextIndex(groupSizes, totalElements, i);
 			unsigned int elem = smallerElems[nextIndex];
 			unsigned int matchingIndexFromEnd = totalElements - i;
@@ -244,13 +247,16 @@ void PMerge::sortVector(std::vector<unsigned int> & vect)
 					matchingIndexFromEnd--;
 				}
 			}
+			std::cout << nextIndex << "(" << elem << ")" << " -> ";
 			std::vector<unsigned int>::iterator endIt
-					= vect.end() - matchingIndexFromEnd;
+				= vect.end() - matchingIndexFromEnd;
+			std::cout << matchingIndexFromEnd << "(" << *endIt << ")";
 			vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
+			std::cout << " ]" << std::endl;
 		}
 	}
-	/* std::cout << "RECURSION return:	";
-	printVector(vect); */
+	std::cout << "RECURSION return:	";
+	printVector(vect);
 }
 
 std::chrono::nanoseconds PMerge::timeVector(int ac, char **av)
