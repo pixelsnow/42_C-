@@ -1,6 +1,6 @@
 #include <iostream>
 #include <random>
-#include <set>
+#include <unordered_set>
 
 #define MIN 1
 #define MAX 100000
@@ -20,6 +20,14 @@ int main(int ac, char ** av)
 		return 1;
 	}
 
+	if (N > MAX - MIN + 1)
+	{
+		std::cerr << "Can't generate more than " << MAX - MIN + 1
+			<< " numbers within the specified range [" << MIN << ";"
+			<< MAX << "]" << std::endl;
+		return 1;
+	}
+
 	// provides a source of random numbers
 	std::random_device rd;
 	// Mersenne Twister pseudo-random number generator
@@ -27,7 +35,7 @@ int main(int ac, char ** av)
 	// generated random ints within a range
 	std::uniform_int_distribution<> dis(MIN, MAX);
 
-	std::set<int> unique_numbers;
+	std::unordered_set<int> unique_numbers;
 	while (unique_numbers.size() < N)
 	{
 		unique_numbers.insert(dis(gen));
