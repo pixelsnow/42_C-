@@ -30,7 +30,7 @@ private:
 	Container parseArgsToContainer(int ac, char** av) const;
 
 	template <typename Container, typename PairContainer>
-	PairContainer pairUp(Container & vect) const;
+	PairContainer pairUp(Container & sequence) const;
 
 	template <typename PairContainer>
 	std::unordered_map<unsigned int, unsigned int> connectPairs
@@ -44,21 +44,21 @@ private:
 	Container makeLargerSequence(const PairContainer & paired) const;
 
 	template <typename Container>
-	Container makeSmallerSequence(const Container & vect,
+	Container makeSmallerSequence(const Container & sequence,
 		std::unordered_map<unsigned int, unsigned int> & pairMap) const;
 
 	template <typename Container>
-	Container generateGroupSizes(unsigned int vectSize) const;
+	Container generateGroupSizes(unsigned int totalSize) const;
 
 	template <typename Container>
 	unsigned int calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex) const;
 
 	template <typename Container, typename PairContainer>
-	void sortSequence(Container & vect) const;
+	void sortSequence(Container & sequence) const;
 
 
 	template <typename Container>
-	void printSequence(const Container &vec) const;
+	void printSequence(const Container &sequence) const;
 
 	void displayError() const;
 
@@ -89,9 +89,9 @@ public:
 
 
 template <typename Container>
-void PMergeMe::printSequence(const Container &vec) const
+void PMergeMe::printSequence(const Container &sequence) const
 {
-	for (const unsigned int &element : vec)
+	for (const unsigned int &element : sequence)
 	{
 		std::cout << element << " ";
 	}
@@ -101,7 +101,7 @@ void PMergeMe::printSequence(const Container &vec) const
 template <typename Container>
 Container PMergeMe::parseArgsToContainer(int ac, char** av) const
 {
-	Container vect;
+	Container sequence;
 	std::unordered_set<unsigned int> seen;
 	if (ac < 2)
 		throw InvalidInputException();
@@ -122,23 +122,23 @@ Container PMergeMe::parseArgsToContainer(int ac, char** av) const
 				throw InvalidInputException();
 			}
 			seen.insert(value);
-			vect.push_back(value);
+			sequence.push_back(value);
 		}
 		catch(const std::exception & e)
 		{
 			throw InvalidInputException();
 		}
 	}
-	return vect;
+	return sequence;
 }
 
 template <typename Container, typename PairContainer>
-PairContainer PMergeMe::pairUp (Container & vect) const
+PairContainer PMergeMe::pairUp (Container & sequence) const
 {
 	PairContainer res;
-	for (size_t i = 0; i < vect.size(); i += 2)
+	for (size_t i = 0; i < sequence.size(); i += 2)
 	{
-		res.emplace_back(std::minmax(vect[i], vect[i + 1]));
+		res.emplace_back(std::minmax(sequence[i], sequence[i + 1]));
 	}
 	return res;
 }
@@ -174,20 +174,20 @@ std::unordered_map<unsigned int, unsigned int> PMergeMe::connectReversePairs
 template <typename Container, typename PairContainer>
 Container PMergeMe::makeLargerSequence(const PairContainer & paired) const
 {
-	Container vect;
+	Container sequence;
 	for (const auto &element : paired)
 	{
-		vect.emplace_back(element.second);
+		sequence.emplace_back(element.second);
 	}
-	return vect;
+	return sequence;
 }
 
 template <typename Container>
-Container PMergeMe::makeSmallerSequence (const Container & vect,
+Container PMergeMe::makeSmallerSequence (const Container & sequence,
 	std::unordered_map<unsigned int, unsigned int> & pairMap) const
 {
 	Container smaller;
-	for (const unsigned int element : vect)
+	for (const unsigned int element : sequence)
 	{
 		smaller.emplace_back(pairMap[element]);
 	}
@@ -195,17 +195,17 @@ Container PMergeMe::makeSmallerSequence (const Container & vect,
 }
 
 template <typename Container>
-Container PMergeMe::generateGroupSizes(unsigned int vectSize) const
+Container PMergeMe::generateGroupSizes(unsigned int totalSize) const
 {
 	Container sequence;
 
 	unsigned int pow = 2;
 	unsigned int sum = 0;
-	for (unsigned int i = 2; i <= vectSize; i++)
+	for (unsigned int i = 2; i <= totalSize; i++)
 	{
 		sequence.emplace_back(pow);
 		sum += pow;
-		if (sum > vectSize)
+		if (sum > totalSize)
 			break;
 		pow = std::pow(2, i) - pow;
 	}
@@ -214,7 +214,7 @@ Container PMergeMe::generateGroupSizes(unsigned int vectSize) const
 
 template <typename Container>
 unsigned int PMergeMe::calculateNextIndex(const Container & groupSizes,
-	unsigned int totalElements, unsigned int currentIndex) const
+	unsigned int totalSize, unsigned int currentIndex) const
 {
 	unsigned int groupSum = 0;
 	for (const unsigned int groupSize : groupSizes)
@@ -222,63 +222,62 @@ unsigned int PMergeMe::calculateNextIndex(const Container & groupSizes,
 		if (currentIndex < groupSum + groupSize)
 		{
 			unsigned int ceiling = groupSum + groupSize;
-			if (ceiling > totalElements)
-				ceiling = totalElements;
+			if (ceiling > totalSize)
+				ceiling = totalSize;
 			unsigned int reversedIndex = ceiling - 1 - (currentIndex - groupSum);
 			return reversedIndex;
 		}
 		groupSum += groupSize;
 	}
-	return totalElements;
+	return totalSize;
 }
 
 template <typename Container, typename PairContainer>
-void PMergeMe::sortSequence(Container & vect) const
+void PMergeMe::sortSequence(Container & sequence) const
 {
-	if (vect.size() < 2)
+	if (sequence.size() < 2)
 	{
 		return;
 	}
-
-	bool hasExtraElem = vect.size() % 2 != 0;
+	bool hasExtraElem = sequence.size() % 2 != 0;
 	unsigned int lastElem;
 	if (hasExtraElem)
 	{
-		lastElem = vect.back();
-		vect.pop_back();
+		lastElem = sequence.back();
+		sequence.pop_back();
 	}
 
-	PairContainer paired = pairUp<Container, PairContainer>(vect);
+	PairContainer paired = pairUp<Container, PairContainer>(sequence);
 	std::unordered_map<unsigned int, unsigned int> pairMap
 		= connectPairs(paired);
-	// make a vector of bigger elements
-	vect = makeLargerSequence<Container, PairContainer>(paired);
-	// sort recursively
-	sortSequence<Container, PairContainer>(vect);
-	// make a vector of smaller elements in matching order
-	Container smallerElems = makeSmallerSequence(vect, pairMap);
+	sequence = makeLargerSequence<Container, PairContainer>(paired);
+
+	sortSequence<Container, PairContainer>(sequence);
+
+	Container smallerElems = makeSmallerSequence(sequence, pairMap);
 	std::unordered_map<unsigned int, unsigned int> reversePairMap
-		= connectReversePairs(vect, smallerElems);
-	// move the elem paired with the smallest sorted into the beginning
-	vect.insert(vect.begin(), smallerElems.front());
+		= connectReversePairs(sequence, smallerElems);
+
+	sequence.insert(sequence.begin(), smallerElems.front());
 	smallerElems.erase(smallerElems.begin());
-	// push the odd elem to the back if it exists
+
 	if (hasExtraElem)
 	{
 		smallerElems.emplace_back(lastElem);
 	}
-	if (!smallerElems.size())
+
+	if (smallerElems.size() == 0)
+	{
 		return;
-	// if there's only one unsorted left, insert into the sorted with binary
-	if (smallerElems.size() <= 1)
+	}
+	if (smallerElems.size() == 1)
 	{
 		unsigned int elem = smallerElems.front();
-		auto endIt = vect.end();
+		auto endIt = sequence.end();
 		if (elem != lastElem)
 			endIt--;
-		vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
+		sequence.insert(std::lower_bound(sequence.begin(), endIt, elem), elem);
 	}
-	// otherwise do the algo with partitions
 	else
 	{
 		unsigned int totalElements = smallerElems.size();
@@ -288,12 +287,12 @@ void PMergeMe::sortSequence(Container & vect) const
 			unsigned int nextIndex = calculateNextIndex(groupSizes, totalElements, i);
 			unsigned int elem = smallerElems[nextIndex];
 			auto sortedMatchIt = reversePairMap.find(elem);
-			auto endIt = vect.end();
+			auto endIt = sequence.end();
 			if (sortedMatchIt != reversePairMap.end())
 			{
-				endIt = std::lower_bound(vect.begin(), vect.end(), elem);
+				endIt = std::lower_bound(sequence.begin(), sequence.end(), elem);
 			}
-			vect.insert(std::lower_bound(vect.begin(), endIt, elem), elem);
+			sequence.insert(std::lower_bound(sequence.begin(), endIt, elem), elem);
 		}
 	}
 }

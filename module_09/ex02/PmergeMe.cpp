@@ -62,9 +62,9 @@ std::chrono::nanoseconds PMergeMe::timeDeque(int ac, char **av) const
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
 
-	std::deque<unsigned int> vect = parseArgsToContainer<std::deque<unsigned int>>(ac, av);
+	std::deque<unsigned int> deq = parseArgsToContainer<std::deque<unsigned int>>(ac, av);
 
-	sortSequence<std::deque<unsigned int>, std::deque<std::pair<unsigned int, unsigned int> > >(vect);
+	sortSequence<std::deque<unsigned int>, std::deque<std::pair<unsigned int, unsigned int> > >(deq);
 
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();
