@@ -26,7 +26,8 @@ void PMergeMe::displaySummary(std::chrono::nanoseconds duration,
 	std::string containerName, int numOfElements) const
 {
 	std::cout << "Time to process " << numOfElements << " elements with std::"
-		<< containerName << " : " << duration.count() << " us" << std::endl;
+		<< BLUE << containerName << RESET << " : " << BLUE << duration.count()
+		<< RESET << " us" << std::endl;
 }
 
 bool PMergeMe::isAllDigits(const std::string& str) const
@@ -39,15 +40,19 @@ std::chrono::nanoseconds PMergeMe::timeVector(int ac, char **av) const
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
 
-	std::vector<unsigned int> vect = parseArgsToContainer<std::vector<unsigned int>>(ac, av);
+	std::vector<unsigned int> vect
+		= parseArgsToContainer<std::vector<unsigned int>>(ac, av);
 
-	std::cout << "Before:	";
+	std::cout << "Before:	" << RED;
 	printSequence<std::vector<unsigned int>>(vect);
+	std::cout << RESET;
 
-	sortSequence<std::vector<unsigned int>, std::vector<std::pair<unsigned int, unsigned int> > >(vect);
+	sortSequence<std::vector<unsigned int>,
+		std::vector<std::pair<unsigned int, unsigned int> > >(vect);
 
-	std::cout << "After:	";
+	std::cout << "After:	" << GREEN;
 	printSequence<std::vector<unsigned int>>(vect);
+	std::cout << RESET;
 
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();
@@ -62,9 +67,11 @@ std::chrono::nanoseconds PMergeMe::timeDeque(int ac, char **av) const
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
 
-	std::deque<unsigned int> deq = parseArgsToContainer<std::deque<unsigned int>>(ac, av);
+	std::deque<unsigned int> deq
+		= parseArgsToContainer<std::deque<unsigned int>>(ac, av);
 
-	sortSequence<std::deque<unsigned int>, std::deque<std::pair<unsigned int, unsigned int> > >(deq);
+	sortSequence<std::deque<unsigned int>,
+		std::deque<std::pair<unsigned int, unsigned int> > >(deq);
 
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();

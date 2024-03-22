@@ -51,7 +51,8 @@ private:
 	Container generateGroupSizes(unsigned int totalSize) const;
 
 	template <typename Container>
-	unsigned int calculateNextIndex(const Container & groupSizes, unsigned int totalElements, unsigned int currentIndex) const;
+	unsigned int calculateNextIndex(const Container & groupSizes,
+		unsigned int totalElements, unsigned int currentIndex) const;
 
 	template <typename Container, typename PairContainer>
 	void sortSequence(Container & sequence) const;
@@ -284,7 +285,8 @@ void PMergeMe::sortSequence(Container & sequence) const
 		Container groupSizes = generateGroupSizes<Container>(totalElements);
 		for (unsigned int i = 0; i < totalElements; i++)
 		{
-			unsigned int nextIndex = calculateNextIndex(groupSizes, totalElements, i);
+			unsigned int nextIndex
+				= calculateNextIndex(groupSizes, totalElements, i);
 			unsigned int elem = smallerElems[nextIndex];
 			auto sortedMatchIt = reversePairMap.find(elem);
 			auto endIt = sequence.end();
