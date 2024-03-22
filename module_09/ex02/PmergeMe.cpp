@@ -1,15 +1,15 @@
 #include "PmergeMe.hpp"
 
-PMerge::PMerge() {}
+PMergeMe::PMergeMe() {}
 
-PMerge::PMerge(const PMerge & source)
+PMergeMe::PMergeMe(const PMergeMe & source)
 {
 	(void)source;
 }
 
-PMerge::~PMerge() {}
+PMergeMe::~PMergeMe() {}
 
-PMerge & PMerge::operator=(const PMerge & source)
+PMergeMe & PMergeMe::operator=(const PMergeMe & source)
 {
 	(void)source;
 	return *this;
@@ -17,23 +17,24 @@ PMerge & PMerge::operator=(const PMerge & source)
 
 // METHODS
 
-void PMerge::displayError() const
+void PMergeMe::displayError() const
 {
 	std::cerr << RED << "Error" << RESET << std::endl;
 }
 
-void PMerge::displaySummary(std::chrono::nanoseconds duration,
+void PMergeMe::displaySummary(std::chrono::nanoseconds duration,
 	std::string containerName, int numOfElements) const
 {
-	std::cout << "Time to process " << numOfElements << " elements with std::" << containerName << " : " << duration.count() << " us" << std::endl;
+	std::cout << "Time to process " << numOfElements << " elements with std::"
+		<< containerName << " : " << duration.count() << " us" << std::endl;
 }
 
-bool PMerge::isAllDigits(const std::string& str) const
+bool PMergeMe::isAllDigits(const std::string& str) const
 {
 	return std::all_of(str.begin(), str.end(), ::isdigit);
 }
 
-std::chrono::nanoseconds PMerge::timeVector(int ac, char **av) const
+std::chrono::nanoseconds PMergeMe::timeVector(int ac, char **av) const
 {
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
@@ -56,7 +57,7 @@ std::chrono::nanoseconds PMerge::timeVector(int ac, char **av) const
 	return duration;
 }
 
-std::chrono::nanoseconds PMerge::timeDeque(int ac, char **av) const
+std::chrono::nanoseconds PMergeMe::timeDeque(int ac, char **av) const
 {
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
@@ -73,7 +74,7 @@ std::chrono::nanoseconds PMerge::timeDeque(int ac, char **av) const
 	return duration;
 }
 
-void PMerge::timeSorts(int ac, char** av) const
+void PMergeMe::timeSorts(int ac, char** av) const
 {
 	try
 	{
@@ -90,12 +91,12 @@ void PMerge::timeSorts(int ac, char** av) const
 
 // EXCEPTIONS
 
-const char * PMerge::InvalidInputException::what() const throw()
+const char * PMergeMe::InvalidInputException::what() const throw()
 {
 	return "Invalid input";
 }
 
-const char * PMerge::SortErrorException::what() const throw()
+const char * PMergeMe::SortErrorException::what() const throw()
 {
 	return "Error during sorting";
 }

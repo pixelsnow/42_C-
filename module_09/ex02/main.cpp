@@ -2,7 +2,7 @@
 
 int main(int ac, char ** av)
 {
-	PMerge pmerge;
+	PMergeMe pmerge;
 	pmerge.timeSorts(ac, av);
 
 	return 0;

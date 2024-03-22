@@ -16,7 +16,7 @@
 #define BLUE "\033[34m"
 #define RESET "\033[0m"
 
-class PMerge
+class PMergeMe
 {
 private:
 
@@ -66,11 +66,11 @@ private:
 		std::string containerName, int numOfElements) const;
 	
 public:
-	PMerge();
-	PMerge(const PMerge & source);
-	~PMerge();
+	PMergeMe();
+	PMergeMe(const PMergeMe & source);
+	~PMergeMe();
 
-	PMerge & operator=(const PMerge & source);
+	PMergeMe & operator=(const PMergeMe & source);
 
 	void timeSorts(int ac, char** av) const;
 
@@ -89,7 +89,7 @@ public:
 
 
 template <typename Container>
-void PMerge::printVector(const Container &vec) const
+void PMergeMe::printVector(const Container &vec) const
 {
 	for (const unsigned int &element : vec)
 	{
@@ -99,7 +99,7 @@ void PMerge::printVector(const Container &vec) const
 }
 
 template <typename Container>
-Container PMerge::parseArgsToVector(int ac, char** av) const
+Container PMergeMe::parseArgsToVector(int ac, char** av) const
 {
 	Container vect;
 	std::unordered_set<unsigned int> seen;
@@ -133,7 +133,7 @@ Container PMerge::parseArgsToVector(int ac, char** av) const
 }
 
 template <typename Container, typename PairContainer>
-PairContainer PMerge::pairUp (Container & vect) const
+PairContainer PMergeMe::pairUp (Container & vect) const
 {
 	PairContainer res;
 	for (size_t i = 0; i < vect.size(); i += 2)
@@ -144,7 +144,7 @@ PairContainer PMerge::pairUp (Container & vect) const
 }
 
 template <typename PairContainer>
-std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
+std::unordered_map<unsigned int, unsigned int> PMergeMe::connectPairs
 	(const PairContainer & paired) const
 {
 	std::unordered_map<unsigned int, unsigned int> pairMap;
@@ -156,7 +156,7 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectPairs
 }
 
 template <typename Container>
-std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
+std::unordered_map<unsigned int, unsigned int> PMergeMe::connectReversePairs
 	(Container & larger, Container & smaller) const
 {
 	std::unordered_map<unsigned int, unsigned int> reversePairMap;
@@ -172,7 +172,7 @@ std::unordered_map<unsigned int, unsigned int> PMerge::connectReversePairs
 }
 
 template <typename Container, typename PairContainer>
-Container PMerge::makeLargerVect(const PairContainer & paired) const
+Container PMergeMe::makeLargerVect(const PairContainer & paired) const
 {
 	Container vect;
 	for (const auto &element : paired)
@@ -183,7 +183,7 @@ Container PMerge::makeLargerVect(const PairContainer & paired) const
 }
 
 template <typename Container>
-Container PMerge::makeSmallerVect (const Container & vect,
+Container PMergeMe::makeSmallerVect (const Container & vect,
 	std::unordered_map<unsigned int, unsigned int> & pairMap) const
 {
 	Container smaller;
@@ -195,7 +195,7 @@ Container PMerge::makeSmallerVect (const Container & vect,
 }
 
 template <typename Container>
-Container PMerge::generateGroupSizes(unsigned int vectSize) const
+Container PMergeMe::generateGroupSizes(unsigned int vectSize) const
 {
 	Container sequence;
 
@@ -213,7 +213,7 @@ Container PMerge::generateGroupSizes(unsigned int vectSize) const
 }
 
 template <typename Container>
-unsigned int PMerge::calculateNextIndex(const Container & groupSizes,
+unsigned int PMergeMe::calculateNextIndex(const Container & groupSizes,
 	unsigned int totalElements, unsigned int currentIndex) const
 {
 	unsigned int groupSum = 0;
@@ -233,7 +233,7 @@ unsigned int PMerge::calculateNextIndex(const Container & groupSizes,
 }
 
 template <typename Container, typename PairContainer>
-void PMerge::sortVector(Container & vect) const
+void PMergeMe::sortVector(Container & vect) const
 {
 	if (vect.size() < 2)
 	{
