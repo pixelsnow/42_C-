@@ -39,15 +39,15 @@ std::chrono::nanoseconds PMergeMe::timeVector(int ac, char **av) const
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
 
-	std::vector<unsigned int> vect = parseArgsToVector<std::vector<unsigned int>>(ac, av);
+	std::vector<unsigned int> vect = parseArgsToContainer<std::vector<unsigned int>>(ac, av);
 
 	std::cout << "Before:	";
-	printVector<std::vector<unsigned int>>(vect);
+	printSequence<std::vector<unsigned int>>(vect);
 
-	sortVector<std::vector<unsigned int>, std::vector<std::pair<unsigned int, unsigned int> > >(vect);
+	sortSequence<std::vector<unsigned int>, std::vector<std::pair<unsigned int, unsigned int> > >(vect);
 
 	std::cout << "After:	";
-	printVector<std::vector<unsigned int>>(vect);
+	printSequence<std::vector<unsigned int>>(vect);
 
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();
@@ -62,9 +62,9 @@ std::chrono::nanoseconds PMergeMe::timeDeque(int ac, char **av) const
 	std::chrono::high_resolution_clock::time_point startTime
 		= std::chrono::high_resolution_clock::now();
 
-	std::deque<unsigned int> vect = parseArgsToVector<std::deque<unsigned int>>(ac, av);
+	std::deque<unsigned int> vect = parseArgsToContainer<std::deque<unsigned int>>(ac, av);
 
-	sortVector<std::deque<unsigned int>, std::deque<std::pair<unsigned int, unsigned int> > >(vect);
+	sortSequence<std::deque<unsigned int>, std::deque<std::pair<unsigned int, unsigned int> > >(vect);
 
 	std::chrono::high_resolution_clock::time_point endTime
 		= std::chrono::high_resolution_clock::now();
